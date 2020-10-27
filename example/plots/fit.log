@@ -1,0 +1,34 @@
+
+
+*******************************************************************************
+Sun Oct 25 21:45:52 2020
+
+
+FIT:    data read from file u 1:2
+        format = x:z
+        #datapoints = 9
+        residuals are weighted equally (unit weight)
+
+function used for fitting: normal(x,mean,stdDev)
+	normal(x, mean, stdDev) = 1.0/(sqrt(2*pi)*stdDev) * exp( -0.5*( (x-mean)/stdDev )**2)
+fitted parameters initialized with current variable values
+
+   4 1.3505044323e-04  -7.79e-01  4.56e-06    5.618172e+00   8.386929e+00
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.00013505
+rel. change during last iteration : -7.78787e-06
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00439237
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.92929e-05
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+stdDev          = 5.61817          +/- 0.2439       (4.342%)
+mean            = 8.38693          +/- 0.2955       (3.523%)
+
+correlation matrix of the fit parameters:
+                stdDev mean   
+stdDev          1.000 
+mean           -0.019  1.000 
