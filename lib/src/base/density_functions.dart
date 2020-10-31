@@ -127,8 +127,7 @@ num truncatedNormalCdf(
   if (x <= min) return 0.0;
   if (x >= max) return 1.0;
 
-  return
-      (stdNormalCdf((x - mean) * invStdDev) -
+  return (stdNormalCdf((x - mean) * invStdDev) -
               stdNormalCdf((min - mean) * invStdDev)) /
           (stdNormalCdf((max - mean) * invStdDev)) -
       stdNormalCdf((min - mean) * invStdDev);
