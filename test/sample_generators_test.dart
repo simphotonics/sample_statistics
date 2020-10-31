@@ -4,13 +4,13 @@ import 'package:minimal_test/minimal_test.dart';
 import 'package:statistics/statistics.dart';
 
 void main(List<String> args) {
-  group('generateSample', () {
+  group('samplePdf', () {
     final min = -4.0;
     final max = 5.0;
     final h = (max - min) / 2;
     final n = 1000;
     num pdf(num x) => triangularPdf(x, min, max);
-    final sample = generateSample(n, min, max, pdf(min + h), pdf);
+    final sample = samplePdf(n, min, max, pdf(min + h), pdf);
     final stats = SampleStatistics(sample);
 
     test('Sample size', () {
@@ -43,14 +43,14 @@ void main(List<String> args) {
     });
   });
 
-  group('generateNormalSample', () {
+  group('normalSample', () {
     final mean = 0.0;
     final stdDev = 2.0;
     final min = -20;
     final max = 20;
     final n = 1000;
     num pdf(num x) => normalPdf(x, mean, stdDev);
-    final sample = generateSample(n, min, max, pdf(mean), pdf);
+    final sample = samplePdf(n, min, max, pdf(mean), pdf);
     final stats = SampleStatistics(sample);
     test('Sample size', () {
       expect(sample.length, n);
@@ -66,14 +66,14 @@ void main(List<String> args) {
     });
   });
 
-  group('generateTrunctedNormalSample', () {
+  group('truncatedNormalSample', () {
     final mean = 5.0;
     final stdDev = 2.5;
     final min = 0.0;
     final max = 10;
     final n = 1000;
     num pdf(num x) => truncatedNormalPdf(x, min, max, mean, stdDev);
-    final sample = generateSample(n, min, max, pdf(mean), pdf);
+    final sample = samplePdf(n, min, max, pdf(mean), pdf);
     final stats = SampleStatistics(sample);
     test('Sample size', () {
       expect(sample.length, n);
