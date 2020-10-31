@@ -6,29 +6,52 @@ import 'package:statistics/statistics.dart';
 Type reflectType<T>() => T;
 
 void main() {
+  group('Polynomial', () {
+    test('empty coeff.', () {
+      expect(polynomial(1.0, []), 0);
+    });
+    test('n = 0', () {
+      expect(polynomial(1, [2.1]), 2.1);
+    });
+    test('n = 1', () {
+      expect(polynomial(1, [2.1, 1]), 3.1);
+    });
+    test('n = 2', () {
+      expect(polynomial(2, [2.1, 3, 4]), 2.1 + 3 * 2 + 4 * 2 * 2);
+    });
+
+    test('n = 6', () {
+      // Polynomial coefficients.
+      final a = [2.1, 1, 2, 3, 4, 5, 6];
+      var sum = 0.0;
+      for (var n = 0; n < a.length; ++n) {
+        sum += a[n] * pow(pi, n);
+      }
+      expect(polynomial(pi, a), sum);
+    });
+  });
+
   group('erf(x)', () {
-    test('dxMax: 0.1', () {
-      expect((erf(0.85) - 0.7706680576083525323800).abs() < 1e-6, true);
+    test('erf(0.85)', () {
+      expect(erf(0.85), 0.7706680576083525323800);
     });
-    test('dxMax: 0.01', () {
-      expect((erf(0.85, dxMax: 0.01) - 0.7706680576083525323800).abs() < 1e-8,
-          true);
+    test('erf(0.8)', () {
+      expect(erf(0.80), 0.7421009647076604861671, precision: 1e-15);
     });
-    test('dxMax: 0.001', () {
-      expect((erf(0.85, dxMax: 0.001) - 0.7706680576083525323800).abs() < 1e-10,
-          true);
+    test('erf(1.8)', () {
+      expect(erf(1.8), 0.98909050163573071418373281);
     });
     test('anti-symmetric property', () {
       expect(erf(-0.85), -erf(0.85));
     });
-    test('limit large positive numbers', () {
-      expect(erf(-1000000), -1.0);
+    test('erf(-2)', () {
+      expect(erf(-2), -0.99532226501895273416206926, precision: 1e-20);
     });
-    test('limit large negative numbers', () {
-      expect(erf(1000000), 1.0);
+    test('erf(-10)', () {
+      expect(erf(-10), -1.0);
     });
-    test('erf(0.85)', () {
-      expect(erf(0.80), 0.7421009647076604861671);
+    test('erf(10)', () {
+      expect(erf(10), 1.0);
     });
   });
 
