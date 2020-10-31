@@ -1,6 +1,6 @@
 # Histogram graph settings
 set key inside nobox vertical font ", 14"
-set title "Histogram" font ",16"
+#set title "Histogram" font ",16"
 set grid lw 1
 
 set tics font ", 13"
