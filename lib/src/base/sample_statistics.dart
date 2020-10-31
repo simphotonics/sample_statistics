@@ -140,6 +140,8 @@ class SampleStatistics {
     final n = intervals + 1;
     probabilityDensity ??= (num x) => normalPdf(x, mean, stdDev);
 
+    // final minMid = min + 0.5 * intervalSize;
+
     final xValues = List<num>.generate(n, (i) => min + i * intervalSize);
     final yValues = List<num>.generate(n, (_) => 0.0);
     final pdf = List<num>.generate(
