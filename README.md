@@ -51,7 +51,6 @@ To generate random samples that follow a certain probability distribution use th
 the *exponential distribution*, and the *truncated normal distribution*.
 The function `generateSample()` expects a callback of type `ProbabilityDensity` and can be used
 to generate random numbers that follow an arbitrary probability distribution function.
-
 ```Dart
  import 'package:statistics/statistics.dart';
 
@@ -80,7 +79,27 @@ to generate random numbers that follow an arbitrary probability distribution fun
 
 ### Histograms
 
-To generate a histogram use the method `histogram()` provided by the class `SampleStatistics`.
+To generate a histogram the first step is to divide the random sample range `max - min` into a suitable number of intervals. The second step consists of counting how many sample entries fall into each
+interval.
+
+The method `List<List<num>> histogram({bool normalize = true, int? intervals, num Function(num)? probabilityDensity})` provided by the class `SampleStatistics` returns an object of type `List<List<num>>`. The first entry contains the centre points of the histogram intervals or bins.
+
+The second entry contains a count of how many sample values fall into each interval. By default,
+the count is normalized such that the total area under the histogram is 1.0. This is useful
+when comparing a histogram to a probability density function.
+
+The method `histogram` takes an optional parameter, a function of type `ProbabilityDensity`.
+This function is used to generate the values in the third entry by evaluating the probability density
+at each interval centre point.
+
+The figure below shows a histogram obtained from a random sample following the truncated
+normal distribution.
+
+
+
+
+
+
 
 
 
