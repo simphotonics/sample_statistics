@@ -9,7 +9,7 @@ void main(List<String> args) async {
   final mean = 3.0;
   final stdDev = 1.0;
   final sample =
-      generateTruncatedNormalSample(sampleSize, min, max, mean, stdDev);
+      truncatedNormalSample(sampleSize, min, max, mean, stdDev);
 
   final stats = SampleStatistics(sample);
 
