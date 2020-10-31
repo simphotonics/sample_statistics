@@ -6,6 +6,6 @@ void main(List<String> args) async {
 
   // Generates a histogram and exports it to a file.
   await normalRandomSample.exportHistogram(
-    '../plots/normalRandomSample.hist',
+    '../plots/normal_random_sample.hist',
   );
 }
