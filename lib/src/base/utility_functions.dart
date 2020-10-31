@@ -68,73 +68,87 @@ final erfTable = Map<double, double>.unmodifiable({
   2.9: 0.9999589021219005411643,
   3.0: 0.9999779095030014145586,
   3.1: 0.99998835134263280040397,
+  3.2: 0.99999397423884823790502,
+  3.3: 0.9999969422902035618385,
+  3.4: 0.9999984780066371377146,
+  3.5: 0.99999925690162765858725,
+  3.6: 0.9999996441370069923147,
+  3.7: 0.9999998328489420908538,
+  3.8: 0.9999999229960725430359,
+  3.9: 0.9999999652077514027683,
+  4.0: 0.99999998458274209971998115,
+  4.1: 0.99999999329997234591510163,
 });
 
-/// Returns an approximation of the real valued error function defined as:
-/// `erf(x) = 2/sqrt(pi) * integral(from_0, to_x, exp(-t*t), dt)`
-/// * Note: `dxMax` is the maximum integration sub-interval used.
-/// * The smaller `dxMax` the smaller the max. deviation:
-///    - `dxMax = 0.1 => max. deviation: 8.0e-7`
-///    - `dxMax = 0.05 => max. deviation: 2.0e-7`
-///    - `dxMax = 0.01 => max. deviation: 8.0e-9`
-///    - `dxMax = 0.001 => max deviation: 8.0e-11`
-num erf(num x, {num dxMax = 0.1}) {
-  if (x == 0) return 0.0;
+/// Returns the polynominal defined by
+/// the coefficients `a`:
+/// `a[0] + a[1] * x + ... + a[n-1] * pow(x, n - 1)`.
+///
+/// Recursive function based on Horner's rule.
+num polynomial(num x, Iterable<num> a) {
+  if (a.isEmpty) return 0;
+  return a.first + x * polynomial(x, a.skip(1));
+}
 
-  final positiveArg = (x > 0) ? true : false;
+/// Returns an approximation of the error
+/// function.
+/// * Convergence is guaranteed for: `x.abs() =< 1`.
+/// * Maximum error: 1.5e-15.
+/// * Sylvain Chevillard. The functions erf and erfc computed with arbitrary
+///   precision and explicit errorbounds. Information and Computation,
+///   Elsevier, 2012, 216, pp.72 – 95.
+///   ensl-00356709v3
+num _erfBelow1(num x) {
+  var alpha = 2 * x.abs() * invSqrtPi;
+  var result = 0.0;
+  var y = -x * x;
 
-  // erf(-x) = erf(x) => Using only positive x-values.
-  x = x.abs();
-
-  // erf(8.0) = 0.999999999999999999999999999989 ( with 30-digit precision).
-  if (x > 8) {
-    return positiveArg ? 1.0 : -1.0;
-  }
-
-  // Find nearest extrapolation starting point.
-  final x0 = (x > 3.0) ? 3.0 : (x * 10).floor() / 10;
-  final x1 = (x > 3.0) ? 3.0 : (x * 10).ceil() / 10;
-
-  final interval = (x - x0) < (x - x1).abs() ? x - x0 : x - x1;
-
-  // Return early if no extrapolation is needed.
-  if (interval == 0.0) return (positiveArg) ? erfTable[x0]! : -erfTable[x0]!;
-
-  // Correct potential negative or large user input for argument dxMax:
-  dxMax = dxMax.abs();
-  dxMax = (dxMax > 0.1) ? 0.1 : dxMax;
-
-  final n0 = (interval.abs() / dxMax).ceil();
-  // To get a similar precision across the whole range of x.
-  final nMin = (1 / (2 * dxMax)).ceil();
-  final n = (n0 < nMin) ? nMin : n0;
-
-  // Integration sub-interval:
-  final dx = interval.abs() / n;
-
-  // Function to be integrated (the factor 2/sqrt(pi) will be added later).
-  num _erf(x) => math.exp(-x * x);
-
-  final lowerLimit = (interval.isNegative) ? x : x0;
-
-  var integral = (interval.isNegative)
-      ? 0.5 * (_erf(x) + _erf(x1))
-      : 0.5 * (_erf(x0) + _erf(x));
+  final n = 20 + 20 * x.toInt();
 
   for (var i = 1; i < n; ++i) {
-    integral += _erf(lowerLimit + i * dx);
+    result += alpha;
+    alpha = alpha * y * (2 * i - 1) / (2 * i + 1) / i;
   }
+  return x.isNegative ? -(result + alpha) : result + alpha;
+}
 
-  integral = integral * 2.0 * dx * invSqrtPi;
+/// Returns an approximation of the error
+/// function.
+/// * Convergence is quaranteed for `x.abs() >= 1`.
+/// * Maximum error: 4.0e-16.
+/// * Sylvain Chevillard. The functions erf and erfc computed with arbitrary
+///   precision and explicit errorbounds. Information and Computation,
+///   Elsevier, 2012, 216, pp.72 – 95.
+///   ensl-00356709v3
+num _erfAbove1(num x) {
+  var alpha = 2 * x.abs() * invSqrtPi * math.exp(-x * x);
+  var result = 0.0;
+  var y = 2 * x * x;
 
-  // If the interval is positive we integrate from x0 to x and add erfTab(x0).
-  // If the interval is negative we integrate from x to x1 and subtract
-  //  the result from erf(x1).
-  integral = (interval.isNegative)
-      ? erfTable[x1]! - integral
-      : erfTable[x0]! + integral;
+  final n = 10 + 20 * x.abs().toInt();
 
-  return (positiveArg) ? integral : -integral;
+  for (var i = 1; i < n; ++i) {
+    result += alpha;
+    alpha = alpha * y / (2 * i + 1);
+  }
+  return x.isNegative ? -(result + alpha) : result + alpha;
+}
+
+/// Returns an approximation of the real
+/// valued error function defined as:
+/// `erf(x) = 2/sqrt(pi) * integral(from: 0, to: x, exp(-t*t), dt)`
+///
+/// Compared to the approximation provided by gnuplot the maximum
+/// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in (-1, 1)`.
+num erf(num x) {
+  if (x == 0) return 0.0;
+  if (x.abs() < 1.0) {
+    return _erfBelow1(x);
+  } else if (x.abs() < 8) {
+    return _erfAbove1(x);
+  } else {
+    return x.isNegative ? -1.0 + 1.0e-28 : 1.0 - 1.0e-28;
+  }
 }
 
 /// Returns the definite integral of `func` over the interval
@@ -257,15 +271,19 @@ extension StatisticsUtils on List<num> {
   /// - Set `indexFirstColumn` to `true` to include an index.
   Future<File> export(
     String filename, {
-    int precision = 4,
-    bool indexFirstColumn = true,
-    String label = '',
+    int precision = 20,
+    List<num> range = const [0, 1],
+    String label = '#     x                      y',
   }) {
     final file = File(filename);
     final b = StringBuffer();
     b.writeln(label);
+    final xRange = range.last - range.first;
+    final dx = xRange / length;
+    final x0 = range.first;
     for (var i = 0; i < length; ++i) {
-      b.writeln('$i       ${this[i].toStringAsPrecision(4)}');
+      b.writeln(
+          '${x0 + i * dx}       ${this[i].toStringAsPrecision(precision)}');
     }
     return file.writeAsString(b.toString());
   }
