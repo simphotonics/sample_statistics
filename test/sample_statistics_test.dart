@@ -39,8 +39,10 @@ void main(List<String> args) {
       expect(stats.histogram(intervals: 8).first.length, 9);
     });
     test('Range', () {
-      expect(stats.histogram().first.first, stats.min);
-      expect(stats.histogram().first.last, stats.max);
+      final hist = stats.histogram(intervals: 10);
+      expect(hist.first.first, stats.min);
+      expect(hist.first.last, stats.max);
+
     });
     test('Normalization', () {
       final numberOfIntervals = 10;
