@@ -102,7 +102,7 @@ num truncatedNormalPdf(
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `min >= max` or if `mean` is outside the interval `(min, max)`.
-num trucatedNormalCdf(
+num truncatedNormalCdf(
   num x,
   num min,
   num max,
@@ -124,7 +124,11 @@ num trucatedNormalCdf(
 
   final invStdDev = 1.0 / stdDev;
 
-  return (stdNormalCdf((x - mean) * invStdDev) -
+  if (x <= min) return 0.0;
+  if (x >= max) return 1.0;
+
+  return
+      (stdNormalCdf((x - mean) * invStdDev) -
               stdNormalCdf((min - mean) * invStdDev)) /
           (stdNormalCdf((max - mean) * invStdDev)) -
       stdNormalCdf((min - mean) * invStdDev);
@@ -174,7 +178,7 @@ num uniformPdf(num x, num min, num max) {
 /// **Uniform cumulative** probability density function
 /// with non-zero support over the interval `(min, max)`.
 ///
-/// Throws an exception of type `ErrorOfType<InvalidFunctionParameter>`
+/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `min >= max`.
 num uniformCdf(num x, num min, num max) {
   if (min >= max) {
@@ -224,7 +228,7 @@ num expCdf(num x, num mean) {
 ///
 /// The maximum occurs at `(max - min) / 2`.
 ///
-/// Throws an exception of type `ErrorOfType<InvalidFunctionParameter>`
+/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `min >= max`.
 num triangularPdf(num x, num min, num max) {
   if (min >= max) {
@@ -240,5 +244,30 @@ num triangularPdf(num x, num min, num max) {
     return (x - min) / (h * h);
   } else {
     return (max - x) / (h * h);
+  }
+}
+
+/// **Triangular cumulative** probability density function
+/// with non-zero support over the interval `(min, max)`.
+///
+/// The maximum of the probability density occurs at `(max - min) / 2`.
+///
+/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
+/// if `min >= max`.
+num triangularCdf(num x, num min, num max) {
+  if (min >= max) {
+    throw ErrorOfType<InvalidFunctionParameter>(
+      invalidState: 'min: $min >= max: $max',
+      expectedState: 'min < max',
+    );
+  }
+  if (x <= min) return 0.0;
+  if (x >= max) return 1.0;
+  final range = max - min;
+  final factor = 2.0 / (range * range);
+  if (x > min && x < min + 0.5 * range) {
+    return factor * (x - min) * (x - min);
+  } else {
+    return 1.0 - factor * (x - max) * (x - max);
   }
 }
