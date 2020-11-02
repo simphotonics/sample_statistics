@@ -96,7 +96,7 @@ This function is used to generate the values in the third entry by evaluating th
 The figure below shows a histogram obtained from a random sample following the truncated
 normal distribution.
 
-![Directed Graph Image](https://raw.githubusercontent.com/simphotonics/statistics/master/example/plots/histogram_truncated_normal.svg?sanitize=true)
+![Directed Graph Image](https://github.com/simphotonics/statistics/blob/main/example/plots/histogram_truncated_normal_2.svg)
 
 
 ## Examples
