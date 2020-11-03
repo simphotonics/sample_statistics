@@ -1,23 +1,23 @@
 
-# Sample sample_statistics for Dart
+# Sample Statistics for Dart
 
 
 
 ## Introduction
 
-The package [`sample_sample_statistics`][sample_sample_statistics] provides libraries for calculating sample_statistics of
+The package [`sample_statistics`][sample_statistics] provides libraries for calculating statistics of
 numerical samples, as well as generating and exporting histograms. It includes common probability
 distribution functions and simple random sample generators.
 
 ## Usage
 
-To use this package include [`sample_sample_statistics`][sample_sample_statistics] as a dependency in your `pubspec.yaml` file.
+To use this package include [`sample_statistics`][sample_statistics] as a dependency in your `pubspec.yaml` file.
 The package uses [null-safety] features and requires Dart SDK version `>=2.10.0`.
 
 ### Sample Statistic
 
-To access basis sample sample_statistics use the class `SampleStats`. It calculates
-sample sample_statistics in a lazy fashion and caches results to avoid expensive calculations if the
+To access basis sample statistics use the class `SampleStats`. It calculates most
+sample statistics in a lazy fashion and caches results to avoid expensive calculations if the
 same quantity is accessed repeatedly.
 
 ```Dart
@@ -87,22 +87,23 @@ into a suitable number of intervals.
 The second step consists of counting how many sample entries fall into each
 interval.
 
-The method `histogram` provided by the class `SampleStats`
+The method `histogram` provided by the class [`SampleStats`][SampleStats]
 returns an object of type `List<List<num>>` (each list entry is a numerical list).
 The first entry contains the left margins of the histogram intervals or bins.
 The second entry contains a count of how many sample values fall into each interval. By default,
 the count is normalized such that the total area under the histogram is equal to 1.0.
 This is useful when comparing a histogram to a probability density function.
 
-The method `histogram` accepts the optional parameter `probabilityDensity`,
-a function of type `ProbabilityDensity`. If this function is specified it is used to
+The method [`histogram()`][histogram()] accepts the optional parameter `probabilityDensity`,
+a function of type [`ProbabilityDensity`][ProbabilityDensity].
+If this function is specified it is used to
 generate the values in the third list entry by evaluating the
 probability density function for each interval.
 
 The figure below shows the histograms obtained from two random samples following a truncated
 normal distribution with `min = 1.5`, `max = 6.0`, `mean = 3.0`, and `stdDev = 1.0`.
-The samples were generated using the function `truncatedNormalSample`
-provided by the library `sample_generators`.
+The samples were generated using the function [`truncatedNormalSample()`][truncatedNormalSample()]
+provided by the library [`sample_generators`].
 
 ![Directed Graph Image](https://github.com/simphotonics/sample_statistics/blob/main/example/plots/histogram_truncated_normal_2.svg)
 
@@ -112,7 +113,8 @@ better match between the shape of the histogram and the underlying probability d
 
 ## Examples
 
-For further example on how to generate random samples, export histograms, and access sample sample_statistics see folder [example].
+For further example on how to generate random samples, export histograms,
+and access sample statistics see folder [example].
 
 
 
@@ -122,9 +124,18 @@ Please file feature requests and bugs at the [issue tracker].
 
 [CachedObjectFactory]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/CachedObjectFactory.html
 
+[histogram()]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats/histogram.html
+
+[SampleStats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats-class.html
+
+[ProbabilityDensity]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/ProbabilityDensity.html
+
+[truncatedNormalSample()]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/truncatedNormalSample.html
+
+
 [issue tracker]: https://github.com/simphotonics/sample_statistics/issues
 
-[example]: https://github.com/simphotonics/statistic/tree/master/example
+[example]: https://github.com/simphotonics/sample_statistic/tree/master/example
 
 [sample_statistics]: https://pub.dev/packages/sample_statistics
 
