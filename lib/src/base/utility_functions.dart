@@ -10,16 +10,13 @@
 ///    exporting data, exporting histogram data.
 library utility_functions;
 
-import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:exception_templates/exception_templates.dart';
 import 'package:lazy_memo/lazy_memo.dart';
-import 'package:statistics/src/exceptions/invalid_function_parameter.dart';
 
+import '../exceptions/invalid_function_parameter.dart';
 import '../exceptions/empty_iterable.dart';
-import 'density_functions.dart';
-import 'sample_statistics.dart';
 
 /// Square root of pi.
 const sqrtPi = 1.77245385090551602729816748334;
@@ -254,116 +251,5 @@ extension Factorial on int {
     } else {
       return _cache[this] ??= this * (this - 1).factorial;
     }
-  }
-}
-
-extension StatisticsUtils on List<num> {
-  /// Removes and returns all list entries
-  /// with a value satisfying the condition:
-  ///
-  /// `(value < q1 - factor * iqr) || (value > q3 + factor * iqr)`
-  ///
-  /// where `iqr = q3 - q1` is the inter-quartile range, `q1` is the first quartile,
-  /// and `q3` is the third quartile.
-  ///
-  /// Note: The default value of `factor` is 1.5.
-  List<num> removeOutliers([num factor = 1.5]) {
-    final stats = SampleStatistics(this);
-    factor = factor.abs();
-    if (isEmpty) return <num>[];
-    final iqr = stats.quartile3 - stats.quartile1;
-    final result = <num>[];
-    final lowerFence = stats.quartile1 - factor * iqr;
-    final upperFence = stats.quartile3 + factor * iqr;
-
-    removeWhere((current) {
-      if (current < lowerFence || current > upperFence) {
-        result.add(current);
-        return true;
-      } else {
-        return false;
-      }
-    });
-    return result;
-  }
-
-  /// Exports the entries of `this` to the file `filename`.
-  /// - Each entry is written to a separate row.
-  /// - Set `indexFirstColumn` to `true` to include an index.
-  Future<File> export(
-    String filename, {
-    int precision = 20,
-    List<num> range = const [0, 1],
-    String label = '#     x                      y',
-  }) {
-    final file = File(filename);
-    final b = StringBuffer();
-    b.writeln(label);
-    final xRange = range.last - range.first;
-    final dx = xRange / length;
-    final x0 = range.first;
-    for (var i = 0; i < length; ++i) {
-      b.writeln(
-          '${x0 + i * dx}       ${this[i].toStringAsPrecision(precision)}');
-    }
-    return file.writeAsString(b.toString());
-  }
-
-  /// Builds a histogram and exports it to the file `filename`.
-  /// * Set `normalize` to true to normalize the total column area.
-  /// * The default number of histogram intervals (or bins)
-  ///   is the cubic root of the sample size.
-  Future<File> exportHistogram(
-    String filename, {
-    bool normalize = true,
-    int? intervals,
-    ProbabilityDensity? pdf,
-  }) {
-    final file = File(filename);
-    final b = StringBuffer();
-    if (length < 2) {
-      b.writeln('# Could not generate histogram. List is too short: $this');
-      return file.writeAsString(b.toString());
-    }
-    final stats = SampleStatistics(this);
-
-    final hist = stats.histogram(
-      intervals: intervals,
-      normalize: normalize,
-      probabilityDensity: pdf,
-    );
-
-    // hist[0] = [min, min + intervalSize, ..., max].
-    final intervalSize = hist[0][2] - hist[0][1];
-
-    intervals ??= hist[0].length;
-
-    b.writeln('# Intervals: $intervals');
-    b.writeln('# Min: ${stats.min}');
-    b.writeln('# Max: ${stats.max}');
-    b.writeln('# Mean: ${stats.mean}');
-    b.writeln('# StdDev: ${stats.stdDev}');
-    b.writeln('# Median: ${stats.median}');
-    b.writeln('# First Quartile: ${stats.quartile1}');
-    b.writeln('# Third Quartile: ${stats.quartile3}');
-    b.writeln('# Interval size: $intervalSize');
-
-    b.writeln('# Integrated histogram: '
-        '${hist[1].sum * intervalSize}');
-    b.writeln('#');
-    b.writeln(
-        '# -------------------------------------------------------------');
-    if (normalize) {
-      b.write(
-          '#      Range            ProbabilityDensity            Truncated Normal\n');
-    } else {
-      b.write('#      Range            Count\n');
-    }
-    print(b.toString());
-    for (var i = 0; i < hist[0].length; ++i) {
-      b.writeln(
-          '${hist[0][i]}      ${hist[1][i]}      ${normalize ? hist[2][i] : ''}');
-    }
-    return file.writeAsString(b.toString());
   }
 }

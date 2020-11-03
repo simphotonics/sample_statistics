@@ -5,8 +5,8 @@ library sample_generators;
 import 'dart:math';
 
 import 'package:exception_templates/exception_templates.dart';
-import 'package:statistics/src/exceptions/invalid_function_parameter.dart';
 
+import '../exceptions/invalid_function_parameter.dart';
 import 'density_functions.dart';
 
 /// Returns a random sample with **probability density**

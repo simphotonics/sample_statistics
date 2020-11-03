@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:statistics/statistics.dart';
+import 'package:sample_statistics/sample_statistics.dart';
 
 /// To run this program navigate to the folder: examples/bin and use the
 /// command:
@@ -16,7 +16,7 @@ void main(List<String> args) async {
   final sample =
       truncatedNormalSample(sampleSize, min, max, mean, stdDev);
 
-  final stats = SampleStatistics(sample);
+  final stats = SampleStats(sample);
 
   // Export histogram
   await sample.exportHistogram(

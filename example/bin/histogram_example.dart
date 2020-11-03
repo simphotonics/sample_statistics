@@ -1,5 +1,5 @@
-import 'package:statistics/src/samples/normal_random_sample.dart';
-import 'package:statistics/statistics.dart';
+import 'package:sample_statistics/src/samples/normal_random_sample.dart';
+import 'package:sample_statistics/sample_statistics.dart';
 
 /// To run this program navigate to the folder: examples/bin and use the
 /// command:

@@ -1,4 +1,4 @@
-name: statistics
+name: sample_statistics
 
 description: A Dart library for calculating statistics of numerical samples and
              creating/exporting histograms. Includes common probability

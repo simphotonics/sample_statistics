@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:minimal_test/minimal_test.dart';
-import 'package:statistics/statistics.dart';
+import 'package:sample_statistics/sample_statistics.dart';
 
 void main(List<String> args) {
   group('samplePdf', () {
@@ -11,7 +11,7 @@ void main(List<String> args) {
     final n = 1000;
     num pdf(num x) => triangularPdf(x, min, max);
     final sample = samplePdf(n, min, max, pdf(min + h), pdf);
-    final stats = SampleStatistics(sample);
+    final stats = SampleStats(sample);
 
     test('Sample size', () {
       expect(sample.length, n);
@@ -51,7 +51,7 @@ void main(List<String> args) {
     final n = 1000;
     num pdf(num x) => normalPdf(x, mean, stdDev);
     final sample = samplePdf(n, min, max, pdf(mean), pdf);
-    final stats = SampleStatistics(sample);
+    final stats = SampleStats(sample);
     test('Sample size', () {
       expect(sample.length, n);
     });
@@ -74,7 +74,7 @@ void main(List<String> args) {
     final n = 1000;
     num pdf(num x) => truncatedNormalPdf(x, min, max, mean, stdDev);
     final sample = samplePdf(n, min, max, pdf(mean), pdf);
-    final stats = SampleStatistics(sample);
+    final stats = SampleStats(sample);
     test('Sample size', () {
       expect(sample.length, n);
     });

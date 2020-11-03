@@ -1,6 +1,8 @@
 import 'dart:io';
 
-import 'package:statistics/statistics.dart';
+import 'package:sample_statistics/sample_statistics.dart';
+
+
 
 /// To run this program navigate to the folder: examples/bin and use the
 /// command:
@@ -25,7 +27,7 @@ void main(List<String> args) async{
     pdf: (x) => triangularPdf(x, min, max),
   );
 
-  final stats = SampleStatistics(sample);
+  final stats = SampleStats(sample);
 
   await sample.export('../sample_data/triangular_sample.dat');
 

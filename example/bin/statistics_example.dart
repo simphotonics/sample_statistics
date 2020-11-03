@@ -1,4 +1,4 @@
-import 'package:statistics/statistics.dart';
+import 'package:sample_statistics/sample_statistics.dart';
 
 /// Used to enable/disable color output.
 enum ColorOutput { ON, OFF }
@@ -41,7 +41,7 @@ String colorize(
 
 void main() {
   final sample = <num>[-10, 0, 1, 2, 3, 4, 5, 6, 20];
-  final stats = SampleStatistics(sample);
+  final stats = SampleStats(sample);
 
   print(colorize('\nRunning statistic_example.dart ...', GREEN));
 

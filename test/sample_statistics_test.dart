@@ -1,10 +1,10 @@
 import 'package:minimal_test/minimal_test.dart';
-import 'package:statistics/statistics.dart';
+import 'package:sample_statistics/sample_statistics.dart';
 
-import 'package:statistics/src/samples/normal_random_sample.dart';
+import 'package:sample_statistics/src/samples/normal_random_sample.dart';
 
 void main(List<String> args) {
-  final stats = SampleStatistics(normalRandomSample);
+  final stats = SampleStats(normalRandomSample);
 
   group('Basic', () {
     test('min', () {

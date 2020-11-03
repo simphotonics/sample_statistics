@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:exception_templates/exception_templates.dart';
 import 'package:minimal_test/minimal_test.dart';
-import 'package:statistics/src/exceptions/invalid_function_parameter.dart';
-import 'package:statistics/statistics.dart';
+
+import 'package:sample_statistics/sample_statistics.dart';
+import 'package:sample_statistics/src/exceptions/invalid_function_parameter.dart';
+
 
 Type reflectType<T>() => T;
 
