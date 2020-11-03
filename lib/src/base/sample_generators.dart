@@ -103,7 +103,7 @@ List<num> exponentialSample(
   return List<num>.generate(n, (_) => -mean * log(1.0 - random.nextDouble()));
 }
 
-/// Returns a random sample following a uniform distribution with
+/// Returns a random sample following a **uniform distribution** with
 /// non-zero support over the range `(min, max)`.
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
@@ -121,7 +121,7 @@ List<num> uniformSample(int n, num min, num max, {int? seed}) {
   return List<num>.generate(n, (_) => min + random.nextDouble() * range);
 }
 
-/// Returns a random sample following a symmetric triangular distribution with
+/// Returns a random sample following a symmetric **triangular distribution** with
 /// non-zero support over the range `(min, max)`.
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
