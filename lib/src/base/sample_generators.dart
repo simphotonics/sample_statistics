@@ -100,7 +100,7 @@ List<num> exponentialSample(
         message: 'Could not generate random exponential sample');
   }
   final random = Random(seed);
-  return List<num>.generate(n, (_) => mean * log(random.nextDouble() * mean));
+  return List<num>.generate(n, (_) => -mean * log(1.0 - random.nextDouble()));
 }
 
 /// Returns a random sample following a uniform distribution with
