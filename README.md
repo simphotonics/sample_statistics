@@ -7,11 +7,11 @@
 
 The package [`statistics`][statistic] provides libraries for calculating statistics of
 numerical samples, as well as generating and exporting histograms. It includes common probability
-distribution functions and a simple random sample generators.
+distribution functions and simple random sample generators.
 
 ## Usage
 
-To use this library include [`statistics`][statistics] as a dependency in your pubspec.yaml file.
+To use this package include [`statistics`][statistics] as a dependency in your pubspec.yaml file.
 The package uses [null-safety] features and requires Dart SDK version `>=2.10.0`.
 
 ### Sample Statistic
@@ -53,6 +53,7 @@ the *exponential distribution*, the *truncated normal distribution*.
 
 The function `sample()` expects a callback of type `ProbabilityDensity` and can be used
 to generate random numbers that follow an arbitrary probability distribution function.
+
 ```Dart
  import 'package:statistics/statistics.dart';
 
