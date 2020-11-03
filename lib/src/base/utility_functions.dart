@@ -14,6 +14,8 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:exception_templates/exception_templates.dart';
+import 'package:lazy_memo/lazy_memo.dart';
+import 'package:statistics/src/exceptions/invalid_function_parameter.dart';
 
 import '../exceptions/empty_iterable.dart';
 import 'density_functions.dart';
@@ -140,7 +142,7 @@ num _erfAbove1(num x) {
 ///
 /// Compared to the approximation provided by gnuplot the maximum
 /// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in (-1, 1)`.
-num erf(num x) {
+num _erf(num x) {
   if (x == 0) return 0.0;
   if (x.abs() < 1.0) {
     return _erfBelow1(x);
@@ -150,6 +152,14 @@ num erf(num x) {
     return x.isNegative ? -1.0 + 1.0e-28 : 1.0 - 1.0e-28;
   }
 }
+
+/// Returns an approximation of the real
+/// valued error function defined as:
+/// `erf(x) = 2/sqrt(pi) * integral(from: 0, to: x, exp(-t*t), dt)`
+///
+/// Compared to the approximation provided by gnuplot the maximum
+/// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in (-1, 1)`.
+final erf = MemoizedFunction(_erf);
 
 /// Returns the definite integral of `func` over the interval
 /// (`lowerLimit`,`upperLimit`) using the
@@ -229,10 +239,21 @@ extension MinMaxSum on Iterable<num> {
 
 /// Adds the getter `factorial`.
 extension Factorial on int {
+  static final _cache = <int, int>{0: 1};
+
   /// Returns the factorial of this.
   int get factorial {
-    if (this < 0) throw 'Factorial is not defined for negative numbers.';
-    return (this == 0) ? 1 : this * (this - 1).factorial;
+    if (this < 0) {
+      throw ErrorOfType<InvalidFunctionParameter>(
+        message: 'The getter factorial is not defined for negative numbers.',
+        invalidState: '$this < 0.',
+      );
+    }
+    if (this == 0) {
+      return 1;
+    } else {
+      return _cache[this] ??= this * (this - 1).factorial;
+    }
   }
 }
 
