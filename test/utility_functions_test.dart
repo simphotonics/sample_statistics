@@ -1,11 +1,35 @@
 import 'dart:math';
 
+import 'package:exception_templates/exception_templates.dart';
 import 'package:minimal_test/minimal_test.dart';
+import 'package:statistics/src/exceptions/invalid_function_parameter.dart';
 import 'package:statistics/statistics.dart';
 
 Type reflectType<T>() => T;
 
 void main() {
+  group('Factorial', () {
+    test('Zero', () {
+      expect(0.factorial, 1);
+    });
+    test('1.factorial', () {
+      expect(1.factorial, 1);
+    });
+    test('4.factorial', () {
+      expect(4.factorial, 24);
+    });
+    test('10.factorial', () {
+      expect(10.factorial, 3628800);
+    });
+    test('InvalidFunctionParameter', () {
+      try {
+        (-10).factorial;
+      } on ErrorOfType<InvalidFunctionParameter> catch (e) {
+        expect(e.invalidState, '-10 < 0.');
+      }
+    });
+  });
+
   group('Polynomial', () {
     test('empty coeff.', () {
       expect(polynomial(1.0, []), 0);
