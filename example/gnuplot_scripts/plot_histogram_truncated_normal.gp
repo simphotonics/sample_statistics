@@ -6,12 +6,12 @@ load 'histogram_settings.gp'
 # Import pdf
 load 'normal_pdf.gp'
 
-hist1 = '../plots/truncated_normal1000.hist'
-hist2 = '../plots/truncated_normal6750.hist'
-vars1 = '../plots/truncated_normal1000.dat'
-vars2 = '../plots/truncated_normal6750.dat'
+hist1 = '../sample_data/truncated_normal1000.hist'
+hist2 = '../sample_data/truncated_normal6750.hist'
+vars1 = '../sample_data/truncated_normal1000.dat'
+vars2 = '../sample_data/truncated_normal6750.dat'
 
-set multiplot layout 1, 2 title 'Random Sample Histograms - Truncated Normal Distribution' font ", 20"
+set multiplot layout 1, 2 title 'Random Sample Histograms - Truncated Normal Distribution' font ", 28"
 
 
 # ------------------------------------- Left plot
@@ -30,10 +30,10 @@ yMax = truncatedNormalPdf(mean, min, max, mean, stdDev)
 meanCorr = meanTruncatedNormal(min, max, mean, stdDev)
 
 
-set label  sprintf('interval size = %.3f', (max - min)/intervals) at 0.8*max, 0.5*yMax \
- font " ,16" textcolor rgb "0x332222"
+set label  sprintf('interval size = %.3f', (max - min)/intervals) at 0.75*max, 0.5*yMax \
+ font " ,20" textcolor rgb "0x332222"
 
-set label  sprintf('mean = %.3f', sampleMean) at 0.7*mean, 1.1*yMax font " ,18" textcolor rgb "blue"
+set label  sprintf('mean = %.3f', sampleMean) at 0.6*mean, 1.1*yMax font " ,20" textcolor rgb "blue" front
 
 set arrow front from mean, 0 to mean, truncatedNormalPdf(mean, min, max, mean, stdDev) backhead ls 2
 
@@ -46,6 +46,7 @@ unset yrange
 # ------------------------------------------ Right plot
 
 unset label
+unset ylabel
 stats hist2 u 1
 #show variables STATS
 intervals = STATS_records
@@ -60,10 +61,10 @@ yMax = truncatedNormalPdf(mean, min, max, mean, stdDev)
 
 meanCorr = meanTruncatedNormal(min, max, mean, stdDev)
 
-set label  sprintf('interval size = %.3f', (max - min)/intervals) at 0.8*max, 0.5*yMax \
- font " ,18" textcolor rgb "0x332222"
+set label  sprintf('interval size = %.3f', (max - min)/intervals) at 0.75*max, 0.5*yMax \
+ font " ,20" textcolor rgb "0x332222"
 
-set label  sprintf('mean = %.3f', sampleMean) at 0.7*mean, 1.1*yMax font " ,18" textcolor rgb "blue"
+set label  sprintf('mean = %.3f', sampleMean) at 0.7*mean, 1.1*yMax font " ,20" textcolor rgb "blue" front
 
 unset arrow
 set arrow from mean, 0 to mean, truncatedNormalPdf(mean, min, max, mean, stdDev) backhead ls 2
