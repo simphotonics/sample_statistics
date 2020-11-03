@@ -1,0 +1,9 @@
+# Histogram: Truncated normal distribution.
+# -----------------------------------------
+# Parameters used to generate the random sample:
+sampleSize = 10000
+min = 4
+max = 10
+mean = 7.0
+sampleMean = 7.004592721157402
+sampleStdDev = 1.2340757656383061
