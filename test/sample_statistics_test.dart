@@ -42,7 +42,6 @@ void main(List<String> args) {
       final hist = stats.histogram(intervals: 10);
       expect(hist.first.first, stats.min);
       expect(hist.first.last, stats.max);
-
     });
     test('Normalization', () {
       final numberOfIntervals = 10;
