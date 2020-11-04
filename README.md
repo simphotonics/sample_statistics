@@ -103,7 +103,7 @@ probability density function for each interval.
 The figure below shows the histograms obtained from two random samples following a truncated
 normal distribution with `min = 1.5`, `max = 6.0`. The original normal distribution has
 `mean = 3.0`, and `stdDev = 1.0`.
-The samples were generated using the function [`sampleTruncatedNormalPdf()`][sampleTruncatedNormalPdf()].
+The samples were generated using the function [`sampleTruncatedNormalPdf`][sampleTruncatedNormalPdf].
 
 
 ![Directed Graph Image](https://github.com/simphotonics/sample_statistics/blob/main/example/plots/histogram_truncated_normal_2.svg)
@@ -114,7 +114,7 @@ better match between the shape of the histogram and the underlying probability d
 
 ## Examples
 
-For further example on how to generate random samples, export histograms,
+For further examples on how to generate random samples, export histograms,
 and access sample statistics see folder [example].
 
 
@@ -123,24 +123,25 @@ and access sample statistics see folder [example].
 
 Please file feature requests and bugs at the [issue tracker].
 
+
 [CachedObjectFactory]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/CachedObjectFactory.html
-
-[histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats/histogram.html
-
-[SampleStats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats-class.html
-
-[samplePdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sample.html
-
-[ProbabilityDensity]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/ProbabilityDensity.html
-
-[truncatedNormalSample()]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/truncatedNormalSample.html
-
-[rejection-sampling]: https://en.wikipedia.org/wiki/Rejection_sampling
-
-[issue tracker]: https://github.com/simphotonics/sample_statistics/issues
 
 [example]: https://github.com/simphotonics/sample_statistic/tree/master/example
 
-[sample_statistics]: https://pub.dev/packages/sample_statistics
+[histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats/histogram.html
+
+[issue tracker]: https://github.com/simphotonics/sample_statistics/issues
 
 [null-safety]: https://dart.dev/null-safety
+
+[ProbabilityDensity]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/ProbabilityDensity.html
+
+[rejection-sampling]: https://en.wikipedia.org/wiki/Rejection_sampling
+
+[sample_statistics]: https://pub.dev/packages/sample_statistics
+
+[samplePdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sample.html
+
+[SampleStats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats-class.html
+
+[truncatedNormalSample()]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/truncatedNormalSample.html
