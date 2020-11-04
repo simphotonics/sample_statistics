@@ -5,8 +5,8 @@
 
 ## Introduction
 
-The package [`sample_statistics`][sample_statistics] provides libraries for calculating statistics of
-numerical samples, as well as generating and exporting histograms. It includes common probability
+The package [`sample_statistics`][sample_statistics] provides helpers for calculating statistics of
+numerical samples and generating/exporting histograms. It includes common probability
 distribution functions and simple random sample generators.
 
 ## Usage
@@ -100,17 +100,17 @@ specified it is used to
 generate the values in the third list entry by evaluating the
 probability density function for each interval.
 
-The figure below shows the histograms obtained from two random samples following a truncated
-normal distribution with `min = 1.5`, `max = 6.0`. The original normal distribution has
-`mean = 3.0`, and `stdDev = 1.0`.
+The figure below shows the histograms obtained from two random samples following a truncated normal distribution with `min = 1.5`, `max = 6.0` and parent distribution
+with `mean = 3.0`, and `stdDev = 1.0`.
 The samples were generated using the function [`sampleTruncatedNormalPdf`][sampleTruncatedNormalPdf].
 
 
 ![Directed Graph Image](https://github.com/simphotonics/sample_statistics/blob/main/example/plots/histogram_truncated_normal_2.svg)
 
-The figure on the left shows the histogram of a sample with size 1000. The figure on the right
-shows the histogram of a sample with size 6750. Increasing the random sample size leads to a
-better match between the shape of the histogram and the underlying probability distribution.
+The figure on the left shows the histogram of a sample with size 1000. The figure on the right shows the histogram of a sample with size 6750. Increasing the random sample size leads to an increasingly closer match between the shape of the histogram and the underlying probability distribution.
+
+The mean of the truncated normal distribution can be calculate using the function
+[`meanTruncatedNormal`][meanTruncatedNormal]. Using the parameters mentioned above one gets a theoretical mean of 3.134. It can be seen that in the limit of a large sample size the sample mean approaches the mean of the underlying probability distribution.
 
 ## Examples
 
@@ -131,6 +131,8 @@ Please file feature requests and bugs at the [issue tracker].
 [histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats/histogram.html
 
 [issue tracker]: https://github.com/simphotonics/sample_statistics/issues
+
+[meanTruncatedNormal]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/meanTruncatedNormal.html
 
 [null-safety]: https://dart.dev/null-safety
 
