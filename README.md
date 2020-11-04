@@ -140,8 +140,8 @@ Please file feature requests and bugs at the [issue tracker].
 
 [sample_statistics]: https://pub.dev/packages/sample_statistics
 
-[samplePdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sample.html
+[samplePdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/samplePdf.html
 
 [SampleStats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats-class.html
 
-[truncatedNormalSample()]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/truncatedNormalSample.html
+[sampleTruncatedNormalPdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sampelTruncatedNormalPdf.html
