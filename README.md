@@ -1,7 +1,7 @@
 
 # Sample Statistics for Dart
 
-
+[![Build Status](https://travis-ci.com/simphotonics/sample_statistics.svg?branch=main)](https://travis-ci.com/simphotonics/sample_statistics)
 
 ## Introduction
 

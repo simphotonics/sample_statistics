@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.com/simphotonics/sample_statistics.svg?branch=main)](https://travis-ci.com/simphotonics/sample_statistics)
 
 ## Statistics - Examples
 The files located in the folder `bin` contain short programs that demonstrate how to generate random samples,
