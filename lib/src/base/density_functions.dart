@@ -141,7 +141,8 @@ num meanTruncatedNormal(num min, num max, num mean, num stdDev) {
   final alpha = (min - mean) / stdDev;
   final beta = (max - mean) / stdDev;
   return mean +
-      (stdNormalPdf(alpha) - stdNormalPdf(beta)) /
+      stdDev *
+          (stdNormalPdf(alpha) - stdNormalPdf(beta)) /
           (stdNormalCdf(beta) - stdNormalCdf(alpha));
 }
 
@@ -155,8 +156,8 @@ num stdDevTruncatedNormal(num min, num max, num mean, num stdDev) {
 
   return stdDev *
       math.sqrt(1.0 +
-          (alpha * stdNormalPdf(alpha) - beta * stdNormalPdf(beta)) / z +
-          math.pow(stdNormalPdf(alpha) - stdNormalPdf(beta), 2) / (z * z));
+          (alpha * stdNormalPdf(alpha) - beta * stdNormalPdf(beta)) / z -
+          math.pow((stdNormalPdf(alpha) - stdNormalPdf(beta)) / z, 2));
 }
 
 /// **Uniform** probability density function
