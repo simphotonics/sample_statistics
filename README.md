@@ -46,12 +46,12 @@ same quantity is accessed repeatedly.
 
 ### Random Sample Generators
 
-To generate random samples that follow a certain probability distribution use the library
-`sample_generators`. It includes random number generators for common probabiliy distribution such
+This package includes random sample generators for common probabiliy distribution such
 as for the *normal distribution*,
 the *exponential distribution*, the *truncated normal distribution*.
 
-The function `sample()` expects a callback of type `ProbabilityDensity` and can be used
+The function `samplePdf()` is based on the [rejection sampling][rejection-sampling] method.
+It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity] and can be used
 to generate random numbers that follow an arbitrary probability distribution function.
 
 ```Dart
@@ -64,7 +64,7 @@ to generate random numbers that follow an arbitrary probability distribution fun
    final stdDev = 2.0;
 
    // Generating the random sample with 1000 entries.
-   final sample = truncatedNormalSample(1000, min, max, mean, stdDev);
+   final sample = sampleTruncatedNormalPdf(1000, min, max, mean, stdDev);
 
    final stats = SampleStats(sample);
    print(stats.mean);
@@ -87,7 +87,7 @@ into a suitable number of intervals.
 The second step consists of counting how many sample entries fall into each
 interval.
 
-The method `histogram` provided by the class [`SampleStats`][SampleStats]
+The method [`histogram()`][histogram()] provided by the class [`SampleStats`][SampleStats]
 returns an object of type `List<List<num>>` (each list entry is a numerical list).
 The first entry contains the left margins of the histogram intervals or bins.
 The second entry contains a count of how many sample values fall into each interval. By default,
@@ -95,15 +95,16 @@ the count is normalized such that the total area under the histogram is equal to
 This is useful when comparing a histogram to a probability density function.
 
 The method [`histogram()`][histogram()] accepts the optional parameter `probabilityDensity`,
-a function of type [`ProbabilityDensity`][ProbabilityDensity].
-If this function is specified it is used to
+a function of type [`ProbabilityDensity`][ProbabilityDensity]. If this function is
+specified it is used to
 generate the values in the third list entry by evaluating the
 probability density function for each interval.
 
 The figure below shows the histograms obtained from two random samples following a truncated
-normal distribution with `min = 1.5`, `max = 6.0`, `mean = 3.0`, and `stdDev = 1.0`.
-The samples were generated using the function [`truncatedNormalSample()`][truncatedNormalSample()]
-provided by the library [`sample_generators`].
+normal distribution with `min = 1.5`, `max = 6.0`. The original normal distribution has
+`mean = 3.0`, and `stdDev = 1.0`.
+The samples were generated using the function [`sampleTruncatedNormalPdf()`][sampleTruncatedNormalPdf()].
+
 
 ![Directed Graph Image](https://github.com/simphotonics/sample_statistics/blob/main/example/plots/histogram_truncated_normal_2.svg)
 
@@ -128,10 +129,13 @@ Please file feature requests and bugs at the [issue tracker].
 
 [SampleStats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats-class.html
 
+[samplePdf()]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sample.html
+
 [ProbabilityDensity]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/ProbabilityDensity.html
 
 [truncatedNormalSample()]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/truncatedNormalSample.html
 
+[rejection-sampling]: https://en.wikipedia.org/wiki/Rejection_sampling
 
 [issue tracker]: https://github.com/simphotonics/sample_statistics/issues
 
