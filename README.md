@@ -131,14 +131,15 @@ with `mean = 3.0`, and `stdDev = 1.0`.
 The samples were generated using the function [`sampleTruncatedNormalPdf`][sampleTruncatedNormalPdf].
 
 
-![Directed Graph Image](https://github.com/simphotonics/sample_statistics/blob/main/example/plots/histogram_truncated_normal_2.svg)
+![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/example/plots/histogram_truncated_normal_2.svg?sanitize=true)
+
 
 The figure on the left shows the histogram of a sample with size 1000. The figure on the right shows
 the histogram of a sample with size 6750. Increasing the random sample size leads to an increasingly
 closer match between the shape of the histogram and the underlying probability distribution.
 
-The mean of a truncated normal distribution can be calculate using the function
-[`meanTruncatedNormal`][meanTruncatedNormal]. Using the parameters mentioned above one can determine
+Using the distribution parameters mentioned above with the function
+[`meanTruncatedNormal`][meanTruncatedNormal],  one can determine
 a theoretical mean of 3.134. It can be seen that in the limit of a large sample
 size the *sample mean* approaches
 the *mean* of the underlying probability distribution.
