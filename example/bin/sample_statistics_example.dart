@@ -43,7 +43,7 @@ void main() {
   final sample = <num>[-10, 0, 1, 2, 3, 4, 5, 6, 20];
   final stats = SampleStats(sample);
 
-  print(colorize('\nRunning statistic_example.dart ...', GREEN));
+  print(colorize('\nRunning sample_statistics_example.dart ...', GREEN));
 
   print(colorize('Sample: ', BLUE) + sample.toString());
 
