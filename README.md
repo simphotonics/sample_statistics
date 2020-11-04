@@ -14,7 +14,7 @@ distribution functions and simple random sample generators.
 To use this package include [`sample_statistics`][sample_statistics] as a dependency in your `pubspec.yaml` file.
 The package uses [null-safety] features and requires Dart SDK version `>=2.10.0`.
 
-### Sample Statistic
+### Sample Statistics
 
 To access basis sample statistics use the class [`SampleStats`][SampleStats]. It calculates most
 sample statistics in a lazy fashion and caches results to avoid expensive calculations if the
