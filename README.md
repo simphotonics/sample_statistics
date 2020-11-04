@@ -16,7 +16,7 @@ The package uses [null-safety] features and requires Dart SDK version `>=2.10.0`
 
 ### Sample Statistic
 
-To access basis sample statistics use the class `SampleStats`. It calculates most
+To access basis sample statistics use the class [`SampleStats`][SampleStats]. It calculates most
 sample statistics in a lazy fashion and caches results to avoid expensive calculations if the
 same quantity is accessed repeatedly.
 
@@ -50,7 +50,7 @@ This package includes random sample generators for common probabiliy distributio
 as for the *normal distribution*,
 the *exponential distribution*, the *truncated normal distribution*.
 
-The function `samplePdf()` is based on the [rejection sampling][rejection-sampling] method.
+The function [`samplePdf`][samplePdf] is based on the [rejection sampling][rejection-sampling] method.
 It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity] and can be used
 to generate random numbers that follow an arbitrary probability distribution function.
 
@@ -87,14 +87,14 @@ into a suitable number of intervals.
 The second step consists of counting how many sample entries fall into each
 interval.
 
-The method [`histogram()`][histogram()] provided by the class [`SampleStats`][SampleStats]
+The method [`histogram`][histogram] provided by the class [`SampleStats`][SampleStats]
 returns an object of type `List<List<num>>` (each list entry is a numerical list).
 The first entry contains the left margins of the histogram intervals or bins.
 The second entry contains a count of how many sample values fall into each interval. By default,
 the count is normalized such that the total area under the histogram is equal to 1.0.
 This is useful when comparing a histogram to a probability density function.
 
-The method [`histogram()`][histogram()] accepts the optional parameter `probabilityDensity`,
+The method [`histogram`][histogram] accepts the optional parameter `probabilityDensity`,
 a function of type [`ProbabilityDensity`][ProbabilityDensity]. If this function is
 specified it is used to
 generate the values in the third list entry by evaluating the
@@ -125,11 +125,11 @@ Please file feature requests and bugs at the [issue tracker].
 
 [CachedObjectFactory]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/CachedObjectFactory.html
 
-[histogram()]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats/histogram.html
+[histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats/histogram.html
 
 [SampleStats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats-class.html
 
-[samplePdf()]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sample.html
+[samplePdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sample.html
 
 [ProbabilityDensity]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/ProbabilityDensity.html
 
