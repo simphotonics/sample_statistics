@@ -1,5 +1,5 @@
 
-# Sample Statistics for Dart
+# Sample Statistics
 
 [![Build Status](https://travis-ci.com/simphotonics/sample_statistics.svg?branch=main)](https://travis-ci.com/simphotonics/sample_statistics)
 
@@ -14,7 +14,7 @@ distribution functions and simple random sample generators.
 To use this package include [`sample_statistics`][sample_statistics] as a dependency in your `pubspec.yaml` file.
 The package uses [null-safety] features and requires Dart SDK version `>=2.10.0`.
 
-### Sample Statistics
+### Random Sample Statistics
 
 To access basis sample statistics use the class [`SampleStats`][SampleStats]. It calculates most
 sample statistics in a lazy fashion and caches results to avoid expensive calculations if the
@@ -71,7 +71,8 @@ This package [`sample_statistics`][sample_statistics] includes functions that ca
 The function [`samplePdf`][samplePdf] is based on the [rejection sampling][rejection-sampling] method.
 It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity] and can be used
 to generate random samples that follow an arbitrary probability distribution function.
-Additinally, the package includes random sample generators based on the following probability distribution functions:
+Additinally, the package includes random sample generators based on the
+following probability distribution functions:
  * normal distribution,
  * truncated normal distribution,
  * exponential distribution,
