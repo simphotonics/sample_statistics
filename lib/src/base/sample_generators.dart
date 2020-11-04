@@ -49,7 +49,7 @@ List<num> samplePdf(
 /// * `stdDev`: standard deviation.
 /// ---
 /// * `seed`: random generator seed (optional).
-List<num> truncatedNormalSample(
+List<num> sampleTruncatedNormalPdf(
   int n,
   num min,
   num max,
@@ -74,7 +74,7 @@ List<num> truncatedNormalSample(
 /// * `min`: minimum value (defaults to `mean - 10 * stdDev`),
 /// * `max`: maximum value (defaults to `mean + 10 * stdDev`),
 /// * `seed`: random generator seed.
-List<num> normalSample(int n, num mean, num stdDev,
+List<num> sampleNormalPdf(int n, num mean, num stdDev,
     {num? min, num? max, int? seed}) {
   min ??= mean - 10 * stdDev;
   max ??= mean + 10 * stdDev;
@@ -88,7 +88,7 @@ List<num> normalSample(int n, num mean, num stdDev,
 /// * `mean` must be larger than zero,
 /// * `seed` is optional (seeds the random number generator)
 /// * Generator uses inversion sampling.
-List<num> exponentialSample(
+List<num> sampleExponentialPdf(
   int n,
   num mean, {
   int? seed,
@@ -108,7 +108,7 @@ List<num> exponentialSample(
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `min >= max`.
-List<num> uniformSample(int n, num min, num max, {int? seed}) {
+List<num> sampleUniformPdf(int n, num min, num max, {int? seed}) {
   if (min >= max) {
     throw ErrorOfType<InvalidFunctionParameter>(
       invalidState: 'min: $min >= max: $max',
@@ -126,7 +126,7 @@ List<num> uniformSample(int n, num min, num max, {int? seed}) {
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `min >= max`.
-List<num> triangularSample(int n, num min, num max, {int? seed}) {
+List<num> sampleTriangularPdf(int n, num min, num max, {int? seed}) {
   if (min >= max) {
     throw ErrorOfType<InvalidFunctionParameter>(
       invalidState: 'min: $min >= max: $max',

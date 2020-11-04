@@ -14,7 +14,7 @@ void main(List<String> args) async {
   final mean = 3.0;
   final stdDev = 1.0;
   final sample =
-      truncatedNormalSample(sampleSize, min, max, mean, stdDev);
+      sampleTruncatedNormalPdf(sampleSize, min, max, mean, stdDev);
 
   final stats = SampleStats(sample);
 

@@ -20,7 +20,7 @@ void main(List<String> args) async{
 
   await y.export('../sample_data/triangular_cdf.dat', range: [min, max]);
 
-  final sample = triangularSample(sampleSize, 4, 10);
+  final sample = sampleTriangularPdf(sampleSize, 4, 10);
 
   await sample.exportHistogram(
     '../plots/triangular_$sampleSize.hist',
