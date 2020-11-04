@@ -43,7 +43,7 @@ void main(List<String> args) {
     });
   });
 
-  group('normalSample', () {
+  group('sampleNormalPdf', () {
     final mean = 0.0;
     final stdDev = 2.0;
     final min = -20;
@@ -66,12 +66,12 @@ void main(List<String> args) {
     });
   });
 
-  group('truncatedNormalSample', () {
-    final mean = 5.0;
-    final stdDev = 2.5;
-    final min = 0.0;
-    final max = 10;
-    final n = 1000;
+  group('sampleTruncatedNormalPdf', () {
+    final mean = 3.0;
+    final stdDev = 1.0;
+    final min = 1.5;
+    final max = 6;
+    final n = 2000;
     num pdf(num x) => truncatedNormalPdf(x, min, max, mean, stdDev);
     final sample = samplePdf(n, min, max, pdf(mean), pdf);
     final stats = SampleStats(sample);
@@ -86,11 +86,11 @@ void main(List<String> args) {
     });
     test('Sample mean', () {
       expect(stats.mean, meanTruncatedNormal(min, max, mean, stdDev),
-          precision: 0.25);
+          precision: 0.05);
     });
     test('stdDev', () {
       expect(stats.stdDev, stdDevTruncatedNormal(min, max, mean, stdDev),
-          precision: 0.2);
+          precision: 0.05);
     });
   });
 }
