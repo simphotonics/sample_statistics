@@ -119,11 +119,7 @@ the count is normalized such that the total area under the histogram is equal to
 This is useful when comparing a histogram to a probability density function.
 
 The method [`histogram`][histogram] accepts the optional parameter `probabilityDensity`,
-a function of type [`ProbabilityDensity`][ProbabilityDe
-```Console
-
-```
-nsity]. If this function is
+a function of type [`ProbabilityDensity`][ProbabilityDensity]. If this function is
 specified it is used to
 generate the values in the third list entry by evaluating the
 probability density function for each interval.
