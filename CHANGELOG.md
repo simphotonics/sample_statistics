@@ -1,3 +1,7 @@
+## 0.0.3-nullsafety
+
+- Edited folder names in `example/README.md`.
+
 ## 0.0.2-nullsafety
 
 - Amended package description.
