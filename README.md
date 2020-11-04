@@ -130,9 +130,11 @@ a truncated normal distribution with `min = 1.5`, `max = 6.0` and parent distrib
 with `mean = 3.0`, and `stdDev = 1.0`.
 The samples were generated using the function [`sampleTruncatedNormalPdf`][sampleTruncatedNormalPdf].
 
+<br>
 
 ![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/example/plots/histogram_truncated_normal_2.svg?sanitize=true)
 
+<br>
 
 The figure on the left shows the histogram of a sample with size 1000. The figure on the right shows
 the histogram of a sample with size 6750. Increasing the random sample size leads to an increasingly
