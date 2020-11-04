@@ -71,7 +71,6 @@ This package [`sample_statistics`][sample_statistics] includes functions that ca
 The function [`samplePdf`][samplePdf] is based on the [rejection sampling][rejection-sampling] method.
 It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity] and can be used
 to generate random samples that follow an arbitrary probability distribution function.
-
 Additinally, the package includes random sample generators based on the following probability distribution functions:
  * normal distribution,
  * truncated normal distribution,
