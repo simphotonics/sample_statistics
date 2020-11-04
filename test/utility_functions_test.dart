@@ -6,7 +6,6 @@ import 'package:minimal_test/minimal_test.dart';
 import 'package:sample_statistics/sample_statistics.dart';
 import 'package:sample_statistics/src/exceptions/invalid_function_parameter.dart';
 
-
 Type reflectType<T>() => T;
 
 void main() {
