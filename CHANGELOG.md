@@ -1,3 +1,7 @@
+## 0.0.8-nullsafety
+
+- Added optional parameter `precision` to method `exportHistogram`.
+
 ## 0.0.7-nullsafety
 
 - Changed type of field `sample` from `Iterable<num>` to `List<num>`
