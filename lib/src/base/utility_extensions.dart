@@ -123,6 +123,80 @@ extension StatisticsUtils on List<num> {
     });
     return result;
   }
+
+  /// Builds a histogram from the entries of `this`
+  /// and writes the data records to a `String`.
+  /// * If `normalize == true` the histogram count will be normalized such
+  ///   that the total histogram area is equal to 1.0.
+  /// * If `normalize == true`, the function `pdf` is evaluated for
+  ///   each histogram interval and added as a third column.
+  /// * The parameter `pdf` defaults to:
+  ///   `(x) => normalPdf(x, sampleMean, sampleStdDev)`.
+  String exportHistogram({
+    bool normalize = true,
+    int? intervals,
+    ProbabilityDensity? pdf,
+    verbose = false,
+    String commentCharacter = '#',
+    int precision = 20,
+  }) {
+    final b = StringBuffer();
+    if (length < 2) {
+      b.writeln('$commentCharacter Could not generate histogram. '
+          'List is too short: $this');
+      return b.toString();
+    }
+    final stats = SampleStats(this);
+
+    final hist = stats.histogram(
+      intervals: intervals,
+      normalize: normalize,
+      probabilityDensity: pdf,
+    );
+
+    // hist[0] = [min, min + intervalSize, ..., max].
+    final intervalSize = hist[0][2] - hist[0][1];
+
+    intervals ??= hist[0].length;
+
+    b.writeln('$commentCharacter Intervals: $intervals');
+    b.writeln('$commentCharacter Min: '
+        '${stats.min.toStringAsPrecision(precision)}');
+    b.writeln('$commentCharacter Max: '
+        '${stats.max.toStringAsPrecision(precision)}');
+    b.writeln('$commentCharacter Mean: '
+        '${stats.mean.toStringAsPrecision(precision)}');
+    b.writeln('$commentCharacter StdDev: '
+        '${stats.stdDev.toStringAsPrecision(precision)}');
+    b.writeln('$commentCharacter Median: '
+        '${stats.median.toStringAsPrecision(precision)}');
+    b.writeln('$commentCharacter First Quartile: '
+        '${stats.quartile1.toStringAsPrecision(precision)}');
+    b.writeln('$commentCharacter Third Quartile: '
+        '${stats.quartile3.toStringAsPrecision(precision)}');
+    b.writeln('$commentCharacter Interval size: '
+        '${intervalSize.toStringAsPrecision(precision)}');
+    b.writeln('$commentCharacter Integrated histogram: '
+        '${hist[1].sum * intervalSize}');
+    b.writeln('$commentCharacter');
+    b.writeln('$commentCharacter ------------------------------------'
+        '-------------------------');
+    if (normalize) {
+      b.write('$commentCharacter     Range     Prob. Density     '
+          'Prob. Density Function\n');
+    } else {
+      b.write('$commentCharacter     Range     Count\n');
+    }
+    if (verbose) {
+      print(b.toString());
+    }
+    for (var i = 0; i < hist[0].length; ++i) {
+      b.writeln('${hist[0][i].toStringAsPrecision(precision)}     '
+          '${hist[1][i].toStringAsPrecision(precision)}     '
+          '${normalize ? hist[2][i].toStringAsPrecision(precision) : ''}');
+    }
+    return b.toString();
+  }
 }
 
 /// Extension on `List<num>` providing the methods
@@ -179,70 +253,6 @@ extension Export on List<num> {
     for (var i = 0; i < length; ++i) {
       b.writeln('${(x0 + i * dx).toStringAsPrecision(precision)}'
           '$delimiter${this[i].toStringAsPrecision(precision)}');
-    }
-    return b.toString();
-  }
-
-  /// Builds a histogram from the entries of `this`
-  /// and writes the data records to a `String`.
-  /// * If `normalize == true` the histogram count will be normalized such
-  ///   that the total histogram area is equal to 1.0.
-  /// * If `normalize == true`, the function `pdf` is evaluated for
-  ///   each histogram interval and added as a third column.
-  /// * The parameter `pdf` defaults to:
-  ///   `(x) => normalPdf(x, sampleMean, sampleStdDev)`.
-  String exportHistogram({
-    bool normalize = true,
-    int? intervals,
-    ProbabilityDensity? pdf,
-    verbose = false,
-    String commentCharacter = '#',
-  }) {
-    final b = StringBuffer();
-    if (length < 2) {
-      b.writeln('$commentCharacter Could not generate histogram. '
-          'List is too short: $this');
-      return b.toString();
-    }
-    final stats = SampleStats(this);
-
-    final hist = stats.histogram(
-      intervals: intervals,
-      normalize: normalize,
-      probabilityDensity: pdf,
-    );
-
-    // hist[0] = [min, min + intervalSize, ..., max].
-    final intervalSize = hist[0][2] - hist[0][1];
-
-    intervals ??= hist[0].length;
-
-    b.writeln('$commentCharacter Intervals: $intervals');
-    b.writeln('$commentCharacter Min: ${stats.min}');
-    b.writeln('$commentCharacter Max: ${stats.max}');
-    b.writeln('$commentCharacter Mean: ${stats.mean}');
-    b.writeln('$commentCharacter StdDev: ${stats.stdDev}');
-    b.writeln('$commentCharacter Median: ${stats.median}');
-    b.writeln('$commentCharacter First Quartile: ${stats.quartile1}');
-    b.writeln('$commentCharacter Third Quartile: ${stats.quartile3}');
-    b.writeln('$commentCharacter Interval size: $intervalSize');
-    b.writeln('$commentCharacter Integrated histogram: '
-        '${hist[1].sum * intervalSize}');
-    b.writeln('$commentCharacter');
-    b.writeln('$commentCharacter ------------------------------------'
-        '-------------------------');
-    if (normalize) {
-      b.write('$commentCharacter     Range     Prob. Density     '
-          'Prob. Density Function\n');
-    } else {
-      b.write('$commentCharacter     Range     Count\n');
-    }
-    if (verbose) {
-      print(b.toString());
-    }
-    for (var i = 0; i < hist[0].length; ++i) {
-      b.writeln(
-          '${hist[0][i]}     ${hist[1][i]}     ${normalize ? hist[2][i] : ''}');
     }
     return b.toString();
   }
