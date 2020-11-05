@@ -17,7 +17,7 @@ class SampleStats {
         }),
         _mean = Lazy<num>(() => sample.sum / sample.length);
 
-  /// Numeric data sample. Must not be empty.
+  /// Numerical data sample. Must not be empty.
   final Iterable<num> sample;
 
   /// Sorted sample stored as lazy variable.
