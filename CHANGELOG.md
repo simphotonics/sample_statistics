@@ -1,3 +1,9 @@
+## 0.0.5-nullsafety
+
+- Libraries no longer depend on `dart:io`.
+- Added Dart docs.
+
+
 ## 0.0.4-nullsafety
 
 - Amended `README.md`.
