@@ -1,3 +1,4 @@
+/// Library providing common probability density functions.
 library density_function;
 
 import 'dart:math' as math;
@@ -10,17 +11,17 @@ import 'utility_functions.dart';
 /// A probability density function.
 typedef ProbabilityDensity = num Function(num x);
 
-/// **Standard normal** probability
+/// Standard normal probability
 /// density function (with zero mean
 /// and standard deviation equal to one) .
 num stdNormalPdf(num x) => invSqrt2Pi * math.exp(-0.5 * x * x);
 
-/// **Standard normal cumulative** probability distribution.
+/// Standard normal cumulative probability distribution.
 num stdNormalCdf(num x) {
   return 0.5 + 0.5 * erf(x * invSqrt2);
 }
 
-/// **Normal** probability density function.
+/// Normal probability density function.
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `stdDev < 0`.
@@ -36,7 +37,7 @@ num normalPdf(num x, num mean, num stdDev) {
   return invSqrt2Pi * invStdDev * math.exp(-0.5 * x * x);
 }
 
-/// **Normal cumulative** probability density function.
+/// Normal cumulative probability density function.
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `stdDev < 0`.
@@ -50,7 +51,7 @@ num normalCdf(num x, num mean, num stdDev) {
   return 0.5 + 0.5 * erf((x - mean) / (math.sqrt2 * stdDev));
 }
 
-/// **Truncated normal** probability density function
+/// Truncated normal probability density function
 /// with parameters:
 /// * `min`: left limit.
 /// * `max`: right limit satisfying `min < max`.
@@ -91,7 +92,7 @@ num truncatedNormalPdf(
   }
 }
 
-/// **Truncated normal cumulative**
+/// Truncated normal cumulative
 /// probability density function
 /// with parameters:
 /// * `min`: left limit.
@@ -160,7 +161,7 @@ num stdDevTruncatedNormal(num min, num max, num mean, num stdDev) {
           math.pow((stdNormalPdf(alpha) - stdNormalPdf(beta)) / z, 2));
 }
 
-/// **Uniform** probability density function
+/// Uniform probability density function
 /// with non-zero support over the interval `(min, max)`.
 ///
 /// Throws an exception of type `ErrorOfType<InvalidFunctionParameter>`
@@ -175,7 +176,7 @@ num uniformPdf(num x, num min, num max) {
   return (x < min || x > max) ? 0.0 : 1.0 / (max - min);
 }
 
-/// **Uniform cumulative** probability density function
+/// Uniform cumulative probability density function
 /// with non-zero support over the interval `(min, max)`.
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
@@ -192,7 +193,7 @@ num uniformCdf(num x, num min, num max) {
   return (x - min) * uniformPdf(x, min, max);
 }
 
-/// **Exponential** density function
+/// Exponential density function
 /// with non-zero support over the interval `(0, inf)`.
 ///
 /// Throws an exception of type `ErrorOfType<InvalidFunctionParameter>`
@@ -208,7 +209,7 @@ num expPdf(num x, num mean) {
   return (x.isNegative) ? 0.0 : 1.0 / mean * math.exp(-x / mean);
 }
 
-/// **Exponential cumulative** probability density function
+/// Exponential cumulative probability density function
 /// with non-zero support over the interval `(0, inf)`.
 ///
 /// Throws an exception of type `ErrorOfType<InvalidFunctionParameter>`
@@ -223,7 +224,7 @@ num expCdf(num x, num mean) {
   return (x.isNegative) ? 0.0 : 1.0 - math.exp(-x / mean);
 }
 
-/// **Triangular** probability density function
+/// Triangular probability density function
 /// with non-zero support over the interval `(min, max)`.
 ///
 /// The maximum occurs at `(max - min) / 2`.
@@ -247,7 +248,7 @@ num triangularPdf(num x, num min, num max) {
   }
 }
 
-/// **Triangular cumulative** probability density function
+/// Triangular cumulative probability density function
 /// with non-zero support over the interval `(min, max)`.
 ///
 /// The maximum of the probability density occurs at `(max - min) / 2`.
