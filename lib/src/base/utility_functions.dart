@@ -1,11 +1,4 @@
-/// Provides the functions:
-/// * `erf(x)`: error function,
-/// * `integrate(x, func, lowerLimit, upperLimit)`.
-/// ---
-/// Includes the extensions:
-/// * `Factorial on int`,
-/// * `MinMaxSum on List<num>`,
-/// * `Roots on <num>`,
+
 library utility_functions;
 
 import 'dart:math' as math;
@@ -14,7 +7,6 @@ import 'package:exception_templates/exception_templates.dart';
 import 'package:lazy_memo/lazy_memo.dart';
 
 import '../exceptions/invalid_function_parameter.dart';
-import '../exceptions/empty_iterable.dart';
 
 /// Square root of pi.
 const sqrtPi = 1.77245385090551602729816748334;
@@ -211,62 +203,5 @@ extension Roots on num {
       );
     }
     return math.exp(math.log(this) / n).toDouble();
-  }
-}
-
-/// Extension on `Iterable<num>` providing the
-/// getters: `min`, `max`, and `sum`.
-extension MinMaxSum on Iterable<num> {
-  num get sum {
-    if (isEmpty) {
-      throw ExceptionOfType<EmptyIterable>(
-          message: 'Summation not possible.',
-          invalidState: 'The iterable is empty');
-    }
-    return fold<num>(0.0, (sum, current) => sum + current);
-  }
-
-  /// Returns the smallest entry.
-  ///
-  /// Throws an exception of type `ExceptionOf`
-  num get min {
-    if (isEmpty) {
-      throw ExceptionOf<num>(
-          message: 'Minimum value can not be determined.',
-          invalidState: 'The iterable is empty');
-    }
-    return fold<num>(first, (math.min));
-  }
-
-  /// Return the largest entry.
-  ///
-  /// Throws an exception if the iterable is empty.
-  num get max {
-    if (isEmpty) {
-      throw ExceptionOfType<EmptyIterable>(
-          message: 'Maximum value can not be determined.',
-          invalidState: 'The iterable is empty');
-    }
-    return fold<num>(first, (math.max));
-  }
-}
-
-/// Adds the getter `factorial`.
-extension Factorial on int {
-  static final _cache = <int, int>{0: 1};
-
-  /// Returns the factorial of this.
-  int get factorial {
-    if (this < 0) {
-      throw ErrorOfType<InvalidFunctionParameter>(
-        message: 'The getter factorial is not defined for negative numbers.',
-        invalidState: '$this < 0.',
-      );
-    }
-    if (this == 0) {
-      return 1;
-    } else {
-      return _cache[this] ??= this * (this - 1).factorial;
-    }
   }
 }
