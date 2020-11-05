@@ -1,3 +1,8 @@
+## 0.0.7-nullsafety
+
+- Changed type of field `sample` from `Iterable<num>` to `List<num>`
+  (see class `SampleStats`).
+
 ## 0.0.6-nullsafety
 
  - Moved extensions to separate file `base/utility_extensions.dart`.
