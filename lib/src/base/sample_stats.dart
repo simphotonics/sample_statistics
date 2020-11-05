@@ -13,12 +13,12 @@ class SampleStats {
   SampleStats(this.sample)
       : sortedSample = Lazy<List<num>>(() {
           assertNotEmpty(sample);
-          return sample.toList()..sort();
+          return sample..sort();
         }),
         _mean = Lazy<num>(() => sample.sum / sample.length);
 
   /// Numerical data sample. Must not be empty.
-  final Iterable<num> sample;
+  final List<num> sample;
 
   /// Sorted sample stored as lazy variable.
   final Lazy<List<num>> sortedSample;
