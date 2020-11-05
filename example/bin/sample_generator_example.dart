@@ -13,15 +13,15 @@ void main(List<String> args) async {
   final max = 6.0;
   final mean = 3.0;
   final stdDev = 1.0;
-  final sample =
-      sampleTruncatedNormalPdf(sampleSize, min, max, mean, stdDev);
+  final sample = sampleTruncatedNormalPdf(sampleSize, min, max, mean, stdDev);
 
   final stats = SampleStats(sample);
 
   // Export histogram
-  await sample.exportHistogram(
-    '../sample_data/truncated_normal$sampleSize.hist',
-    pdf: (x) => truncatedNormalPdf(x, min, max, mean, stdDev),
+  await File('../sample_data/truncated_normal$sampleSize.hist').writeAsString(
+    sample.exportHistogram(
+      pdf: (x) => truncatedNormalPdf(x, min, max, mean, stdDev),
+    ),
   );
 
   // Export variables used by the gnuplot script:

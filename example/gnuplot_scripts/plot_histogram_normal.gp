@@ -1,3 +1,8 @@
+# To use this script navigate to the folder: `example/bin`
+# and issue the command:
+# $ gnuplot
+# Followed by:
+# gnuplot: load 'plot_histogram_normal.gp'
 reset
 
 # Apply graph settings.

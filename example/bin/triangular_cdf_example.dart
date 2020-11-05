@@ -2,14 +2,12 @@ import 'dart:io';
 
 import 'package:sample_statistics/sample_statistics.dart';
 
-
-
 /// To run this program navigate to the folder: examples/bin and use the
 /// command:
 /// ```Console
 /// $ dart --enable-experiment==non-nullable triangular_cdf_example.dart
 /// ```
-void main(List<String> args) async{
+void main(List<String> args) async {
   final min = 4;
   final max = 10;
   final range = max - min;
@@ -18,18 +16,23 @@ void main(List<String> args) async{
   final y = List<num>.generate(
       sampleSize, (i) => triangularCdf(min + i * dx, min, max));
 
-  await y.export('../sample_data/triangular_cdf.dat', range: [min, max]);
+  await File('../sample_data/triangular_cdf.dat').writeAsString(
+    y.export(range: [min, max]),
+  );
 
   final sample = sampleTriangularPdf(sampleSize, 4, 10);
 
-  await sample.exportHistogram(
-    '../plots/triangular_$sampleSize.hist',
-    pdf: (x) => triangularPdf(x, min, max),
+  await File('../plots/triangular_$sampleSize.hist').writeAsString(
+    sample.exportHistogram(
+      pdf: (x) => triangularPdf(x, min, max),
+    ),
   );
 
   final stats = SampleStats(sample);
 
-  await sample.export('../sample_data/triangular_sample.dat');
+  await File('../sample_data/triangular_sample.dat').writeAsString(
+    sample.export(),
+  );
 
   // Export variables
   final file = File('../sample_data/triangular_$sampleSize.dat');
