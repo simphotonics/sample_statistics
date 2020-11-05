@@ -6,8 +6,6 @@
 /// * `Factorial on int`,
 /// * `MinMaxSum on List<num>`,
 /// * `Roots on <num>`,
-/// * `StatisticsUtils on List<num>`: Adding methods for removing outliers,
-///    exporting data, exporting histogram data.
 library utility_functions;
 
 import 'dart:math' as math;
