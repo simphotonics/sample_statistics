@@ -9,7 +9,7 @@ import 'package:exception_templates/exception_templates.dart';
 import '../exceptions/invalid_function_parameter.dart';
 import 'density_functions.dart';
 
-/// Returns a random sample with **probability density**
+/// Returns a random sample with probability density
 /// `probabilityDensity`.
 ///
 /// * `n`: sample size,
@@ -22,7 +22,7 @@ List<num> samplePdf(
   num min,
   num max,
   num probDistMax,
-  ProbabilityDensity probabilityDensity, {
+  ProbabilityDensity pdf, {
   int? seed,
 }) {
   final result = <num>[];
@@ -34,7 +34,7 @@ List<num> samplePdf(
     final x = range * random.nextDouble() + min;
     final y = probDistMax * random.nextDouble();
 
-    if (y < probabilityDensity(x)) {
+    if (y < pdf(x)) {
       result.add(x);
     }
   }
@@ -42,7 +42,7 @@ List<num> samplePdf(
 }
 
 /// Returns a random sample of size `n` following a
-/// **truncated normal distribution** with:
+/// truncated normal distribution with:
 /// * `min`: minimum value,
 /// * `max`: maximum value,
 /// * `mean`,
@@ -66,7 +66,7 @@ List<num> sampleTruncatedNormalPdf(
     );
 
 /// Returns a random sample of size `n` following a
-/// **normal distribution** with parameters:
+/// normal distribution with parameters:
 /// * `mean`,
 /// * `stdDev`: standard deviation.
 /// ---
@@ -84,7 +84,7 @@ List<num> sampleNormalPdf(int n, num mean, num stdDev,
 }
 
 /// Returns a random sample of size `n` following an
-/// **exponential distribution**.
+/// exponential distribution.
 /// * `mean` must be larger than zero,
 /// * `seed` is optional (seeds the random number generator)
 /// * Generator uses inversion sampling.
@@ -103,7 +103,7 @@ List<num> sampleExponentialPdf(
   return List<num>.generate(n, (_) => -mean * log(1.0 - random.nextDouble()));
 }
 
-/// Returns a random sample following a **uniform distribution** with
+/// Returns a random sample following a uniform distribution with
 /// non-zero support over the range `(min, max)`.
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
@@ -121,7 +121,7 @@ List<num> sampleUniformPdf(int n, num min, num max, {int? seed}) {
   return List<num>.generate(n, (_) => min + random.nextDouble() * range);
 }
 
-/// Returns a random sample following a symmetric **triangular distribution** with
+/// Returns a random sample following a symmetric triangular distribution with
 /// non-zero support over the range `(min, max)`.
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
