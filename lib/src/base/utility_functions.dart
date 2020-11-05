@@ -1,12 +1,10 @@
-
+/// Includes an approximation of the error function and an iteration function
+/// based on the trapezoidal rule.
 library utility_functions;
 
 import 'dart:math' as math;
 
-import 'package:exception_templates/exception_templates.dart';
 import 'package:lazy_memo/lazy_memo.dart';
-
-import '../exceptions/invalid_function_parameter.dart';
 
 /// Square root of pi.
 const sqrtPi = 1.77245385090551602729816748334;
@@ -181,27 +179,3 @@ num integrate(
 
 /// Returns the first derivative of the error function.
 num dxErf(num x) => 2.0 * invSqrtPi * math.pow(math.e, -x * x);
-
-/// Extension on `num` providing the method
-/// `root`.
-extension Roots on num {
-  /// Returns the n-th root of this as a `double`.
-  /// * Usage: `final n = 32.root(5);`
-  /// * Only supported for positive numbers.
-  ///
-  /// Important: The dot operator has higher precedence than the minus sign.
-  ///
-  /// Therefore: `-32.root(5) == -(32.root(5)) == -2`.
-  ///
-  /// Whereas:  `(-32).root(5)` throws an error of
-  /// type `ErrorOfType<InvalidFunctionParameter`.
-  double root(n) {
-    if (isNegative) {
-      throw ErrorOfType<InvalidFunctionParameter>(
-        message: 'Can not calculate roots of negative numbers.',
-        invalidState: '$this < 0',
-      );
-    }
-    return math.exp(math.log(this) / n).toDouble();
-  }
-}

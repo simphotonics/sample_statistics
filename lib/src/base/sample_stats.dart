@@ -6,7 +6,6 @@ import 'package:lazy_memo/lazy_memo.dart';
 import '../exceptions/empty_iterable.dart';
 import 'density_functions.dart';
 import 'utility_extensions.dart';
-import 'utility_functions.dart';
 
 /// Provides access to basic statistical entities of a
 /// numerical random sample.
