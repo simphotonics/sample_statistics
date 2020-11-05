@@ -22,7 +22,7 @@ const sqrtPi = 1.77245385090551602729816748334;
 /// Constant: 1.0/(sqrt(pi)).
 const invSqrtPi = 1.0 / sqrtPi;
 
-/// Square root of 2.0*pi.
+/// Constant: sqrt(2.0*pi).
 const sqrt2Pi = math.sqrt2 * sqrtPi;
 
 /// Constant: 1.0/(sqrt(2*pi)).
