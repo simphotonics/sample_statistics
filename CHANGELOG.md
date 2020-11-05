@@ -1,3 +1,7 @@
+## 0.0.6-nullsafety
+
+ - Moved extensions to separate file `base/utility_extensions.dart`.
+
 ## 0.0.5-nullsafety
 
 - Libraries no longer depend on `dart:io`.
