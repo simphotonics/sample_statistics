@@ -2,7 +2,7 @@
 
 ## Statistics - Examples
 The files located in the folder `example/bin` contain short programs that demonstrate how to generate random samples,
-export histograms and calculate sample statistics.
+export histograms, and calculate sample statistics.
 
 The scripts located in the folder `example/gnuplot_scripts` were used to plot the histograms
 and graphs in the folder `example/plots`.
