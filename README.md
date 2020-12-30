@@ -66,18 +66,18 @@ same quantity is accessed repeatedly.
 
 ### Random Sample Generators
 
-This package [`sample_statistics`][sample_statistics] includes functions that can be used to generate random samples.
-
-The function [`samplePdf`][samplePdf] is based on the [rejection sampling][rejection-sampling] method.
-It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity] and can be used
-to generate random samples that follow an arbitrary probability distribution function.
-Additinally, the package includes random sample generators based on the
-following probability distribution functions:
+The library `sample_generators` includes function for generating random samples
+that follow the probability distribution functions listed below:
  * normal distribution,
  * truncated normal distribution,
  * exponential distribution,
  * uniform distribution,
  * triangular distribution.
+
+Additionally, the library includes the function [`samplePdf`][samplePdf] which
+is based on the [rejection sampling][rejection-sampling] method.
+It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity] and can be used
+to generate random samples that follow an *arbitrary* probability distribution function.
 
 ```Dart
  import 'package:sample_statistics/sample_statistics.dart';
@@ -105,7 +105,7 @@ following probability distribution functions:
  }
 ```
 
-### Histograms
+### Generating Histograms
 
 To generate a histogram the first step is to divide the random sample range `max - min`
 into a suitable number of intervals.
@@ -160,7 +160,7 @@ Please file feature requests and bugs at the [issue tracker].
 
 [CachedObjectFactory]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/CachedObjectFactory.html
 
-[example]: https://github.com/simphotonics/sample_statistic/tree/master/example
+[example]: https://github.com/simphotonics/sample_statistics/tree/master/example
 
 [histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats/histogram.html
 
@@ -180,4 +180,4 @@ Please file feature requests and bugs at the [issue tracker].
 
 [SampleStats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats-class.html
 
-[sampleTruncatedNormalPdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sampelTruncatedNormalPdf.html
+[sampleTruncatedNormalPdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sampleTruncatedNormalPdf.html
