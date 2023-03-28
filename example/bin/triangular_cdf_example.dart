@@ -1,23 +1,27 @@
 import 'dart:io';
 
+import 'package:list_operators/list_operators.dart';
 import 'package:sample_statistics/sample_statistics.dart';
 
 /// To run this program navigate to the folder: examples/bin and use the
 /// command:
 /// ```Console
-/// $ dart --enable-experiment==non-nullable triangular_cdf_example.dart
+/// $ dart triangular_cdf_example.dart
 /// ```
 void main(List<String> args) async {
   final min = 4;
   final max = 10;
   final range = max - min;
   final sampleSize = 10000;
-  final dx = range / sampleSize;
-  final y = List<num>.generate(
-      sampleSize, (i) => triangularCdf(min + i * dx, min, max));
+  // final dx = range / sampleSize;
+  // final y = List<num>.generate(
+  //     sampleSize, (i) => triangularCdf(min + i * dx, min, max));
 
-  await File('../sample_data/triangular_cdf.dat').writeAsString(
-    y.export(range: [min, max]),
+  await File('../data/triangular_cdf.dat').writeAsString(
+    ((num x) => triangularCdf(x, min, max)).export(
+      range: [min, max],
+      label: '# x    triangularCdf(x, $min, $max)',
+    ),
   );
 
   final sample = sampleTriangularPdf(sampleSize, 4, 10);
@@ -28,14 +32,14 @@ void main(List<String> args) async {
     ),
   );
 
-  final stats = SampleStats(sample);
+  final stats = Stats(sample);
 
-  await File('../sample_data/triangular_sample.dat').writeAsString(
+  await File('../data/triangular_sample.dat').writeAsString(
     sample.export(),
   );
 
   // Export variables
-  final file = File('../sample_data/triangular_$sampleSize.dat');
+  final file = File('../data/triangular_$sampleSize.dat');
 
   final b = StringBuffer();
   b.writeln('# Histogram: Truncated normal distribution.');

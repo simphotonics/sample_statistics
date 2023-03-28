@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:sample_statistics/sample_statistics.dart';
 
-/// To run this program navigate to the folder: examples/bin and use the
+/// To run this program navigate to the main package folder and use the
 /// command:
 /// ```Console
-/// $ dart --enable-experiment==non-nullable sample_generator_example.dart
+/// $ dart example/bin/sample_generator_example.dart
 /// ```
 void main(List<String> args) async {
   final sampleSize = 1000;
@@ -15,17 +15,17 @@ void main(List<String> args) async {
   final stdDev = 1.0;
   final sample = sampleTruncatedNormalPdf(sampleSize, min, max, mean, stdDev);
 
-  final stats = SampleStats(sample);
+  final stats = Stats(sample);
 
   // Export histogram
-  await File('../sample_data/truncated_normal$sampleSize.hist').writeAsString(
+  await File('../data/truncated_normal$sampleSize.hist').writeAsString(
     sample.exportHistogram(
       pdf: (x) => truncatedNormalPdf(x, min, max, mean, stdDev),
     ),
   );
 
   // Export variables used by the gnuplot script:
-  final file = File('../sample_data/truncated_normal$sampleSize.dat');
+  final file = File('../data/truncated_normal$sampleSize.dat');
 
   final b = StringBuffer();
   b.writeln('# Histogram: Truncated normal distribution.');

@@ -1,72 +1,69 @@
 import 'package:sample_statistics/sample_statistics.dart';
 
 /// Used to enable/disable color output.
-enum ColorOutput { ON, OFF }
+enum ColorOutput { on, off }
 
 /// Ansi color modifier: Reset to default.
-const String RESET = '\u001B[0m';
+const String resetColour = '\u001B[0m';
 
 /// Ansi color modifier: blue foreground.
-const String BLUE = '\u001B[1;94m';
+const String blue = '\u001B[1;94m';
 
 /// Ansi color modifier: cyan foreground.
-const String CYAN = '\u001B[36m';
+const String cyan = '\u001B[36m';
 
 /// Ansi color modifier: cyan bold text.
-const String CYAN_BOLD = '\u001B[1;36m';
+const String cyanBold = '\u001B[1;36m';
 
 /// Ansi color modifier: green foreground.
-const String GREEN = '\u001B[1;32m';
+const String green = '\u001B[1;32m';
 
 /// Ansi color modifier: red foreground.
-const String RED = '\u001B[31m';
+const String red = '\u001B[31m';
 
 /// Ansi color modifier: yellow foreground.
-const String YELLOW = '\u001B[33m';
+const String yellow = '\u001B[33m';
 
 /// Ansi color modifier: magenta foreground.
-const String MAGENTA = '\u001B[35m';
+const String magenta = '\u001B[35m';
 
 /// Applies an ansi compliant color modifier to a `String`.
 String colorize(
   String message,
   String color, {
-  ColorOutput colorOutput = ColorOutput.ON,
+  ColorOutput colorOutput = ColorOutput.on,
 }) {
-  color = (colorOutput == ColorOutput.ON) ? color : '';
-  final reset = (colorOutput == ColorOutput.ON) ? RESET : '';
+  color = (colorOutput == ColorOutput.on) ? color : '';
+  final reset = (colorOutput == ColorOutput.on) ? resetColour : '';
 
   return message = message.isEmpty ? '' : '$color$message$reset';
 }
 
 void main() {
-  final sample = <num>[-10, 0, 1, 2, 3, 4, 5, 6, 20];
-  final stats = SampleStats(sample);
+  final sample = [-10, 0, 1, 2, 3, 4, 5, 6, 20];
+  final stats = Stats(sample);
 
-  print(colorize('\nRunning sample_statistics_example.dart ...', GREEN));
+  print(colorize('\nRunning sample_statistics_example.dart ...', green));
 
-  print(colorize('Sample: ', BLUE) + sample.toString());
+  print(colorize('Sample: ', blue) + sample.toString());
 
-  print(colorize('min: ', MAGENTA) + stats.min.toString());
+  print(colorize('min: ', magenta) + stats.min.toString());
 
-  print(colorize('max: ', BLUE) + stats.max.toString());
+  print(colorize('max: ', blue) + stats.max.toString());
 
-  print(colorize('mean: ', MAGENTA) + stats.mean.toString());
+  print(colorize('mean: ', magenta) + stats.mean.toString());
 
-  print(colorize('median: ', BLUE) + stats.median.toString());
+  print(colorize('median: ', blue) + stats.median.toString());
 
-  print(colorize('first quartile: ', MAGENTA) + stats.quartile1.toString());
+  print(colorize('first quartile: ', magenta) + stats.quartile1.toString());
 
-  print(colorize('third quartile: ', BLUE) + stats.quartile3.toString());
+  print(colorize('third quartile: ', blue) + stats.quartile3.toString());
 
-  print(colorize('standard deviation: ', MAGENTA) + stats.stdDev.toString());
+  print(colorize('standard deviation: ', magenta) + stats.stdDev.toString());
 
-  final outliers = sample.removeOutliers();
-  print(colorize('outliers:', BLUE) + outliers.toString());
+  sample.removeOutliers();
+  print(colorize('outliers:', blue) + sample.toString());
 
   print(
-      colorize('sample with outliers removed: ', MAGENTA) + sample.toString());
-
-
-
+      colorize('sample with outliers removed: ', magenta) + sample.toString());
 }
