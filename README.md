@@ -1,7 +1,7 @@
 
 # Sample Statistics
 
-[![Build Status](https://travis-ci.com/simphotonics/sample_statistics.svg?branch=main)](https://travis-ci.com/simphotonics/sample_statistics)
+
 
 ## Introduction
 
@@ -146,7 +146,7 @@ The random samples were generated using the function
 
 <br>
 
-![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/example/images/histogram_truncated_normal_2.svg?sanitize=true)
+![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal_2.svg?sanitize=true)
 
 <br>
 
