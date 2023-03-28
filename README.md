@@ -5,19 +5,23 @@
 
 ## Introduction
 
-The package [`sample_statistics`][sample_statistics] provides helpers for calculating statistics of
-numerical samples and generating/exporting histograms. It includes common probability
-distribution functions and simple random sample generators.
+The package [`sample_statistics`][sample_statistics] provides helpers for
+calculating statistics of numerical samples and generating/exporting histograms.
+It includes common probability
+distribution functions and random sample generators.
+Throughout the library the acronym *Pdf* stands for *Probability Distribution
+Function*, while *Cdf* stands for *Cummulative Distribution Function*.
 
 ## Usage
 
-To use this package include [`sample_statistics`][sample_statistics] as a dependency in your `pubspec.yaml` file.
-The package uses [null-safety] features and requires Dart SDK version `>=2.10.0`.
+To use this package include [`sample_statistics`][sample_statistics]
+as a dependency in your `pubspec.yaml` file.
 
-### Random Sample Statistics
+### 1. Sample Statistics
 
-To access basis sample statistics use the class [`SampleStats`][SampleStats]. It calculates most
-sample statistics in a lazy fashion and caches results to avoid expensive calculations if the
+To access sample statistics use the class [`SampleStats`][SampleStats].
+It calculates sample statistics in a lazy fashion and caches results
+to avoid expensive calculations if the
 same quantity is accessed repeatedly.
 
 ```Dart
@@ -26,7 +30,7 @@ same quantity is accessed repeatedly.
  void main() {
 
    final sample = <num>[-10, 0, 1, 2, 3, 4, 5, 6, 20]
-   final stats = SampleStats(sample)
+   final stats = Stats(sample)
 
    print('\nRunning statistic_example.dart ...')
    print('Sample: $sample')
@@ -41,13 +45,16 @@ same quantity is accessed repeatedly.
    final outliers = sample.removeOutliers();
    print('outliers: $outliers')
    print('sample with outliers removed:  $sample');
+
+   // Update statistics after sample has changed:
+   stats.updateCache();
  }
 ```
 
 <details>  <summary> Click to show console output. </summary>
 
  ```Console
-  $ dart --enable-experiment=non-nullable sample_statistics_example.dart
+  $ dart  sample_statistics_example.dart
 
   Running sample_statistic_example.dart ...
   Sample: [-10, 0, 1, 2, 3, 4, 5, 6, 20]
@@ -64,7 +71,7 @@ same quantity is accessed repeatedly.
  ```
 </details>
 
-### Random Sample Generators
+### 2. Random Sample Generators
 
 The library `sample_generators` includes function for generating random samples
 that follow the probability distribution functions listed below:
@@ -76,8 +83,9 @@ that follow the probability distribution functions listed below:
 
 Additionally, the library includes the function [`samplePdf`][samplePdf] which
 is based on the [rejection sampling][rejection-sampling] method.
-It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity] and can be used
-to generate random samples that follow an *arbitrary* probability distribution function.
+It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity]
+and can be used to generate random samples that follow
+an *arbitrary* probability distribution function.
 
 ```Dart
  import 'package:sample_statistics/sample_statistics.dart';
@@ -91,7 +99,7 @@ to generate random samples that follow an *arbitrary* probability distribution f
    // Generating the random sample with 1000 entries.
    final sample = sampleTruncatedNormalPdf(1000, min, max, mean, stdDev);
 
-   final stats = SampleStats(sample);
+   final stats = Stats(sample);
    print(stats.mean);
    print(stats.stdDev);
    print(stats.min);
@@ -105,22 +113,27 @@ to generate random samples that follow an *arbitrary* probability distribution f
  }
 ```
 
-### Generating Histograms
+### 3. Generating Histograms
 
-To generate a histogram the first step is to divide the random sample range `max - min`
+To generate a histogram the first step is to divide the random
+sample range `max - min`
 into a suitable number of intervals.
 The second step consists of counting how many sample entries fall into each
 interval.
 
-The method [`histogram`][histogram] provided by the class [`SampleStats`][SampleStats]
+The method [`histogram`][histogram] provided by the class [`Stats`][Stats]
 returns an object of type `List<List<num>>` (each list entry is a numerical list).
 The first entry contains the left margins of the histogram intervals or bins.
-The second entry contains a count of how many sample values fall into each interval. By default,
-the count is normalized such that the total area under the histogram is equal to 1.0.
+The second entry contains a count of how many sample values fall into each interval.
+By default, the count is normalized such that the total area
+under the histogram is equal to 1.0.
 This is useful when comparing a histogram to a probability density function.
 
-The method [`histogram`][histogram] accepts the optional parameter `probabilityDensity`,
-a function of type [`ProbabilityDensity`][ProbabilityDensity]. If this function is
+The method [`histogram`][histogram] accepts the optional parameter
+`probabilityDensity`,
+a function of type [`ProbabilityDensity`][ProbabilityDensity] which defaults
+to [`normalPdf`][normalPdf].
+If this function is
 specified it is used to
 generate the values in the third list entry by evaluating the
 probability density function for each interval.
@@ -128,11 +141,12 @@ probability density function for each interval.
 The figure below shows the histograms obtained from two random samples following
 a truncated normal distribution with `min = 1.5`, `max = 6.0` and parent distribution
 with `mean = 3.0`, and `stdDev = 1.0`.
-The samples were generated using the function [`sampleTruncatedNormalPdf`][sampleTruncatedNormalPdf].
+The random samples were generated using the function
+[`sampleTruncatedNormalPdf`][sampleTruncatedNormalPdf].
 
 <br>
 
-![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/example/plots/histogram_truncated_normal_2.svg?sanitize=true)
+![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/example/images/histogram_truncated_normal_2.svg?sanitize=true)
 
 <br>
 
@@ -157,18 +171,14 @@ and access sample statistics see folder [example].
 
 Please file feature requests and bugs at the [issue tracker].
 
-
-[CachedObjectFactory]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/CachedObjectFactory.html
-
 [example]: https://github.com/simphotonics/sample_statistics/tree/master/example
 
-[histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats/histogram.html
+[histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/Stats/histogram.html
 
 [issue tracker]: https://github.com/simphotonics/sample_statistics/issues
 
 [meanTruncatedNormal]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/meanTruncatedNormal.html
 
-[null-safety]: https://dart.dev/null-safety
 
 [ProbabilityDensity]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/ProbabilityDensity.html
 
@@ -178,6 +188,6 @@ Please file feature requests and bugs at the [issue tracker].
 
 [samplePdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/samplePdf.html
 
-[SampleStats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/SampleStats-class.html
+[Stats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/Stats-class.html
 
 [sampleTruncatedNormalPdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sampleTruncatedNormalPdf.html
