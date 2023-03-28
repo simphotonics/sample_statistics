@@ -20,3 +20,9 @@ doc/api/
 *.js.deps
 *.js.map
 *.code-workspace
+
+.vscode
+
+example/plots
+example/data
+example/sample_data
