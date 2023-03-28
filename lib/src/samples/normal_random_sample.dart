@@ -1,6 +1,6 @@
 // Generated random sample with mean = 10 and stdDev = 5.
 // Used for testing purposes.
-final normalRandomSample = [
+final normalRandomSample = <double>[
   12.63595487,
   10.22123952,
   16.79425819,

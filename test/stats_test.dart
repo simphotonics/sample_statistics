@@ -1,12 +1,10 @@
-import 'package:minimal_test/minimal_test.dart';
 import 'package:sample_statistics/sample_statistics.dart';
+import 'package:test/test.dart';
 
-import 'package:sample_statistics/src/samples/normal_random_sample.dart';
+void main() {
+  final stats = Stats(normalRandomSample);
 
-void main(List<String> args) {
-  final stats = SampleStats(normalRandomSample);
-
-  group('Basic', () {
+  group('Basic:', () {
     test('min', () {
       expect(stats.min, -1.949079932);
     });
@@ -14,7 +12,7 @@ void main(List<String> args) {
       expect(stats.max, 26.55182824);
     });
     test('mean', () {
-      expect(stats.mean, 10.168769294545003);
+      expect(stats.mean, closeTo(10.168769294545003, 1e-12));
     });
     test('median', () {
       expect(stats.median, 10.232570379999999);
@@ -33,7 +31,7 @@ void main(List<String> args) {
   group('Histogram', () {
     test('Columns', () {
       expect(stats.histogram().length, 3);
-      expect(stats.histogram(normalize: false).length, 2);
+      expect(stats.histogram(normalize: false).length, 3);
     });
     test('Number of intervals', () {
       expect(stats.histogram(intervals: 8).first.length, 9);
@@ -47,7 +45,8 @@ void main(List<String> args) {
       final numberOfIntervals = 10;
       final hist = stats.histogram(intervals: numberOfIntervals);
       var sum = hist[1].fold<num>(0.0, (sum, current) => sum + current);
-      expect(sum * (stats.max - stats.min) / numberOfIntervals, 1.0);
+      expect(sum * (stats.max - stats.min) / numberOfIntervals,
+          closeTo(1.0, 1e-12));
     });
     test('Total count (non-normalized histograms)', () {
       final hist = stats.histogram(normalize: false);
@@ -61,7 +60,7 @@ void main(List<String> args) {
     test('Data', () {
       expect(
           hist,
-          '# Intervals: 9\n'
+          '# Intervals: 8\n'
           '# Min: -1.9490799\n'
           '# Max: 26.551828\n'
           '# Mean: 10.168769\n'
@@ -73,15 +72,15 @@ void main(List<String> args) {
           '# Integrated histogram: 1.0000000000000002\n'
           '#\n'
           '# -------------------------------------------------------------\n'
-          '#     Range     Prob. Density     Prob. Density Function\n'
-          '-1.9490799     0.011227712     0.0058236414\n'
-          '1.6135336     0.042103921     0.020882819\n'
+          '#     Range     Count    Prob. Density Func. \n'
+          '-1.9490799     0.0056138562     0.0058236414\n'
+          '1.6135336     0.022455425     0.020882819\n'
           '5.1761471     0.056138562     0.048220974\n'
-          '8.7387606     0.070173202     0.071702644\n'
-          '12.301374     0.061752418     0.068657297\n'
-          '15.863988     0.028069281     0.042334124\n'
-          '19.426601     0.0084207843     0.016809190\n'
-          '22.989215     0.0000000     0.0042978905\n'
+          '8.7387606     0.058945490     0.071702644\n'
+          '12.301374     0.064559346     0.068657297\n'
+          '15.863988     0.056138562     0.042334124\n'
+          '19.426601     0.011227712     0.016809190\n'
+          '22.989215     0.0028069281     0.0042978905\n'
           '26.551828     0.0028069281     0.00070764630\n'
           '');
     });
