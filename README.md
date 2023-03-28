@@ -1,6 +1,6 @@
 
 # Sample Statistics
-
+[![Dart](https://github.com/simphotonics/sample_statistics/actions/workflows/dart.yml/badge.svg)](https://github.com/simphotonics/sample_statistics/actions/workflows/dart.yml)
 
 
 ## Introduction
@@ -19,7 +19,7 @@ as a dependency in your `pubspec.yaml` file.
 
 ### 1. Sample Statistics
 
-To access sample statistics use the class [`SampleStats`][SampleStats].
+To access sample statistics use the class [`Stats`][Stats].
 It calculates sample statistics in a lazy fashion and caches results
 to avoid expensive calculations if the
 same quantity is accessed repeatedly.
@@ -171,7 +171,7 @@ and access sample statistics see folder [example].
 
 Please file feature requests and bugs at the [issue tracker].
 
-[example]: https://github.com/simphotonics/sample_statistics/tree/master/example
+[example]: https://github.com/simphotonics/sample_statistics/tree/main/example
 
 [histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/Stats/histogram.html
 
