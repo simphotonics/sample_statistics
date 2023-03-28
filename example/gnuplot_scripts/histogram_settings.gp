@@ -6,7 +6,8 @@ set grid lw 2
 set tics font ", 18"
 
 set style line 1 lt 1 pt 6 lc rgb "#0608aaff" lw 3.5
-set style line 2 lt 2 lw 3 lc rgb "blue" pt 6 ps 3
+set style line 2 lt 2 lw 4 lc rgb "blue" pt 6 ps 3
+set style line 3 lt 2 lw 4 lc rgb "red" pt 6 ps 3
 
 set xlabel "Sample values" font ", 24"
 set xrange [ * : * ] noreverse writeback

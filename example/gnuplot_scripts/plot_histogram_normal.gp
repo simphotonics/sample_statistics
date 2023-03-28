@@ -12,7 +12,7 @@ load 'histogram_settings.gp'
 load 'normal_pdf.gp'
 
 # Set histogram data file.
-file = '../sample_data/normal_random_sample.hist'
+file = '../data/normal_random_sample.hist'
 stats file u 1
 show variables STATS
 

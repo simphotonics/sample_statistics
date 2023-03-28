@@ -11,10 +11,10 @@ load 'histogram_settings.gp'
 # Import pdf
 load 'normal_pdf.gp'
 
-hist1 = '../sample_data/truncated_normal1000.hist'
-hist2 = '../sample_data/truncated_normal6750.hist'
-vars1 = '../sample_data/truncated_normal1000.dat'
-vars2 = '../sample_data/truncated_normal6750.dat'
+hist1 = '../data/truncated_normal1000.hist'
+hist2 = '../data/truncated_normal6750.hist'
+vars1 = '../data/truncated_normal1000.dat'
+vars2 = '../data/truncated_normal6750.dat'
 
 set multiplot layout 1, 2 title 'Random Sample Histograms - Truncated Normal Distribution' font ", 28"
 
@@ -38,18 +38,20 @@ meanCorr = meanTruncatedNormal(min, max, mean, stdDev)
 set label  sprintf('interval size = %.3f', (max - min)/intervals) at 0.75*max, 0.5*yMax \
  font " ,20" textcolor rgb "0x332222"
 
-set label  sprintf('mean = %.3f', sampleMean) at 0.6*mean, 1.1*yMax font " ,20" textcolor rgb "blue" front
+set label  sprintf('mean = %.3f', sampleMean) at 0.6*mean, 1.1*yMax font " ,20" textcolor rgb "red" front
 
-set arrow front from mean, 0 to mean, truncatedNormalPdf(mean, min, max, mean, stdDev) backhead ls 2
+set arrow 1 front from mean, 0 to mean, truncatedNormalPdf(mean, min, max, mean, stdDev) backhead ls 3
+show arrow
 
 set yrange [0: 0.5]
 #set boxwidth (max - min)/intervals
 plot hist1 u 1: 2 with boxes t sprintf('histogram sample size: %d', sampleSize) ls 1, \
-hist1 u 1: 3 ls 2 t "truncated normal dist."
-unset yrange
+hist1 u 1: 3 ls 3 t "truncated normal dist."
 
 # ------------------------------------------ Right plot
 
+#unset arrow
+unset yrange
 unset label
 unset ylabel
 stats hist2 u 1
@@ -69,13 +71,13 @@ meanCorr = meanTruncatedNormal(min, max, mean, stdDev)
 set label  sprintf('interval size = %.3f', (max - min)/intervals) at 0.75*max, 0.5*yMax \
  font " ,20" textcolor rgb "0x332222"
 
-set label  sprintf('mean = %.3f', sampleMean) at 0.7*mean, 1.1*yMax font " ,20" textcolor rgb "blue" front
+set label  sprintf('mean = %.3f', sampleMean) at 0.7*mean, 1.1*yMax font " ,20" textcolor rgb "red"
 
-unset arrow
-set arrow from mean, 0 to mean, truncatedNormalPdf(mean, min, max, mean, stdDev) backhead ls 2
-
+set arrow 2 from mean, 0 to mean, truncatedNormalPdf(mean, min, max, mean, stdDev) backhead ls 3
 set yrange [0: 0.5]
 #set boxwidth (max - min)/intervals
 plot hist2 u 1: 2 with boxes t sprintf('histogram sample size: %d', sampleSize) ls 1, \
-hist2 u 1: 3 ls 2 t "truncated normal dist."
+hist2 u 1: 3 ls 3 t "truncated normal dist."
 unset yrange
+#unset arrow
+unset multiplot

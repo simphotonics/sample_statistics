@@ -11,10 +11,10 @@ load 'histogram_settings.gp'
 # Import pdf
 load 'normal_pdf.gp'
 
-hist1 = '../sample_data/triangular_200.hist'
-hist2 = '../sample_data/triangular_10000.hist'
-vars1 = '../sample_data/triangular_200.dat'
-vars2 = '../sample_data/triangular_10000.dat'
+hist1 = '../data/triangular_200.hist'
+hist2 = '../data/triangular_10000.hist'
+vars1 = '../data/triangular_200.dat'
+vars2 = '../data/triangular_10000.dat'
 
 set multiplot layout 1, 2 title 'Random Sample Histograms - Triangular Distribution' font ", 28"
 
