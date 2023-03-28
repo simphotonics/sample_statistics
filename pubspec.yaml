@@ -1,21 +1,26 @@
 name: sample_statistics
 
-description: A Dart library for calculating sample statistics and
-             creating histograms. Includes common probability
-             distribution functions and random sample generators.
+description: A Dart library for calculating sample statistics and creating
+  histograms. Includes common probability distribution functions and random
+  sample generators.
 
-
-version: 0.0.8-nullsafety
+version: 0.1.0
 
 homepage: https://github.com/simphotonics/sample_statistics
 
 environment:
-  sdk: '>=2.10.0 <3.0.0'
+  sdk: '>=2.19.0 <3.0.0'
 
 dependencies:
-  exception_templates: ^0.1.1-nullsafety
-  lazy_memo: ^0.0.3-nullsafety
+  exception_templates: ^0.2.4
+  lazy_memo: ^0.1.4
+  list_operators: ^0.4.2
+  simulated_annealing: ^0.3.7
 
 dev_dependencies:
-  minimal_test: ^0.1.2-nullsafety
-  pedantic: ^1.9.2
+  lints: ^2.0.1
+  test: ^1.23.1
+
+# dependency_overrides:
+#   simulated_annealing:
+#     path: ../simulated_annealing/

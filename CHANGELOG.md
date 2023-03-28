@@ -1,6 +1,14 @@
+## 0.1.0
+
+- Renamed source files. Updated deps.
+
+## 0.1.0-nullsafety
+
+- Added dependency on [`simulated_annealing`](https://pub.dev/packages/simulated_annealing)
+
 ## 0.0.8-nullsafety
 
-- Added optional parameter `precision` to method `exportHistogram`.
+- Added optional parameter `precision` to method `exportHistogram` (library `utility_extensions`).
 
 ## 0.0.7-nullsafety
 
@@ -15,7 +23,6 @@
 
 - Libraries no longer depend on `dart:io`.
 - Added Dart docs.
-
 
 ## 0.0.4-nullsafety
 
