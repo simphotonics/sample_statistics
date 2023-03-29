@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:sample_statistics/sample_statistics.dart';
 
+import '../../test/samples/normal_random_sample.dart';
+
 /// To run this program navigate to the folder: examples/bin and use the
 /// command:
 /// ```Console

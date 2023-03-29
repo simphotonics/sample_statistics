@@ -24,7 +24,7 @@ void main(List<String> args) async {
     ),
   );
 
-  final sample = sampleTriangularPdf(sampleSize, 4, 10);
+  final sample = triangularSample(sampleSize, 4, 10);
 
   await File('../plots/triangular_$sampleSize.hist').writeAsString(
     sample.exportHistogram(

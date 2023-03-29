@@ -9,11 +9,10 @@ import 'package:sample_statistics/sample_statistics.dart';
 /// ```
 void main(List<String> args) {
   final lookupTable = sin.export(
-    range: [pi, 2 * pi],
-    label: '#      x       sin(x)',
-    steps: 20,
-    precision: 10
-  );
+      range: [pi, 2 * pi],
+      label: '#      x       sin(x)',
+      steps: 20,
+      precision: 10);
 
   print(lookupTable);
 }

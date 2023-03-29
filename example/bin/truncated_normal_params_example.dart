@@ -21,7 +21,7 @@ num inverseCdf(num p, num xMin, num xMax) {
 
 final sigma = FixedInterval(
   sigma0,
-  stdDevTr*10,
+  stdDevTr * 10,
   //inverseCdf: inverseCdf,
 );
 final mu = ParametricInterval(
@@ -80,7 +80,8 @@ Future<void> main(List<String> args) async {
     return result..add(field.value);
   });
 
-  await File('example/data/fieldPerturb.dat').writeAsString(fieldSample.export());
+  await File('example/data/fieldPerturb.dat')
+      .writeAsString(fieldSample.export());
 
   print('Starting annealing process ...');
 
