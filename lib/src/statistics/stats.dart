@@ -1,3 +1,5 @@
+import 'dart:math' as math show max;
+
 import 'package:lazy_memo/lazy_memo.dart';
 import 'package:list_operators/list_operators.dart';
 
@@ -79,6 +81,15 @@ class Stats<T extends num> {
   ///   `sample.length - 1`.
   double get stdDev => _stdDev();
 
+  /// Returns the optimal interval according to the Freedman-Diaconis rule
+  /// taking into account the inter-quartile range and the sample size.
+  double get intervalSize =>
+      2 * (quartile3 - quartile1) / (_sortedSample().length.root(3));
+
+  /// Returns the optimal number of intervals. The interval size
+  /// is estimated using the Freedman-Diaconis rule.
+  int get intervals => math.max((max - min) ~/ intervalSize, 3);
+
   /// Returns an object of type `List<List<num>>` containing a sample histogram.
   /// * The first list contains the interval mid points. The left most interval
   ///   has boundaries: `min - h/2 ... min + h/2. The right most interval has
@@ -102,11 +113,7 @@ class Stats<T extends num> {
   }) {
     final sampleSize = _sortedSample().length;
 
-    // Number of intervals (Freedman-Diaconis rule).
-    final optimalIntervalSize =
-        2 * (quartile3 - quartile1) / sampleSize.root(3);
-
-    intervals = intervals < 2 ? (max - min) ~/ optimalIntervalSize : intervals;
+    intervals = intervals < 2 ? this.intervals : intervals;
 
     /// Make sure we have at least 2 intervals
     while (intervals < 2) {
