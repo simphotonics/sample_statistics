@@ -58,6 +58,14 @@ extension StatisticsUtils<T extends num> on List<T> {
   /// and writes the data records to a `String`.
   /// * If `normalize == true` the histogram count will be normalized such
   ///   that the total histogram area is equal to 1 .0.
+  /// * `intervals`: The number of same-size intervals used to construct
+  ///    the histogram.
+  /// * `pdf`: The probability density function used to calculate the third
+  ///    column.
+  /// * `verbose`: Logical flag indicating if sample stats should be printed
+  ///    as comments above the histogram data.
+  /// * `commentCharacter`: The String character used to prefix comments.
+  ///    It defaults to `#` the comment character used by Gnuplot.
   /// * `precision` is used when converting numbers to a [String].
   String exportHistogram({
     bool normalize = true,
@@ -89,37 +97,36 @@ extension StatisticsUtils<T extends num> on List<T> {
     final gridPoints = hist[0].length;
     final actualIntervals = gridPoints - 1;
 
-    b.writeln('$commentCharacter Intervals: $actualIntervals');
-    b.writeln('$commentCharacter Min: '
-        '${stats.min.toStringAsPrecision(precision)}');
-    b.writeln('$commentCharacter Max: '
-        '${stats.max.toStringAsPrecision(precision)}');
-    b.writeln('$commentCharacter Mean: '
-        '${stats.mean.toStringAsPrecision(precision)}');
-    b.writeln('$commentCharacter StdDev: '
-        '${stats.stdDev.toStringAsPrecision(precision)}');
-    b.writeln('$commentCharacter Median: '
-        '${stats.median.toStringAsPrecision(precision)}');
-    b.writeln('$commentCharacter First Quartile: '
-        '${stats.quartile1.toStringAsPrecision(precision)}');
-    b.writeln('$commentCharacter Third Quartile: '
-        '${stats.quartile3.toStringAsPrecision(precision)}');
-    b.writeln('$commentCharacter Interval size: '
-        '${intervalSize.toStringAsPrecision(precision)}');
-    b.writeln('$commentCharacter Integrated histogram: '
-        '${hist[1].sum() * intervalSize}');
-    b.writeln(commentCharacter);
-    b.writeln('$commentCharacter ------------------------------------'
-        '-------------------------');
+    if (verbose) {
+      b.writeln('$commentCharacter Intervals: $actualIntervals');
+      b.writeln('$commentCharacter Min: '
+          '${stats.min.toStringAsPrecision(precision)}');
+      b.writeln('$commentCharacter Max: '
+          '${stats.max.toStringAsPrecision(precision)}');
+      b.writeln('$commentCharacter Mean: '
+          '${stats.mean.toStringAsPrecision(precision)}');
+      b.writeln('$commentCharacter StdDev: '
+          '${stats.stdDev.toStringAsPrecision(precision)}');
+      b.writeln('$commentCharacter Median: '
+          '${stats.median.toStringAsPrecision(precision)}');
+      b.writeln('$commentCharacter First Quartile: '
+          '${stats.quartile1.toStringAsPrecision(precision)}');
+      b.writeln('$commentCharacter Third Quartile: '
+          '${stats.quartile3.toStringAsPrecision(precision)}');
+      b.writeln('$commentCharacter Interval size: '
+          '${intervalSize.toStringAsPrecision(precision)}');
+      b.writeln('$commentCharacter Integrated histogram: '
+          '${hist[1].sum() * intervalSize}');
+      b.writeln(commentCharacter);
+      b.writeln('$commentCharacter ------------------------------------'
+          '-------------------------');
+    }
     if (hasPdf) {
       b.write('$commentCharacter     Range      Prob. Density     '
           'Prob. Density Function\n');
     } else {
       b.write(
           '$commentCharacter     Range     Count    Prob. Density Func. \n');
-    }
-    if (verbose) {
-      print(b.toString());
     }
     for (var i = 0; i < gridPoints; ++i) {
       b.writeln('${hist[0][i].toStringAsPrecision(precision)}     '
