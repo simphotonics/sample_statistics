@@ -150,12 +150,12 @@ with `meanOfParent = 3.0`, and `stdDevOfParent = 1.0`.
 The random samples were generated using the function
 [`truncatedNormalSample`][truncatedNormalSample].
 
-<br>
 
-![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal150.png)
-![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal600.png)
 
-<br>
+![Histogram 150](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal150.png)
+![Histogram 2000](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal2000.png)
+
+
 
 The figure on the left shows the histogram of a sample with size 150.
 The figure on the right shows the histogram of a sample with size 600.
