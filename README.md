@@ -163,24 +163,19 @@ the *mean* of the underlying probability distribution.
 
 The histograms above were generated using the extension method
 [exportHistogram][exportHistogram] (see source code above).
-
 Internally, this method uses the class method
 [`histogram`][histogram] provided by the class [`Stats`][Stats].
-It returns an object of type `List<List<num>>` (each list entry is a numerical list).
-The first entry contains the central values of the histogram intervals or bins.
-The second entry contains a count of how many sample values fall into each interval.
-By default, the count is normalized such that the total area
-under the histogram is equal to 1.0.
-This is useful when comparing a histogram to a probability density function.
-
-The method [`histogram`][histogram] accepts the optional parameter
-`probabilityDensity`,
-a function of type [`ProbabilityDensity`][ProbabilityDensity] which defaults
-to [`normalPdf`][normalPdf].
-This function is used to
-generate the values in the third list entry by evaluating the
-probability density function at each interval mid-point.
-
+It returns an object of type `List<List<num>>` holding three sub-lists:
+* The first entry contains the central values of the histogram intervals or bins.
+* The second entry contains a count of how many sample values fall into each interval.
+  By default, the count is normalized such that the total area
+  under the histogram is equal to 1.0.
+  This is useful when comparing a histogram to a probability density function
+  (see above).
+* The third list entry contains the values of `probabilityDensity`,
+  a function of type [`ProbabilityDensity`][ProbabilityDensity] evaluated at each
+  interval mid-point. It no probability density is provided,
+  [`normalPdf`][normalPdf] is used.
 
 ## Examples
 

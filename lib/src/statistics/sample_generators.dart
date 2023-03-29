@@ -10,15 +10,16 @@ import 'probability_density.dart';
 /// Returns a random sample with probability density
 /// `probabilityDensity`.
 ///
-/// * `n`: sample size,
+/// * `sampleSize`: sample size,
 /// * `xMin`: lower limit of the sample values,
 /// * `xMax`: upper limit of the sample values,
 /// * `yMax`: maximum value of `pdf`,
+/// * `pdf`: probability density function,
 /// * `seed`: optional random generator seed.
 ///
 /// The generator uses a rejection sampling algorithm.
 List<double> randomSample(
-  int n,
+  int sampleSize,
   num xMin,
   num xMax,
   num yMax,
@@ -28,7 +29,7 @@ List<double> randomSample(
   final result = <double>[];
   final random = Random(seed);
   final range = xMax - xMin;
-  while (result.length < n) {
+  while (result.length < sampleSize) {
     final x = range * random.nextDouble() + xMin;
     final y = yMax * random.nextDouble();
     if (y < pdf(x)) {
@@ -38,7 +39,7 @@ List<double> randomSample(
   return result;
 }
 
-/// Returns a random sample containing `n` elements following a
+/// Returns a random sample containing `sampleSize` elements following a
 /// truncated normal distribution with:
 /// * `xMin`: minimum value,
 /// * `xMax`: maximum value,
@@ -47,7 +48,7 @@ List<double> randomSample(
 /// ---
 /// * `seed`: random generator seed (optional).
 List<double> truncatedNormalSample(
-  int n,
+  int sampleSize,
   num xMin,
   num xMax,
   num meanOfParent,
@@ -55,7 +56,7 @@ List<double> truncatedNormalSample(
   int? seed,
 }) =>
     randomSample(
-      n,
+      sampleSize,
       xMin,
       xMax,
       truncatedNormalPdf(
@@ -69,7 +70,7 @@ List<double> truncatedNormalSample(
       seed: seed,
     );
 
-/// Returns a random sample with `n` elements following a
+/// Returns a random sample with `sampleSize` elements following a
 /// normal distribution with parameters:
 /// * `mean`: mean value,
 /// * `stdDev`: standard deviation.
@@ -79,7 +80,7 @@ List<double> truncatedNormalSample(
 /// * `xMax`: maximum value (defaults to `mean + 10 * stdDev`),
 /// * `seed`: random generator seed.
 List<double> normalSample(
-  int n,
+  int sampleSize,
   num mean,
   num stdDev, {
   num? xMin,
@@ -89,7 +90,7 @@ List<double> normalSample(
   xMin ??= mean - 10 * stdDev;
   xMax ??= mean + 10 * stdDev;
   return randomSample(
-    n,
+    sampleSize,
     xMin,
     xMax,
     normalPdf(mean, mean, stdDev),
@@ -98,27 +99,27 @@ List<double> normalSample(
   );
 }
 
-/// Returns a random sample of length `n` following an
+/// Returns a random sample of length `sampleSize` following an
 /// exponential distribution.
 /// * `mean` must be larger than zero,
 /// * `seed` is optional (seeds the random number generator)
 /// * The generator uses inversion sampling.
 List<double> exponentialSample(
-  int n,
+  int sampleSize,
   num mean, {
   int? seed,
 }) {
   if (mean <= 0) {
     throw ErrorOfType<InvalidFunctionParameter>(
       message: 'Error in function '
-          'exponentialSample($n, $mean, seed: $seed).',
+          'exponentialSample($sampleSize, $mean, seed: $seed).',
       expectedState: 'mean > 0',
       invalidState: 'mean = $mean',
     );
   }
   final random = Random(seed);
   return List<double>.generate(
-      n, (_) => -mean * log(1.0 - random.nextDouble()));
+      sampleSize, (_) => -mean * log(1.0 - random.nextDouble()));
 }
 
 /// Returns a random sample following a uniform distribution with
@@ -127,7 +128,7 @@ List<double> exponentialSample(
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `xMin >= xMax`.
 List<double> uniformSample(
-  int n,
+  int sampleSize,
   num xMin,
   num xMax, {
   int? seed,
@@ -140,7 +141,7 @@ List<double> uniformSample(
   }
   final random = Random(seed);
   return List<double>.generate(
-    n,
+    sampleSize,
     (_) => xMin + random.nextDouble() * (xMax - xMin),
   );
 }
@@ -151,7 +152,7 @@ List<double> uniformSample(
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `xMin >= xMax`.
 List<double> triangularSample(
-  int n,
+  int sampleSize,
   num xMin,
   num xMax, {
   int? seed,
@@ -159,7 +160,7 @@ List<double> triangularSample(
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
       message: 'Error in function '
-          'triangularSample($n, $xMin, $xMax, seed: $seed)',
+          'triangularSample($sampleSize, $xMin, $xMax, seed: $seed)',
       invalidState: 'min: $xMin >= max: $xMax',
       expectedState: 'xMmin < xMax',
     );
@@ -176,5 +177,5 @@ List<double> triangularSample(
 
   final random = Random(seed);
   return List<double>.generate(
-      n, (_) => invCdf(random.nextDouble(), xMin, xMax));
+      sampleSize, (_) => invCdf(random.nextDouble(), xMin, xMax));
 }
