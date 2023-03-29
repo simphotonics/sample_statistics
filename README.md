@@ -135,13 +135,13 @@ import 'dart:io';
 ### 3. Generating Histograms
 
 To generate a histogram, the first step consists in dividing the random
-sample range `max - min` into a suitable number of intervals.
+sample range into a suitable number of intervals.
 The second step consists in counting how many sample entries fall into each
 interval.
 
 The figures below show the histograms obtained from two random samples that
 follow a truncated normal distribution with
-`min = 2.0`, `max = 6.0` and normal parent distribution
+`xMin = 2.0`, `xMax = 6.0` and normal parent distribution
 with `meanOfParent = 3.0`, and `stdDevOfParent = 1.0`.
 The random samples were generated using the function
 [`truncatedNormalSample`][truncatedNormalSample].
