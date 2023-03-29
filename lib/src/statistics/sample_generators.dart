@@ -17,7 +17,7 @@ import 'probability_density.dart';
 /// * `seed`: optional random generator seed.
 ///
 /// The generator uses a rejection sampling algorithm.
-List<double> samplePdf(
+List<double> randomSample(
   int n,
   num xMin,
   num xMax,
@@ -27,13 +27,10 @@ List<double> samplePdf(
 }) {
   final result = <double>[];
   final random = Random(seed);
-
   final range = xMax - xMin;
-
   while (result.length < n) {
     final x = range * random.nextDouble() + xMin;
     final y = yMax * random.nextDouble();
-
     if (y < pdf(x)) {
       result.add(x);
     }
@@ -41,46 +38,57 @@ List<double> samplePdf(
   return result;
 }
 
-/// Returns a random sample of size `n` following a
+/// Returns a random sample containing `n` elements following a
 /// truncated normal distribution with:
 /// * `xMin`: minimum value,
 /// * `xMax`: maximum value,
-/// * `mean`,
-/// * `stdDev`: standard deviation.
+/// * `meanOfParent`: mean of parent normal distribution,
+/// * `stdDevOfParent`: standard deviation of parent normal distribution.
 /// ---
 /// * `seed`: random generator seed (optional).
-List<double> sampleTruncatedNormalPdf(
+List<double> truncatedNormalSample(
   int n,
   num xMin,
   num xMax,
-  num mean,
-  num stdDev, {
+  num meanOfParent,
+  num stdDevOfParent, {
   int? seed,
 }) =>
-    samplePdf(
+    randomSample(
       n,
       xMin,
       xMax,
-      truncatedNormalPdf(mean, xMin, xMax, mean, stdDev),
-      (x) => truncatedNormalPdf(x, xMin, xMax, mean, stdDev),
+      truncatedNormalPdf(
+        meanOfParent,
+        xMin,
+        xMax,
+        meanOfParent,
+        stdDevOfParent,
+      ),
+      (x) => truncatedNormalPdf(x, xMin, xMax, meanOfParent, stdDevOfParent),
       seed: seed,
     );
 
-/// Returns a random sample of size `n` following a
+/// Returns a random sample with `n` elements following a
 /// normal distribution with parameters:
-/// * `mean`,
+/// * `mean`: mean value,
 /// * `stdDev`: standard deviation.
 /// ---
 /// The following parameters are optional:
 /// * `xMin`: minimum value (defaults to `mean - 10 * stdDev`),
 /// * `xMax`: maximum value (defaults to `mean + 10 * stdDev`),
 /// * `seed`: random generator seed.
-List<double> sampleNormalPdf(int n, num mean, num stdDev,
-    {num? xMin, num? xMax, int? seed}) {
+List<double> normalSample(
+  int n,
+  num mean,
+  num stdDev, {
+  num? xMin,
+  num? xMax,
+  int? seed,
+}) {
   xMin ??= mean - 10 * stdDev;
   xMax ??= mean + 10 * stdDev;
-
-  return samplePdf(
+  return randomSample(
     n,
     xMin,
     xMax,
@@ -90,21 +98,23 @@ List<double> sampleNormalPdf(int n, num mean, num stdDev,
   );
 }
 
-/// Returns a random sample of size `n` following an
+/// Returns a random sample of length `n` following an
 /// exponential distribution.
 /// * `mean` must be larger than zero,
 /// * `seed` is optional (seeds the random number generator)
 /// * The generator uses inversion sampling.
-List<double> sampleExponentialPdf(
+List<double> exponentialSample(
   int n,
   num mean, {
   int? seed,
 }) {
   if (mean <= 0) {
     throw ErrorOfType<InvalidFunctionParameter>(
-        invalidState: 'mean: $mean <= 0',
-        expectedState: 'mean > 0',
-        message: 'Could not generate random exponential sample');
+      message: 'Error in function '
+          'exponentialSample($n, $mean, seed: $seed).',
+      expectedState: 'mean > 0',
+      invalidState: 'mean = $mean',
+    );
   }
   final random = Random(seed);
   return List<double>.generate(
@@ -112,11 +122,11 @@ List<double> sampleExponentialPdf(
 }
 
 /// Returns a random sample following a uniform distribution with
-/// non-zero support over the range `(xMin, xMax)`.
+/// non-zero support over the range `xMin ... xMax`.
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `xMin >= xMax`.
-List<double> sampleUniformPdf(
+List<double> uniformSample(
   int n,
   num xMin,
   num xMax, {
@@ -128,18 +138,19 @@ List<double> sampleUniformPdf(
       expectedState: 'xMin < xMax',
     );
   }
-
   final random = Random(seed);
-  final range = xMax - xMin;
-  return List<double>.generate(n, (_) => xMin + random.nextDouble() * range);
+  return List<double>.generate(
+    n,
+    (_) => xMin + random.nextDouble() * (xMax - xMin),
+  );
 }
 
 /// Returns a random sample following a symmetric triangular distribution with
-/// non-zero support over the range `(xMin, xMax)`.
+/// non-zero support over the range `xMin ... xMax`.
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `xMin >= xMax`.
-List<double> sampleTriangularPdf(
+List<double> triangularSample(
   int n,
   num xMin,
   num xMax, {
@@ -147,12 +158,14 @@ List<double> sampleTriangularPdf(
 }) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
+      message: 'Error in function '
+          'triangularSample($n, $xMin, $xMax, seed: $seed)',
       invalidState: 'min: $xMin >= max: $xMax',
       expectedState: 'xMmin < xMax',
     );
   }
 
-  double invCDF(num p, num min, num max) {
+  double invCdf(num p, num min, num max) {
     final range = max - min;
     if (p < 0.5) {
       return min + range * sqrt(p / 2);
@@ -163,5 +176,5 @@ List<double> sampleTriangularPdf(
 
   final random = Random(seed);
   return List<double>.generate(
-      n, (_) => invCDF(random.nextDouble(), xMin, xMax));
+      n, (_) => invCdf(random.nextDouble(), xMin, xMax));
 }
