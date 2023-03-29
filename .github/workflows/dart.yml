@@ -48,4 +48,4 @@ jobs:
         run: dart test -r expanded --test-randomize-ordering-seed=random
 
       - name: Run example
-         run: dart example/bin/sample_statistics_example.dart
+        run: dart example/bin/sample_statistics_example.dart
