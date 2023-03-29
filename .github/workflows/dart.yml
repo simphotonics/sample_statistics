@@ -39,7 +39,7 @@ jobs:
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: Analyze project source
-        run: dart analyze
+        run: dart analyze lib test example
 
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
@@ -47,8 +47,5 @@ jobs:
       - name: Run tests
         run: dart test -r expanded --test-randomize-ordering-seed=random
 
-      # - name: Run example comparable lists
-      #   run: dart example/bin/comparable_list_example.dart
-
-      # - name: Run example numerical iterable
-      #   run: dart example/bin/numerical_list_example.dart
+      - name: Run example
+         run: dart example/bin/sample_statistics_example.dart
