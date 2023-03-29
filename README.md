@@ -91,14 +91,17 @@ It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity]
 and can be used to generate random samples that follow
 an *arbitrary* probability distribution function.
 
+The program listed below demonstrates how to generated a random sample
+and write a histogram to a file.
+
 ```Dart
 import 'dart:io';
 
  import 'package:sample_statistics/sample_statistics.dart';
 
- void main(List<String> args) {
-   final min = 1.0;
-   final max = 9.0;
+ void main(List<String> args) async{
+   final xMmin = 1.0;
+   final xMmax = 9.0;
    final meanOfParent = 5.0;
    final stdDevOfParent = 2.0;
    final sampleSize = 1000;
@@ -106,8 +109,8 @@ import 'dart:io';
    // Generating the random sample with 1000 entries.
    final sample = truncatedNormalSample(
      sampleSize,
-     min,
-     max,
+     xMmin,
+     xMmax,
      meanOfParent,
      stdDevOfParent,
    );
@@ -143,8 +146,8 @@ with `meanOfParent = 3.0`, and `stdDevOfParent = 1.0`.
 The random samples were generated using the function
 [`truncatedNormalSample`][truncatedNormalSample].
 
-![Histogram 150](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal150.png)
-![Histogram 2000](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal2000.png)
+![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal.png)
+
 
 The figure on the left shows the histogram of a sample with size 150.
 The figure on the right shows the histogram of a sample with size 600.
@@ -179,13 +182,6 @@ generate the values in the third list entry by evaluating the
 probability density function at each interval mid-point.
 
 
-
-
-
-
-
-
-
 ## Examples
 
 For further examples on how to generate random samples, export histograms,
@@ -210,6 +206,8 @@ Please file feature requests and bugs at the [issue tracker].
 [ProbabilityDensity]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/ProbabilityDensity.html
 
 [normalPdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/normalPdf.html
+
+[randomSample]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/randomSample.html
 
 [rejection-sampling]: https://en.wikipedia.org/wiki/Rejection_sampling
 
