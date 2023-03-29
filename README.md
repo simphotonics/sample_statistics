@@ -6,9 +6,12 @@
 ## Introduction
 
 The package [`sample_statistics`][sample_statistics] provides helpers for
-calculating statistics of numerical samples and generating/exporting histograms.
-It includes common probability
-distribution functions and random sample generators.
+calculating *statistics* of numerical samples and generating/exporting
+*histograms*. It includes common *probability
+distribution* functions, an approximation of the *error function*,
+and random sample *generators*.
+
+
 Throughout the library the acronym *Pdf* stands for *Probability Distribution
 Function*, while *Cdf* stands for *Cummulative Distribution Function*.
 
@@ -22,7 +25,8 @@ as a dependency in your `pubspec.yaml` file.
 To access sample statistics use the class [`Stats`][Stats].
 It calculates sample statistics in a lazy fashion and caches results
 to avoid expensive calculations if the
-same quantity is accessed repeatedly.
+same quantity is accessed repeatedly. If the random sample changes
+use the method `updateCache()` to recalculate the sample statistics.
 
 ```Dart
  import 'package:sample_statistics/sample_statistics.dart'
