@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Amended docs.
+
 ## 0.1.0
 
 - Renamed source files. Updated deps.
