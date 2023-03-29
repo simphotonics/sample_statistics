@@ -73,7 +73,7 @@ same quantity is accessed repeatedly.
 
 ### 2. Random Sample Generators
 
-The library `sample_generators` includes function for generating random samples
+The library `sample_generators` includes functions for generating random samples
 that follow the probability distribution functions listed below:
  * normal distribution,
  * truncated normal distribution,
@@ -81,8 +81,8 @@ that follow the probability distribution functions listed below:
  * uniform distribution,
  * triangular distribution.
 
-Additionally, the library includes the function [`samplePdf`][samplePdf] which
-is based on the [rejection sampling][rejection-sampling] method.
+Additionally, the library includes the function [`randomSample`][randomSample]
+which is based on the [rejection sampling][rejection-sampling] method.
 It expects a callback of type [`ProbabilityDensity`][ProbabilityDensity]
 and can be used to generate random samples that follow
 an *arbitrary* probability distribution function.
@@ -93,11 +93,17 @@ an *arbitrary* probability distribution function.
  void main(List<String> args) {
    final min = 1.0;
    final max = 9.0;
-   final mean = 5.0;
-   final stdDev = 2.0;
+   final meanOfParent = 5.0;
+   final stdDevOfParent = 2.0;
 
    // Generating the random sample with 1000 entries.
-   final sample = sampleTruncatedNormalPdf(1000, min, max, mean, stdDev);
+   final sample = truncatedNormalSample(
+     1000,
+     min,
+     max,
+     meanOfParent,
+     stdDevOfParent,
+   );
 
    final stats = Stats(sample);
    print(stats.mean);
@@ -108,7 +114,7 @@ an *arbitrary* probability distribution function.
    sample.exportHistogram(
      '../plots/truncated_normal.hist',
      pdf: (x) =>
-         truncatedNormalPdf(x, stats.min, stats.max, stats.mean, stats.stdDev),
+         truncatedNormalPdf(x, min, max, meanOfParent, stdDevOfParent),
    );
  }
 ```
@@ -123,7 +129,7 @@ interval.
 
 The method [`histogram`][histogram] provided by the class [`Stats`][Stats]
 returns an object of type `List<List<num>>` (each list entry is a numerical list).
-The first entry contains the left margins of the histogram intervals or bins.
+The first entry contains the central value of the histogram intervals or bins.
 The second entry contains a count of how many sample values fall into each interval.
 By default, the count is normalized such that the total area
 under the histogram is equal to 1.0.
@@ -133,31 +139,34 @@ The method [`histogram`][histogram] accepts the optional parameter
 `probabilityDensity`,
 a function of type [`ProbabilityDensity`][ProbabilityDensity] which defaults
 to [`normalPdf`][normalPdf].
-If this function is
-specified it is used to
+This function is used to
 generate the values in the third list entry by evaluating the
-probability density function for each interval.
+probability density function at each interval mid-point.
 
-The figure below shows the histograms obtained from two random samples following
-a truncated normal distribution with `min = 1.5`, `max = 6.0` and parent distribution
-with `mean = 3.0`, and `stdDev = 1.0`.
+The figure below shows the histograms obtained from two random samples that
+follow a truncated normal distribution with
+`min = 2.0`, `max = 6.0` and normal parent distribution
+with `meanOfParent = 3.0`, and `stdDevOfParent = 1.0`.
 The random samples were generated using the function
-[`sampleTruncatedNormalPdf`][sampleTruncatedNormalPdf].
+[`truncatedNormalSample`][truncatedNormalSample].
 
 <br>
 
-![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal_2.svg?sanitize=true)
+![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal150.png)
+![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal600.png)
 
 <br>
 
-The figure on the left shows the histogram of a sample with size 1000. The figure on the right shows
-the histogram of a sample with size 6750. Increasing the random sample size leads to an increasingly
-closer match between the shape of the histogram and the underlying probability distribution.
+The figure on the left shows the histogram of a sample with size 150.
+The figure on the right shows the histogram of a sample with size 600.
+Increasing the random sample size leads to an increasingly
+closer match between the shape of the histogram and
+the underlying probability distribution.
 
 Using the distribution parameters mentioned above with the function
 [`meanTruncatedNormal`][meanTruncatedNormal],  one can determine
-a theoretical mean of 3.134. It can be seen that in the limit of a large sample
-size the *sample mean* approaches
+a theoretical mean of 3.2828. It can be seen that in the limit of a
+large sample size the *sample mean* approaches
 the *mean* of the underlying probability distribution.
 
 ## Examples
