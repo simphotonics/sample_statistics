@@ -10,7 +10,7 @@ void main() {
     final h = (max - min) / 2;
     final n = 1000;
     double pdf(num x) => triangularPdf(x, min, max);
-    final sample = samplePdf(n, min, max, pdf(min + h), pdf);
+    final sample = randomSample(n, min, max, pdf(min + h), pdf);
     final stats = Stats(sample);
 
     test('Sample size', () {
@@ -51,7 +51,7 @@ void main() {
     final max = 20;
     final n = 1000;
     double pdf(num x) => normalPdf(x, mean, stdDev);
-    final sample = samplePdf(n, min, max, pdf(mean), pdf);
+    final sample = randomSample(n, min, max, pdf(mean), pdf);
     final stats = Stats(sample);
     test('Sample size', () {
       expect(sample.length, n);
@@ -74,7 +74,7 @@ void main() {
     final max = 6;
     final n = 2000;
     double pdf(num x) => truncatedNormalPdf(x, min, max, mean, stdDev);
-    final sample = samplePdf(n, min, max, pdf(mean), pdf);
+    final sample = randomSample(n, min, max, pdf(mean), pdf);
     final stats = Stats(sample);
     test('Sample size', () {
       expect(sample.length, n);

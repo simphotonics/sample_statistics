@@ -1,6 +1,8 @@
 import 'package:sample_statistics/sample_statistics.dart';
 import 'package:test/test.dart';
 
+import 'samples/normal_random_sample.dart';
+
 void main() {
   final stats = Stats(normalRandomSample);
 
@@ -56,7 +58,10 @@ void main() {
   });
 
   group('Export Histogram', () {
-    final hist = normalRandomSample.exportHistogram(precision: 8);
+    final hist = normalRandomSample.exportHistogram(
+      precision: 8,
+      verbose: true,
+    );
     test('Data', () {
       expect(
           hist,

@@ -235,11 +235,21 @@ void main() {
     test('min < mean < max', () async {
       final min = -2.0;
       final max = 6.0;
-      final mean = 3;
-      final stdDev = 2.75;
+      final meanOfParent = 3;
+      final stdDevOfParent = 2.75;
 
-      final meanTr = meanTruncatedNormal(min, max, mean, stdDev);
-      final stdDevTr = stdDevTruncatedNormal(min, max, mean, stdDev);
+      final meanTr = meanTruncatedNormal(
+        min,
+        max,
+        meanOfParent,
+        stdDevOfParent,
+      );
+      final stdDevTr = stdDevTruncatedNormal(
+        min,
+        max,
+        meanOfParent,
+        stdDevOfParent,
+      );
 
       final params = await truncatedNormalToNormal(
         min,
@@ -247,8 +257,9 @@ void main() {
         meanTr,
         stdDevTr,
       );
-      expect(params['mean']!, closeTo(mean, 1e-3));
-      expect(params['stdDev']!, closeTo(stdDev, 1e-3));
+
+      expect(params['mean']!, closeTo(meanOfParent, 1e-3));
+      expect(params['stdDev']!, closeTo(stdDevOfParent, 1e-3));
     });
   });
 }
