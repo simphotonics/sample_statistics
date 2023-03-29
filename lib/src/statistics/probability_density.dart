@@ -133,7 +133,7 @@ double truncatedNormalCdf(
 /// with minimum value [xMin], maximum
 /// value [xMax], and a parent normal distribution with
 /// mean [meanOfParent], and standard deviation [stdDevOfParent].
-double meanTruncatedNormal(
+double _meanTruncatedNormal(
   num xMin,
   num xMax,
   num meanOfParent,
@@ -148,20 +148,23 @@ double meanTruncatedNormal(
           (stdNormalCdf(beta) - stdNormalCdf(alpha));
 }
 
-/// Local alias (used in energy function see below).
-double _meanTruncatedNormal(
+/// Returns the mean of a truncated normal distribution
+/// with minimum value [xMin], maximum
+/// value [xMax], and a parent normal distribution with
+/// mean [meanOfParent], and standard deviation [stdDevOfParent].
+double meanTruncatedNormal(
   num xMin,
   num xMax,
   num meanOfParent,
   num stdDevOfParent,
 ) =>
-    meanTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent);
+    _meanTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent);
 
 /// Returns the standard deviation of a truncated normal distribution
 /// with minimum value [xMin], maximum
 /// value [xMax], and a parent normal distribution with
 /// mean [meanOfParent], and standard deviation [stdDevOfParent].
-double stdDevTruncatedNormal(
+double _stdDevTruncatedNormal(
   num xMin,
   num xMax,
   num meanOfParent,
@@ -177,27 +180,19 @@ double stdDevTruncatedNormal(
       math.sqrt(1.0 +
           (alpha * pdfAlpha - beta * pdfBeta) / z -
           math.pow((pdfAlpha - pdfBeta) / z, 2));
-
-  // final expAlpha = math.exp(0.5 * alpha * alpha);
-  // final expBeta = math.exp(0.5 * beta * beta);
-  // final z = erfx(beta * invSqrt2) * expAlpha -
-  //     erfx(alpha * invSqrt2) * expBeta +
-  //     epsilon;
-
-  // return stdDevOfParent *
-  //     math.sqrt(1.0 +
-  //         2 * invSqrt2Pi * (alpha * expBeta - beta * expAlpha) / z -
-  //         2 / math.pi * math.pow((expBeta - expAlpha) / z, 2));
 }
 
-/// Local alias used in energy function (see below).
-double _stdDevTruncatedNormal(
+/// Returns the standard deviation of a truncated normal distribution
+/// with minimum value [xMin], maximum
+/// value [xMax], and a parent normal distribution with
+/// mean [meanOfParent], and standard deviation [stdDevOfParent].
+double stdDevTruncatedNormal(
   num xMin,
   num xMax,
   num meanOfParent,
   num stdDevOfParent,
 ) =>
-    stdDevTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent);
+    _stdDevTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent);
 
 /// Returns a `Future<Map<String, num>>`
 /// containing
@@ -271,7 +266,7 @@ Future<Map<String, num>> truncatedNormalToNormal(
             stdDevTruncatedNormal -
                 _stdDevTruncatedNormal(xMin, xMax, x[0], x[1]),
             2) +
-        1e-20);
+        epsilon);
     // if (result.isNaN || result.isInfinite) {
     //   print('$x => energy: $result ');
     // }
@@ -285,10 +280,10 @@ Future<Map<String, num>> truncatedNormalToNormal(
     field,
     gammaStart: 0.7,
     gammaEnd: 0.1,
-    outerIterations: 100,
+    outerIterations: 150,
     innerIterationsStart: 3,
     innerIterationsEnd: 6,
-    sampleSize: 250,
+    sampleSize: 350,
   )
     ..deltaPositionStart = [stdDevTruncatedNormal, meanTruncatedNormal]
     // ..deltaPositionEnd  = [1e-8, 1e-8]
@@ -418,5 +413,41 @@ double triangularCdf(num x, num xMin, num xMax) {
     return factor * (x - xMin) * (x - xMin);
   } else {
     return 1.0 - factor * (x - xMax) * (x - xMax);
+  }
+}
+
+/// Triangular inverse cumulative probability density function
+/// with non-zero support over the interval `(xMin, xMax)`.
+///
+/// The mean of the probability density occurs at `(xMax - xMin) / 2`
+/// and the probability density function is symmetric w.r.t its mean.
+///
+/// * `p`: A probability with `0 <= p < 1`.
+/// * `xMin`: The left margin of the domain of the density function.
+/// * `xMax`: The right margin of the domain of the density function.
+///
+/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
+/// if `xMin >= xMax`.
+///
+double triangularInvCdf(num p, num xMin, num xMax) {
+  if (p < 0 || p > 1) {
+    throw ErrorOfType<InvalidFunctionParameter>(
+      message: 'Error in function triangularInvCdf($p, $xMin, $xMax)',
+      invalidState: 'Probability p = $p.',
+      expectedState: '0 <= p < 1',
+    );
+  }
+  if (xMin >= xMax) {
+    throw ErrorOfType<InvalidFunctionParameter>(
+      message: 'Error in triangularInvCdf($p, $xMin, $xMax)',
+      invalidState: 'xMin: $xMin >= xMax: $xMax',
+      expectedState: 'xMin < xMax',
+    );
+  }
+  final range = xMax - xMin;
+  if (p < 0.5) {
+    return xMin + range * sqrt(p / 2);
+  } else {
+    return xMax - range * sqrt((1.0 - p) / 2);
   }
 }
