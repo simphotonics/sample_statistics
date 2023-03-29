@@ -129,7 +129,7 @@ import 'dart:io';
 
 To generate a histogram, the first step consists in dividing the random
 sample range `max - min` into a suitable number of intervals.
-The second step consists of counting how many sample entries fall into each
+The second step consists in counting how many sample entries fall into each
 interval.
 
 The figures below show the histograms obtained from two random samples that
@@ -155,7 +155,8 @@ large sample size the *sample mean* approaches
 the *mean* of the underlying probability distribution.
 
 The histograms above were generated using the extension method
-[exportHistogram][exportHistogram].
+[exportHistogram][exportHistogram] (see source code above).
+
 Internally, this method uses the class method
 [`histogram`][histogram] provided by the class [`Stats`][Stats].
 It returns an object of type `List<List<num>>` (each list entry is a numerical list).
@@ -192,11 +193,15 @@ and access sample statistics see folder [example].
 
 Please file feature requests and bugs at the [issue tracker].
 
+[issue tracker]: https://github.com/simphotonics/sample_statistics/issues
+
 [example]: https://github.com/simphotonics/sample_statistics/tree/main/example
+
+[exportHistogram]:https://pub.dev/documentation/sample_statistics/latest/sample_statistics/StatisticsUtils/exportHistogram.html
+
 
 [histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/Stats/histogram.html
 
-[issue tracker]: https://github.com/simphotonics/sample_statistics/issues
 
 [meanTruncatedNormal]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/meanTruncatedNormal.html
 
@@ -211,4 +216,4 @@ Please file feature requests and bugs at the [issue tracker].
 
 [Stats]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/Stats-class.html
 
-[sampleTruncatedNormalPdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/sampleTruncatedNormalPdf.html
+[truncatedNormalSample]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/truncatedNormalSample.html
