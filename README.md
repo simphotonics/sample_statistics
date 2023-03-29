@@ -199,14 +199,13 @@ Please file feature requests and bugs at the [issue tracker].
 
 [exportHistogram]:https://pub.dev/documentation/sample_statistics/latest/sample_statistics/StatisticsUtils/exportHistogram.html
 
-
 [histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/Stats/histogram.html
-
 
 [meanTruncatedNormal]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/meanTruncatedNormal.html
 
-
 [ProbabilityDensity]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/ProbabilityDensity.html
+
+[normalPdf]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/normalPdf.html
 
 [rejection-sampling]: https://en.wikipedia.org/wiki/Rejection_sampling
 
