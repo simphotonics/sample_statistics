@@ -1,3 +1,6 @@
+## 0.1.3
+- Updated deps. Amended section histograms.
+
 ## 0.1.2
 
 - Amended docs. Renamed parameter `n` in sample generators -> `sampleSize`.
