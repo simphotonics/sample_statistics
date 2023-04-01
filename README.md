@@ -145,6 +145,8 @@ follow a truncated normal distribution with
 with `meanOfParent = 3.0`, and `stdDevOfParent = 1.0`.
 The random samples were generated using the function
 [`truncatedNormalSample`][truncatedNormalSample].
+The histograms were generated using the extension method
+[exportHistogram][exportHistogram], see source code above.
 
 ![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal.png)
 
@@ -161,9 +163,8 @@ a theoretical mean of 3.2828. It can be seen that in the limit of a
 large sample size the *sample mean* approaches
 the *mean* of the underlying probability distribution.
 
-The histograms above were generated using the extension method
-[exportHistogram][exportHistogram] (see source code above).
-Internally, this method uses the class method
+
+<!-- Internally, this method uses the class method
 [`histogram`][histogram] provided by the class [`Stats`][Stats].
 It returns an object of type `List<List<num>>` holding three sub-lists:
 * The first entry contains the central values of the histogram intervals or bins.
@@ -175,7 +176,7 @@ It returns an object of type `List<List<num>>` holding three sub-lists:
 * The third list entry contains the values of `probabilityDensity`,
   a function of type [`ProbabilityDensity`][ProbabilityDensity] evaluated at each
   interval mid-point. Note: `probabilityDensity` defaults to
-  [`normalPdf`][normalPdf].
+  [`normalPdf`][normalPdf]. -->
 
 ## Examples
 
