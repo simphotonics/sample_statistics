@@ -250,15 +250,15 @@ final erfx = MemoizedFunction(_erfx);
 /// `erfcx(x) = exp(x * x) * erfc(x)`
 final erfcx = MemoizedFunction(_erfcx);
 
-/// Returns an approximation of error function defined as:
+/// Returns an approximation of the error function defined as:
 ///
 /// `erf(x) = 2/sqrt(pi) * integral(from: 0, to: x, exp(-t * t), dt)`
 ///
 /// Compared to the approximation provided by gnuplot the maximum
-/// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in (-1, 1)`.
+/// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in [-1, 1]`.
 final erf = MemoizedFunction(_erf);
 
-/// Returns an approximation of complementary error function defined as:
+/// Returns an approximation of the complementary error function defined as:
 ///
 /// `erfc(x) = 1.0 - erf(x)`
 ///
