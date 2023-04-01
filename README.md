@@ -174,8 +174,8 @@ It returns an object of type `List<List<num>>` holding three sub-lists:
   (see above).
 * The third list entry contains the values of `probabilityDensity`,
   a function of type [`ProbabilityDensity`][ProbabilityDensity] evaluated at each
-  interval mid-point. It no probability density is provided,
-  [`normalPdf`][normalPdf] is used.
+  interval mid-point. Note: `probabilityDensity` defaults to
+  [`normalPdf`][normalPdf].
 
 ## Examples
 

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:sample_statistics/sample_statistics.dart' show Integral;
+import 'package:sample_statistics/sample_statistics.dart' show Integration;
 
 void main(List<String> args) {
   final dx = 0.01;

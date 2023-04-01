@@ -11,7 +11,7 @@ void main() {
   group('uniformPdf.', () {
     final min = -2.0;
     final max = 3.0;
-    num pdf(num x) => uniformPdf(x, min, max);
+    double pdf(num x) => uniformPdf(x, min, max);
     test('Shape', () {
       expect(pdf(-2.5), 0);
       expect(pdf(3.5), 0);
@@ -24,7 +24,7 @@ void main() {
   group('uniformCdf', () {
     final min = -2.0;
     final max = 3.0;
-    num pdf(num x) => uniformPdf(x, min, max);
+    double pdf(num x) => uniformPdf(x, min, max);
     test('Limits', () {
       expect(uniformCdf(-2.1, min, max), closeTo(0, 1e-10));
       expect(uniformCdf(3.0, min, max), closeTo(1.0, 1e-10));
@@ -37,7 +37,7 @@ void main() {
 
   group('expPdf.', () {
     final mean = 2.5;
-    num pdf(num x) => expPdf(x, mean);
+    double pdf(num x) => expPdf(x, mean);
     test('Shape', () {
       expect(pdf(0), 1 / mean);
       expect(pdf(100 * mean), closeTo(0, 1e-20));
