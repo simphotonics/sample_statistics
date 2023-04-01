@@ -1,8 +1,8 @@
-/// Typedef of a function with a single positional parameter of type `num` and
-/// return type `num`.
-typedef NumericalFunction = num Function(num);
+/// Typedef of a function with a single positional parameter of type
+/// `T extends num` and return type `T`.
+typedef NumericalFunction = double Function(num);
 
-extension Integral on NumericalFunction {
+extension Integration on NumericalFunction {
   /// Returns the definite integral of `this` over the interval
   /// (`lowerLimit`,`upperLimit`).
   ///
@@ -15,7 +15,7 @@ extension Integral on NumericalFunction {
   /// ```Dart
   /// final result = sin(x).integrate(0, pi/2)
   /// ```
-  num integrate(
+  double integrate(
     num lowerLimit,
     num upperLimit, {
     num dx = 0.1,
@@ -43,36 +43,38 @@ extension Integral on NumericalFunction {
   }
 }
 
-/// Returns the polynominal defined by
-/// the coefficients `a`:
-/// `a[0] + a[1] * x + ... + a[n-1] * pow(x, n - 1)`.
-///
-/// Recursive function based on Horner's rule.
-num polynomial(num x, Iterable<num> a) {
-  if (a.isEmpty) return 0;
-  return a.first + x * polynomial(x, a.skip(1));
-}
+extension Differentiation on NumericalFunction {
+  /// Returns the first derivative of the function `this` at [x].
+  ///
+  /// Usage:
+  /// ```Dart
+  /// import 'dart:math';
+  /// final diff = sin.ddx(0.5)
+  /// ```
+  /// The error of the approximation is of the order `pow(dx, 2)`.
+  /// The default value of `dx` is 1e-4.
+  double ddx(num x, [num dx = 1e-4]) =>
+      // (this(x - 2 * dx) -
+      //     this(x + 2 * dx) -
+      //     8 * this(x - dx) +
+      //     8 * this(x + dx)) /
+      // (12 * dx);
+      (this(x + dx) - this(x - dx)) / (2 * dx);
 
-NumericalFunction poly(Iterable<num> a) {
-  if (a.isEmpty) return (num x) => 0;
-  return (num x) => poly(a.skip(1))(x) * x + a.first;
-}
-
-extension Operators on NumericalFunction {
-  NumericalFunction operator +(NumericalFunction other) =>
-      (num x) => this(x) + other(x);
-
-  NumericalFunction operator -(NumericalFunction other) =>
-      (num x) => this(x) - other(x);
-
-  NumericalFunction operator *(NumericalFunction other) =>
-      (num x) => this(x) * other(x);
-
-  NumericalFunction operator /(NumericalFunction other) =>
-      (num x) => this(x) / other(x);
-
-  NumericalFunction operator ~/(NumericalFunction other) =>
-      (num x) => this(x) / other(x);
-
-  NumericalFunction operator -() => (num x) => -this(x);
+  /// Returns the second derivative of the function `this` at [x].
+  ///
+  /// Usage:
+  /// ```Dart
+  /// import 'dart:math';
+  /// final diff = sin.d2dx2(0.5)
+  /// ```
+  /// The error of the approximation is of the order `pow(dx, 2)`.
+  /// The default value of `dx` is 1e-4.
+  double d2dx2(num x, [num dx = 1e-4]) =>
+      // (-this(x - 2 * dx) -
+      //     this(x + 2 * dx) +
+      //     16 * (this(x + dx) + this(x - dx)) -
+      //     30 * this(x)) /
+      // (12 * dx * dx);
+      (this(x + dx) + this(x - dx) - 2 * this(x)) / (dx * dx);
 }
