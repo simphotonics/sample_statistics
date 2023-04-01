@@ -127,13 +127,11 @@ final erfxTable = Map<double, double>.unmodifiable({
 ///   precision and explicit errorbounds. Information and Computation,
 ///   Elsevier, 2012, 216, pp.72 – 95.
 ///   ensl-00356709v3
-num _erfBelow1(num x) {
+double _erfBelow1(num x) {
   var alpha = 2 * x.abs() * invSqrtPi;
   var result = 0.0;
   var y = -x * x;
-
   final n = 20 + 20 * x.toInt();
-
   for (var i = 1; i < n; ++i) {
     result += alpha;
     alpha = alpha * y * (2 * i - 1) / (2 * i + 1) / i;
@@ -141,7 +139,7 @@ num _erfBelow1(num x) {
   return x.isNegative ? -(result + alpha) : result + alpha;
 }
 
-num _erfxBelow1(num x) => math.exp(x * x) * _erfBelow1(x);
+double _erfxBelow1(num x) => math.exp(x * x) * _erfBelow1(x);
 
 /// Returns an approximation of the scaled error
 /// function.
@@ -151,13 +149,11 @@ num _erfxBelow1(num x) => math.exp(x * x) * _erfBelow1(x);
 ///   precision and explicit errorbounds. Information and Computation,
 ///   Elsevier, 2012, 216, pp.72 – 95.
 ///   ensl-00356709v3
-num _erfxAbove1(num x) {
+double _erfxAbove1(num x) {
   var alpha = 2 * x.abs() * invSqrtPi;
   var result = 0.0;
   final y = 2 * x * x;
-
   final n = 10 + 20 * x.abs().toInt();
-
   for (var i = 1; i < n; ++i) {
     result += alpha;
     alpha = alpha * y / (2 * i + 1);
@@ -173,10 +169,10 @@ num _erfxAbove1(num x) {
 ///   precision and explicit errorbounds. Information and Computation,
 ///   Elsevier, 2012, 216, pp.72 – 95.
 ///   ensl-00356709v3
-num _erfAbove1(num x) => _erfxAbove1(x) * math.exp(-x * x);
+double _erfAbove1(num x) => _erfxAbove1(x) * math.exp(-x * x);
 
-/// Scaled complementary error function for x.abs() > 5.
-num _erfcAbove5(num x) {
+/// Complementary error function for x.abs() > 5.
+double _erfcAbove5(num x) {
   var alpha = 1 / ((x.abs() * sqrtPi));
   var result = 0.0;
   final y = -1.0 / (2 * x * x);
@@ -190,8 +186,8 @@ num _erfcAbove5(num x) {
       : math.exp(-x * x) * (result + alpha);
 }
 
-///Complementary error function for x.abs() > 5.
-num _erfcxAbove5(num x) => _erfcAbove5(x) * math.exp(x * x);
+/// Scaled complementary error function for x.abs() > 5.
+double _erfcxAbove5(num x) => _erfcAbove5(x) * math.exp(x * x);
 
 /// Returns an approximation of the real
 /// valued error function defined as:
@@ -199,7 +195,7 @@ num _erfcxAbove5(num x) => _erfcAbove5(x) * math.exp(x * x);
 ///
 /// Compared to the approximation provided by gnuplot the maximum
 /// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in (-1, 1)`.
-num _erf(num x) {
+double _erf(num x) {
   if (x == 0) return 0.0;
   if (x.abs() < 1.0) {
     return _erfBelow1(x);
@@ -210,7 +206,7 @@ num _erf(num x) {
   }
 }
 
-num _erfx(num x) {
+double _erfx(num x) {
   if (x == 0) return 0.0;
   if (x.abs() < 1.0) {
     return _erfxBelow1(x);
@@ -221,7 +217,7 @@ num _erfx(num x) {
   }
 }
 
-num _erfc(num x) {
+double _erfc(num x) {
   if (x == 0) return 1.0;
   if (x.abs() < 1.0) {
     return 1 - _erfBelow1(x);
@@ -232,7 +228,7 @@ num _erfc(num x) {
   }
 }
 
-num _erfcx(num x) {
+double _erfcx(num x) {
   if (x == 0) return 1.0;
   if (x.abs() < 1.0) {
     return math.exp(x * x) - _erfxBelow1(x);
@@ -243,24 +239,32 @@ num _erfcx(num x) {
   }
 }
 
+/// Returns an approximation of the scaled error function defined as:
+///
+/// `erfx(x) = exp(x * x) * erf(x)`
 final erfx = MemoizedFunction(_erfx);
+
+/// Returns an approximation of the complementary scaled error function
+/// defined as:
+///
+/// `erfcx(x) = exp(x * x) * erfc(x)`
 final erfcx = MemoizedFunction(_erfcx);
 
-/// Returns an approximation of the real
-/// valued error function defined as:
-/// `erf(x) = 2/sqrt(pi) * integral(from: 0, to: x, exp(-t*t), dt)`
+/// Returns an approximation of error function defined as:
+///
+/// `erf(x) = 2/sqrt(pi) * integral(from: 0, to: x, exp(-t * t), dt)`
 ///
 /// Compared to the approximation provided by gnuplot the maximum
 /// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in (-1, 1)`.
 final erf = MemoizedFunction(_erf);
 
-/// Returns an approximation of the real
-/// valued error function defined as:
-/// `erfComplement(x) = 1.0 - 2/sqrt(pi) * integral(from: 0, to: x, exp(-t*t), dt)`
+/// Returns an approximation of complementary error function defined as:
+///
+/// `erfc(x) = 1.0 - erf(x)`
 ///
 /// Compared to the approximation provided by gnuplot the maximum absolute
-/// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in (-1, 1)`.
+/// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in [1, 1]`.
 final erfc = MemoizedFunction(_erfc);
 
 /// Returns the first derivative of the error function.
-num dxErf(num x) => 2.0 * invSqrtPi * math.pow(math.e, -x * x);
+double dxErf(num x) => 2.0 * invSqrtPi * math.exp(-x * x);
