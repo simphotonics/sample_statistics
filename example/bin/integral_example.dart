@@ -8,7 +8,7 @@ void main(List<String> args) {
   watch.start();
   final result = sin.integrate(0, pi / 2, dx: dx);
   watch.stop();
-  print('Integrating sin(x), lower limit: 0, upper limit: pi/2:');
+  print('sin.integrate(0, pi/2, dx: $dx)');
   print('Result: ${result.toStringAsPrecision(6)} | '
       'Precision: ${(1.0 - result).toStringAsPrecision(6)}.');
   print('Integration step size: $dx. '

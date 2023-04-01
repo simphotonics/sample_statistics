@@ -8,8 +8,8 @@ import 'package:sample_statistics/sample_statistics.dart';
 /// $ dart erfc_example.dart
 /// ```
 void main(List<String> args) async {
-  final x0 = -1000;
-  final x1 = 1000;
+  final x0 = -2;
+  final x1 = 2;
 
   /// Writes a tabulated list of erfc(x) to file erfc.dat.
   await File('../data/erfc.dat')
