@@ -146,7 +146,7 @@ with `meanOfParent = 3.0`, and `stdDevOfParent = 1.0`.
 The random samples were generated using the function
 [`truncatedNormalSample`][truncatedNormalSample].
 The histograms were generated using the extension method
-[exportHistogram][exportHistogram], see source code above.
+[`exportHistogram`][exportHistogram], see source code above.
 
 ![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal.png)
 
