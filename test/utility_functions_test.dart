@@ -147,7 +147,7 @@ void main() {
       expect(sin.d2dx2(0), closeTo(0, dx * dx));
     });
     test('sin.d2dx2(pi/2)', () {
-       expect(sin.d2dx2(pi / 2), closeTo(-1, dx * dx));
+      expect(sin.d2dx2(pi / 2), closeTo(-1, dx * dx));
     });
   });
 
