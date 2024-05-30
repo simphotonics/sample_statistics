@@ -1,6 +1,3 @@
-/// Utilities and functions for calculating sample statistics and generating
-/// random samples.
-
 export 'src/exceptions/invalid_function_parameter.dart';
 export 'src/extensions/export.dart';
 export 'src/extensions/histogram.dart';

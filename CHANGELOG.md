@@ -1,3 +1,7 @@
+## 0.2.0
+- Updated deps.
+- Dart version ^3.0.0 is now required.
+
 ## 0.1.3
 - Updated deps. Amended section histograms.
 

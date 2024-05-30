@@ -1,5 +1,3 @@
-/// Library providing common probability density functions.
-
 import 'dart:math' as math;
 import 'dart:math';
 

@@ -1,5 +1,3 @@
-/// Random sample generators based on inversion
-/// and rejection sampling algorithms.
 import 'dart:math';
 
 import 'package:exception_templates/exception_templates.dart';

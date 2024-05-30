@@ -157,15 +157,20 @@ class Stats<T extends num> {
   /// Requests an update of the cached variables:
   /// * `sortedSample`,
   /// * `mean`,
-  /// * `stdDev`.
+  /// * `median`,
+  /// * `stdDev`,
+  /// * `min`,
+  /// * `max`,
+  /// * `quartile1`,
+  /// * `quartile2`,
   void update() {
     _sortedSample.updateCache();
+    _mean.updateCache();
+    _median.updateCache();
+    _stdDev.updateCache();
     _min.updateCache();
     _max.updateCache();
     _quartile1.updateCache();
     _quartile3.updateCache();
-    _median.updateCache();
-    _mean.updateCache();
-    _stdDev.updateCache();
   }
 }
