@@ -11,10 +11,10 @@ environment:
   sdk: '^3.9.0'
 
 topics:
-  statistics
-  histogram
-  probability-distribution
-  random-sample-generator
+  - statistic
+  - histogram
+  - probability-distribution
+  - random-sample-generator
 
 dependencies:
   exception_templates: ^0.3.2
