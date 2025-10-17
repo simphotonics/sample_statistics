@@ -31,7 +31,9 @@ void main() {
     });
     test('Value', () {
       expect(
-          uniformCdf(1.0, min, max), closeTo(pdf.integrate(min, 1.0), 1e-10));
+        uniformCdf(1.0, min, max),
+        closeTo(pdf.integrate(min, 1.0), 1e-10),
+      );
     });
   });
 
@@ -63,8 +65,10 @@ void main() {
 
   group('normalPdf:', () {
     test('is normalized', () {
-      expect(((x) => normalPdf(x, 0, 1.0)).integrate(-10, 10),
-          closeTo(1.0, 1e-12));
+      expect(
+        ((x) => normalPdf(x, 0, 1.0)).integrate(-10, 10),
+        closeTo(1.0, 1e-12),
+      );
     });
   });
 
@@ -99,16 +103,20 @@ void main() {
       try {
         truncatedNormalPdf(10, max + 1, max, mean, stdDev);
       } catch (e) {
-        expect(e.runtimeType,
-            reflectType<ErrorOfType<InvalidFunctionParameter>>());
+        expect(
+          e.runtimeType,
+          reflectType<ErrorOfType<InvalidFunctionParameter>>(),
+        );
       }
     });
     test('Error if mean not in (min, ..., max)', () {
       try {
         truncatedNormalPdf(10, min, max, max + 1, stdDev);
       } catch (e) {
-        expect(e.runtimeType,
-            reflectType<ErrorOfType<InvalidFunctionParameter>>());
+        expect(
+          e.runtimeType,
+          reflectType<ErrorOfType<InvalidFunctionParameter>>(),
+        );
       }
     });
     test('Approaches normal dist. for min << mean << max', () {
@@ -118,9 +126,15 @@ void main() {
     test('is normalized', () {
       expect(stdNormalPdf.integrate(-20, 20), closeTo(1.0, 1e-6));
       expect(
-          ((x) => truncatedNormalPdf(x, -2, 2, 0, 1.0))
-              .integrate(-2, 2, dx: 1e-3),
-          closeTo(1.0, 1e-6));
+        ((x) => truncatedNormalPdf(
+          x,
+          -2,
+          2,
+          0,
+          1.0,
+        )).integrate(-2, 2, dx: 1e-3),
+        closeTo(1.0, 1e-6),
+      );
     });
   });
 
@@ -206,8 +220,10 @@ void main() {
       expect(triangularPdf(max - h + 1e-12, min, max), closeTo(1 / h, 1e-10));
     });
     test('Is normalized', () {
-      expect(((x) => triangularPdf(x, min, max)).integrate(min - 1, max + 1),
-          closeTo(1.0, 1e-12));
+      expect(
+        ((x) => triangularPdf(x, min, max)).integrate(min - 1, max + 1),
+        closeTo(1.0, 1e-12),
+      );
     });
   });
 
@@ -225,41 +241,14 @@ void main() {
       expect(triangularCdf(min + h, min, max), 0.5);
     });
     test('equal to integrated pdf', () {
-      expect(((x) => triangularPdf(x, min, max)).integrate(min, min + 1.0),
-          closeTo(triangularCdf(min + 1.0, min, max), 1e-12));
-      expect(((x) => triangularPdf(x, min, max)).integrate(min, min + 2.1),
-          closeTo(triangularCdf(min + 2.1, min, max), 1e-12));
-    });
-  });
-  group('truncatedNormalToNormal:', () {
-    test('min < mean < max', () async {
-      final min = -2.0;
-      final max = 6.0;
-      final meanOfParent = 3;
-      final stdDevOfParent = 2.75;
-
-      final meanTr = meanTruncatedNormal(
-        min,
-        max,
-        meanOfParent,
-        stdDevOfParent,
+      expect(
+        ((x) => triangularPdf(x, min, max)).integrate(min, min + 1.0),
+        closeTo(triangularCdf(min + 1.0, min, max), 1e-12),
       );
-      final stdDevTr = stdDevTruncatedNormal(
-        min,
-        max,
-        meanOfParent,
-        stdDevOfParent,
+      expect(
+        ((x) => triangularPdf(x, min, max)).integrate(min, min + 2.1),
+        closeTo(triangularCdf(min + 2.1, min, max), 1e-12),
       );
-
-      final params = await truncatedNormalToNormal(
-        min,
-        max,
-        meanTr,
-        stdDevTr,
-      );
-
-      expect(params['mean']!, closeTo(meanOfParent, 1e-3));
-      expect(params['stdDev']!, closeTo(stdDevOfParent, 1e-3));
     });
   });
 }

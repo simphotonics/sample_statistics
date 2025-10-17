@@ -164,19 +164,6 @@ large sample size the *sample mean* approaches
 the *mean* of the underlying probability distribution.
 
 
-<!-- Internally, this method uses the class method
-[`histogram`][histogram] provided by the class [`Stats`][Stats].
-It returns an object of type `List<List<num>>` holding three sub-lists:
-* The first entry contains the central values of the histogram intervals or bins.
-* The second entry contains a count of how many sample values fall into each interval.
-  By default, the count is normalized such that the total area
-  under the histogram is equal to 1.0.
-  This is useful when comparing a histogram to a probability density function
-  (see above).
-* The third list entry contains the values of `probabilityDensity`,
-  a function of type [`ProbabilityDensity`][ProbabilityDensity] evaluated at each
-  interval mid-point. Note: `probabilityDensity` defaults to
-  [`normalPdf`][normalPdf]. -->
 
 ## Examples
 

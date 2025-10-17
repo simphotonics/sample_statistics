@@ -15,11 +15,7 @@ extension Integration on NumericalFunction {
   /// ```Dart
   /// final result = sin(x).integrate(0, pi/2)
   /// ```
-  double integrate(
-    num lowerLimit,
-    num upperLimit, {
-    num dx = 0.1,
-  }) {
+  double integrate(num lowerLimit, num upperLimit, {num dx = 0.1}) {
     final interval = upperLimit - lowerLimit;
     dx = dx.abs();
     late int n;

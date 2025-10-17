@@ -2,7 +2,7 @@ import 'dart:math' as math;
 import 'dart:math';
 
 import 'package:exception_templates/exception_templates.dart';
-import 'package:simulated_annealing/simulated_annealing.dart';
+//import 'package:simulated_annealing/simulated_annealing.dart';
 
 import '../exceptions/invalid_function_parameter.dart';
 import 'error_function.dart';
@@ -73,7 +73,8 @@ double truncatedNormalPdf(
 ) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
-      message: 'Error in truncatedNormalPdf($x, $xMin, $xMax, '
+      message:
+          'Error in truncatedNormalPdf($x, $xMin, $xMax, '
           '$meanOfParent, $stdDevOfParent)',
       invalidState: 'min: $xMin >= max: $xMax',
       expectedState: 'xMin < xMax',
@@ -111,7 +112,8 @@ double truncatedNormalCdf(
 ) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
-      message: 'Error in truncatedNormalCdf($x, $xMin, $xMax, '
+      message:
+          'Error in truncatedNormalCdf($x, $xMin, $xMax, '
           '$meanOfParent, $stdDevOfParent)',
       invalidState: 'min: $xMin >= max: $xMax',
       expectedState: 'xMmin < xMmax',
@@ -155,8 +157,7 @@ double meanTruncatedNormal(
   num xMax,
   num meanOfParent,
   num stdDevOfParent,
-) =>
-    _meanTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent);
+) => _meanTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent);
 
 /// Returns the standard deviation of a truncated normal distribution
 /// with minimum value [xMin], maximum
@@ -175,9 +176,11 @@ double _stdDevTruncatedNormal(
   final z = (stdNormalCdf(beta) - stdNormalCdf(alpha) + epsilon);
 
   return stdDevOfParent *
-      math.sqrt(1.0 +
-          (alpha * pdfAlpha - beta * pdfBeta) / z -
-          math.pow((pdfAlpha - pdfBeta) / z, 2));
+      math.sqrt(
+        1.0 +
+            (alpha * pdfAlpha - beta * pdfBeta) / z -
+            math.pow((pdfAlpha - pdfBeta) / z, 2),
+      );
 }
 
 /// Returns the standard deviation of a truncated normal distribution
@@ -189,113 +192,7 @@ double stdDevTruncatedNormal(
   num xMax,
   num meanOfParent,
   num stdDevOfParent,
-) =>
-    _stdDevTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent);
-
-/// Returns a `Future<Map<String, num>>`
-/// containing
-/// the mean and standard deviation
-/// of the **parent distribution** of
-/// a truncated normal distribution
-/// with:
-///
-/// * `xMin`: Left limit of the truncated normal distribution,
-/// * `xMax`: Right limit of the truncated normal distribution. `xMin < xMax`,
-/// * `meanOfTruncatedNormal`: mean of the truncated normal,
-/// * `stdDevOfTruncatedNormal`: standard deviation of the truncated normal.
-///
-/// Important: The function uses a simulated annealing algorithm,
-/// and convergence is not strictly guaranteed.
-///
-/// Note: The distribution must have a maximum between
-/// `xMin` and `xMax`, that is the parent distribution must have
-/// `xMin < mean < xMax`.
-///
-/// Usage:
-/// ```Dart
-/// import 'package:sample_statistics/sample_statistics.dart';
-/// void main(List<String> args) async {
-///   final xMin = 2.0;
-///   final xMax = 7.0;
-///   final meanTruncatedNormal = 4.0;
-///   final stdDevTruncatedNormal = 2.0;
-///   final Map<String, double> result = await truncatedNormalToNormal(
-///       xMin,
-///       xMax,
-///       meanTr,
-///       stdDevTr,
-///   );
-///
-///   print('mean: ${result[0]}, stdDev: ${result[1]});
-/// }
-/// ```
-Future<Map<String, num>> truncatedNormalToNormal(
-  num xMin,
-  num xMax,
-  num meanTruncatedNormal,
-  num stdDevTruncatedNormal, {
-  num stdDevMin = 0.1,
-  num stdDevMax = 5,
-}) async {
-  final mean = FixedInterval(
-    xMin + stdDevMin,
-    xMax - stdDevMin,
-    name: 'mean',
-  );
-  final stdDev = FixedInterval(
-    stdDevTruncatedNormal / 2,
-    stdDevTruncatedNormal * 2,
-    name: 'stdDev',
-  );
-  final space = SearchSpace.fixed(
-    [mean, stdDev],
-  );
-
-  num logBase(num x, {num base = 10}) {
-    return log(x) / log(base);
-  }
-
-  // This function will be minimized.
-  num energy(List<num> x) {
-    final result = (pow(
-            meanTruncatedNormal - _meanTruncatedNormal(xMin, xMax, x[0], x[1]),
-            2) +
-        pow(
-            stdDevTruncatedNormal -
-                _stdDevTruncatedNormal(xMin, xMax, x[0], x[1]),
-            2) +
-        epsilon);
-    // if (result.isNaN || result.isInfinite) {
-    //   print('$x => energy: $result ');
-    // }
-
-    return logBase(result);
-  }
-
-  final field = EnergyField(energy, space);
-
-  final sim = LoggingSimulator(
-    field,
-    gammaStart: 0.7,
-    gammaEnd: 0.1,
-    outerIterations: 150,
-    innerIterationsStart: 3,
-    innerIterationsEnd: 6,
-    sampleSize: 350,
-  )
-    ..deltaPositionStart = [stdDevTruncatedNormal, meanTruncatedNormal]
-    // ..deltaPositionEnd  = [1e-8, 1e-8]
-    ..temperatureSequence = exponentialSequence
-    ..startPosition = [meanTruncatedNormal, stdDevTruncatedNormal];
-
-  final result = await sim.anneal(
-    isRecursive: true,
-    ratio: 0.7,
-  );
-
-  // await File('example/data/log.dat').writeAsString(sim.export());
-  return {'mean': result[0], 'stdDev': result[1]};
-}
+) => _stdDevTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent);
 
 /// Uniform probability density function
 /// with non-zero support over the interval `(xMin, xMax)`.

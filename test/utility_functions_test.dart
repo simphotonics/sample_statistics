@@ -116,8 +116,10 @@ void main() {
       expect(sin.integrate(0, pi / 2, dx: 1e-6), closeTo(1.0, 1.0e-6));
     });
     test('integrate(x, 0, 1)', () {
-      expect(((num x) => x.toDouble()).integrate(0, 1, dx: 1e-2),
-          closeTo(0.5, 1e-12));
+      expect(
+        ((num x) => x.toDouble()).integrate(0, 1, dx: 1e-2),
+        closeTo(0.5, 1e-12),
+      );
     });
     test('integrate(1, 0, 1)', () {
       expect(((num x) => 1.0).integrate(0, 1, dx: 0.1), closeTo(1.0, 1e-12));
@@ -172,7 +174,7 @@ void main() {
       8,
       10,
       11,
-      22
+      22,
     ];
     test('Remove outliers', () {
       final outliers = list.removeOutliers();

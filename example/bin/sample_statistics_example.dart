@@ -65,5 +65,6 @@ void main() {
   print(colorize('outliers:', blue) + sample.toString());
 
   print(
-      colorize('sample with outliers removed: ', magenta) + sample.toString());
+    colorize('sample with outliers removed: ', magenta) + sample.toString(),
+  );
 }

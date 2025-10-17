@@ -1,3 +1,8 @@
+## 0.2.1
+- Updated deps.
+- Removed function `truncatedNormalToNormal` (the package no longer depends
+ on package `simulated_annealing`).
+
 ## 0.2.0
 - Updated deps.
 - Dart version ^3.0.0 is now required.

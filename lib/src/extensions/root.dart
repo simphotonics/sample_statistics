@@ -20,9 +20,10 @@ extension Root on num {
   double root(num n) {
     if (isNegative) {
       throw ErrorOfType<InvalidFunctionParameter>(
-          message: 'Error in function root($this).',
-          invalidState: '$this < 0',
-          expectedState: 'A positive function argument.');
+        message: 'Error in function root($this).',
+        invalidState: '$this < 0',
+        expectedState: 'A positive function argument.',
+      );
     }
     return exp(log(this) / n).toDouble();
   }

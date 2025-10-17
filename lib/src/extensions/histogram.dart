@@ -77,8 +77,10 @@ extension StatisticsUtils<T extends num> on List<T> {
   }) {
     final b = StringBuffer();
     if (length < 2) {
-      b.writeln('$commentCharacter Could not generate histogram. '
-          '$this is too short.');
+      b.writeln(
+        '$commentCharacter Could not generate histogram. '
+        '$this is too short.',
+      );
       return b.toString();
     }
     final stats = Stats(this);
@@ -99,39 +101,64 @@ extension StatisticsUtils<T extends num> on List<T> {
 
     if (verbose) {
       b.writeln('$commentCharacter Intervals: $actualIntervals');
-      b.writeln('$commentCharacter Min: '
-          '${stats.min.toStringAsPrecision(precision)}');
-      b.writeln('$commentCharacter Max: '
-          '${stats.max.toStringAsPrecision(precision)}');
-      b.writeln('$commentCharacter Mean: '
-          '${stats.mean.toStringAsPrecision(precision)}');
-      b.writeln('$commentCharacter StdDev: '
-          '${stats.stdDev.toStringAsPrecision(precision)}');
-      b.writeln('$commentCharacter Median: '
-          '${stats.median.toStringAsPrecision(precision)}');
-      b.writeln('$commentCharacter First Quartile: '
-          '${stats.quartile1.toStringAsPrecision(precision)}');
-      b.writeln('$commentCharacter Third Quartile: '
-          '${stats.quartile3.toStringAsPrecision(precision)}');
-      b.writeln('$commentCharacter Interval size: '
-          '${intervalSize.toStringAsPrecision(precision)}');
-      b.writeln('$commentCharacter Integrated histogram: '
-          '${hist[1].sum() * intervalSize}');
+      b.writeln(
+        '$commentCharacter Min: '
+        '${stats.min.toStringAsPrecision(precision)}',
+      );
+      b.writeln(
+        '$commentCharacter Max: '
+        '${stats.max.toStringAsPrecision(precision)}',
+      );
+      b.writeln(
+        '$commentCharacter Mean: '
+        '${stats.mean.toStringAsPrecision(precision)}',
+      );
+      b.writeln(
+        '$commentCharacter StdDev: '
+        '${stats.stdDev.toStringAsPrecision(precision)}',
+      );
+      b.writeln(
+        '$commentCharacter Median: '
+        '${stats.median.toStringAsPrecision(precision)}',
+      );
+      b.writeln(
+        '$commentCharacter First Quartile: '
+        '${stats.quartile1.toStringAsPrecision(precision)}',
+      );
+      b.writeln(
+        '$commentCharacter Third Quartile: '
+        '${stats.quartile3.toStringAsPrecision(precision)}',
+      );
+      b.writeln(
+        '$commentCharacter Interval size: '
+        '${intervalSize.toStringAsPrecision(precision)}',
+      );
+      b.writeln(
+        '$commentCharacter Integrated histogram: '
+        '${hist[1].sum() * intervalSize}',
+      );
       b.writeln(commentCharacter);
-      b.writeln('$commentCharacter ------------------------------------'
-          '-------------------------');
+      b.writeln(
+        '$commentCharacter ------------------------------------'
+        '-------------------------',
+      );
     }
     if (hasPdf) {
-      b.write('$commentCharacter     Range      Prob. Density     '
-          'Prob. Density Function\n');
+      b.write(
+        '$commentCharacter     Range      Prob. Density     '
+        'Prob. Density Function\n',
+      );
     } else {
       b.write(
-          '$commentCharacter     Range     Count    Prob. Density Func. \n');
+        '$commentCharacter     Range     Count    Prob. Density Func. \n',
+      );
     }
     for (var i = 0; i < gridPoints; ++i) {
-      b.writeln('${hist[0][i].toStringAsPrecision(precision)}     '
-          '${hist[1][i].toStringAsPrecision(precision)}     '
-          '${hist[2][i].toStringAsPrecision(precision)}');
+      b.writeln(
+        '${hist[0][i].toStringAsPrecision(precision)}     '
+        '${hist[1][i].toStringAsPrecision(precision)}     '
+        '${hist[2][i].toStringAsPrecision(precision)}',
+      );
     }
     return b.toString();
   }

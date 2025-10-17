@@ -31,16 +31,20 @@ void main() {
     test('stdDev', () {
       final mid = min + (max - min) / 2;
       expect(
-          stats.stdDev,
-          closeTo(
-              math.sqrt((min * min +
-                      max * max +
-                      mid * mid -
-                      mid * max -
-                      mid * min -
-                      max * min) /
-                  18),
-              0.25));
+        stats.stdDev,
+        closeTo(
+          math.sqrt(
+            (min * min +
+                    max * max +
+                    mid * mid -
+                    mid * max -
+                    mid * min -
+                    max * min) /
+                18,
+          ),
+          0.25,
+        ),
+      );
     });
   });
 
@@ -86,12 +90,16 @@ void main() {
       expect(stats.max < max, true);
     });
     test('Sample mean', () {
-      expect(stats.mean,
-          closeTo(meanTruncatedNormal(min, max, mean, stdDev), 0.05));
+      expect(
+        stats.mean,
+        closeTo(meanTruncatedNormal(min, max, mean, stdDev), 0.05),
+      );
     });
     test('stdDev', () {
-      expect(stats.stdDev,
-          closeTo(stdDevTruncatedNormal(min, max, mean, stdDev), 0.05));
+      expect(
+        stats.stdDev,
+        closeTo(stdDevTruncatedNormal(min, max, mean, stdDev), 0.05),
+      );
     });
   });
 }

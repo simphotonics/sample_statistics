@@ -18,25 +18,22 @@ void main(List<String> args) async {
   //     sampleSize, (i) => triangularCdf(min + i * dx, min, max));
 
   await File('../data/triangular_cdf.dat').writeAsString(
-    ((num x) => triangularCdf(x, min, max)).export(
-      range: [min, max],
-      label: '# x    triangularCdf(x, $min, $max)',
-    ),
+    ((num x) => triangularCdf(
+      x,
+      min,
+      max,
+    )).export(range: [min, max], label: '# x    triangularCdf(x, $min, $max)'),
   );
 
   final sample = triangularSample(sampleSize, 4, 10);
 
   await File('../plots/triangular_$sampleSize.hist').writeAsString(
-    sample.exportHistogram(
-      pdf: (x) => triangularPdf(x, min, max),
-    ),
+    sample.exportHistogram(pdf: (x) => triangularPdf(x, min, max)),
   );
 
   final stats = Stats(sample);
 
-  await File('../data/triangular_sample.dat').writeAsString(
-    sample.export(),
-  );
+  await File('../data/triangular_sample.dat').writeAsString(sample.export());
 
   // Export variables
   final file = File('../data/triangular_$sampleSize.dat');

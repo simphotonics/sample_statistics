@@ -13,7 +13,7 @@ void main(List<String> args) async {
   // The variable  'sample' is defined in the file normal_random_sample.dart.
 
   // Generates a histogram and exports it to a file.
-  await File('../data/normal_random_sample.hist').writeAsString(
-    normalRandomSample.exportHistogram(),
-  );
+  await File(
+    '../data/normal_random_sample.hist',
+  ).writeAsString(normalRandomSample.exportHistogram());
 }

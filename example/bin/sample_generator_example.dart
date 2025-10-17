@@ -34,7 +34,8 @@ void main(List<String> args) async {
 
   await File('example/data/truncated_normal$sampleSize.dat').writeAsString(
     sample.export(
-      label: '# Truncated Normal min: $xMin, max: $xMax, '
+      label:
+          '# Truncated Normal min: $xMin, max: $xMax, '
           'mean: $meanOfParent, stdDev: $stdDevOfParent, sampleSize: $sampleSize',
     ),
   );
@@ -50,12 +51,16 @@ void main(List<String> args) async {
   b.writeln('max = $xMax');
   b.writeln('meanOfParent = $meanOfParent');
   b.writeln('sampleMean = ${stats.mean}');
-  b.writeln('mean = '
-      '${meanTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent)}');
+  b.writeln(
+    'mean = '
+    '${meanTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent)}',
+  );
   b.writeln('stdDevOfParent = $stdDevOfParent');
   b.writeln('sampleStdDev =${stats.stdDev}');
-  b.writeln('stdDev = '
-      '${stdDevTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent)}');
+  b.writeln(
+    'stdDev = '
+    '${stdDevTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent)}',
+  );
 
   await file.writeAsString(b.toString());
 }

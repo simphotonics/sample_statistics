@@ -12,6 +12,7 @@ void main(List<String> args) async {
   final x1 = 2;
 
   /// Writes a tabulated list of erfc(x) to file erfc.dat.
-  await File('../data/erfc.dat')
-      .writeAsString(((num x) => erfc(x)).export(range: [x0, x1], steps: 1000));
+  await File(
+    '../data/erfc.dat',
+  ).writeAsString(((num x) => erfc(x)).export(range: [x0, x1], steps: 1000));
 }

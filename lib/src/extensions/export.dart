@@ -42,11 +42,12 @@ extension FunctionTable on NumericalFunction {
     String delimiter = ' ',
   }) {
     final table = this.table(range: range, steps: steps);
-    return [
-      table.keys.toList(),
-      table.values.toList(),
-    ].export(
-        label: label, precision: precision, delimiter: delimiter, flip: true);
+    return [table.keys.toList(), table.values.toList()].export(
+      label: label,
+      precision: precision,
+      delimiter: delimiter,
+      flip: true,
+    );
   }
 
   /// Returns a map of type `Map<num, num>`
@@ -66,17 +67,14 @@ extension FunctionTable on NumericalFunction {
   ///   steps: 5,
   /// );
   /// ```
-  Map<num, num> table({
-    List<num> range = const [0, 1],
-    int steps = 100,
-  }) {
+  Map<num, num> table({List<num> range = const [0, 1], int steps = 100}) {
     final result = <num, num>{};
     final x0 = (range.isEmpty) ? 0 : range.first;
     final dx = (range.isEmpty)
         ? 1
         : (range.length < 2)
-            ? 1
-            : (range.last - range.first) / (steps - 1);
+        ? 1
+        : (range.last - range.first) / (steps - 1);
     num arg = 0;
     for (var i = 0; i < steps; ++i) {
       arg = x0 + i * dx;

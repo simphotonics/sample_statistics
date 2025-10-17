@@ -52,21 +52,14 @@ List<double> truncatedNormalSample(
   num meanOfParent,
   num stdDevOfParent, {
   int? seed,
-}) =>
-    randomSample(
-      sampleSize,
-      xMin,
-      xMax,
-      truncatedNormalPdf(
-        meanOfParent,
-        xMin,
-        xMax,
-        meanOfParent,
-        stdDevOfParent,
-      ),
-      (x) => truncatedNormalPdf(x, xMin, xMax, meanOfParent, stdDevOfParent),
-      seed: seed,
-    );
+}) => randomSample(
+  sampleSize,
+  xMin,
+  xMax,
+  truncatedNormalPdf(meanOfParent, xMin, xMax, meanOfParent, stdDevOfParent),
+  (x) => truncatedNormalPdf(x, xMin, xMax, meanOfParent, stdDevOfParent),
+  seed: seed,
+);
 
 /// Returns a random sample with `sampleSize` elements following a
 /// normal distribution with parameters:
@@ -102,14 +95,11 @@ List<double> normalSample(
 /// * `mean` must be larger than zero,
 /// * `seed` is optional (seeds the random number generator)
 /// * The generator uses inversion sampling.
-List<double> exponentialSample(
-  int sampleSize,
-  num mean, {
-  int? seed,
-}) {
+List<double> exponentialSample(int sampleSize, num mean, {int? seed}) {
   if (mean <= 0) {
     throw ErrorOfType<InvalidFunctionParameter>(
-      message: 'Error in function '
+      message:
+          'Error in function '
           'exponentialSample($sampleSize, $mean, seed: $seed).',
       expectedState: 'mean > 0',
       invalidState: 'mean = $mean',
@@ -117,7 +107,9 @@ List<double> exponentialSample(
   }
   final random = Random(seed);
   return List<double>.generate(
-      sampleSize, (_) => -mean * log(1.0 - random.nextDouble()));
+    sampleSize,
+    (_) => -mean * log(1.0 - random.nextDouble()),
+  );
 }
 
 /// Returns a random sample following a uniform distribution with
@@ -125,12 +117,7 @@ List<double> exponentialSample(
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `xMin >= xMax`.
-List<double> uniformSample(
-  int sampleSize,
-  num xMin,
-  num xMax, {
-  int? seed,
-}) {
+List<double> uniformSample(int sampleSize, num xMin, num xMax, {int? seed}) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
       invalidState: 'xMin: $xMin >= xMax: $xMax',
@@ -149,15 +136,11 @@ List<double> uniformSample(
 ///
 /// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
 /// if `xMin >= xMax`.
-List<double> triangularSample(
-  int sampleSize,
-  num xMin,
-  num xMax, {
-  int? seed,
-}) {
+List<double> triangularSample(int sampleSize, num xMin, num xMax, {int? seed}) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
-      message: 'Error in function '
+      message:
+          'Error in function '
           'triangularSample($sampleSize, $xMin, $xMax, seed: $seed)',
       invalidState: 'min: $xMin >= max: $xMax',
       expectedState: 'xMmin < xMax',
@@ -175,5 +158,7 @@ List<double> triangularSample(
 
   final random = Random(seed);
   return List<double>.generate(
-      sampleSize, (_) => invCdf(random.nextDouble(), xMin, xMax));
+    sampleSize,
+    (_) => invCdf(random.nextDouble(), xMin, xMax),
+  );
 }
