@@ -1,5 +1,9 @@
 ## 0.2.2
-- Added `Stats` getter `iqr` returning the interquartile range of the sample. 
+- Added `Stats` getters `iqr`, `sortedSample` returning the interquartile range of the sample.
+- Added `Stats` method `addDataPoints`. This method calls `updatedCache`
+  (previously named `update`).
+- The data `sample` held by `Stats` is now a copy of the original sample.
+  Changes to the original sample will not be reflected in sample. 
 
 ## 0.2.1
 - Updated deps.
