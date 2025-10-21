@@ -40,12 +40,12 @@ String colorize(
 }
 
 void main() {
-  final sample = [-10, 0, 1, 2, 3, 4, 5, 6, 20];
-  final stats = Stats(sample);
+  final originalSample = [-10, 0, 1, 2, 3, 4, 5, 6, 20];
+  final stats = Stats(originalSample);
 
   print(colorize('\nRunning sample_statistics_example.dart ...', green));
 
-  print(colorize('Sample: ', blue) + sample.toString());
+  print(colorize('Sample: ', blue) + stats.sample.toString());
 
   print(colorize('min: ', magenta) + stats.min.toString());
 
@@ -63,10 +63,20 @@ void main() {
 
   print(colorize('standard deviation: ', blue) + stats.stdDev.toString());
 
-  sample.removeOutliers();
-  print(colorize('outliers:', magenta) + sample.toString());
+  final outliers = stats.removeOutliers();
+  print(colorize('outliers:', magenta) + outliers.toString());
+
+  print(colorize('Sample without outliers: ', blue) + stats.sample.toString());
+
+  stats.addDataPoints([-2, 7]);
 
   print(
-    colorize('sample with outliers removed: ', blue) + sample.toString(),
+    colorize('Sample with additional data points: ', magenta) +
+        stats.sample.toString(),
+  );
+
+  print(
+    colorize('Sorted sample: ', blue) +
+        stats.sortedSample.toString(),
   );
 }
