@@ -26,16 +26,10 @@ extension Factorial on int {
 }
 
 extension StatisticsUtils<T extends num> on List<T> {
-  /// Removes and returns list entries
-  /// with a value satisfying the condition:
-  ///
-  /// `value < (q1 - factor * iqr) || (q3 + factor * iqr) < value`
-  ///
-  /// where `iqr = q3 - q1` is the inter-quartile range,
-  /// `q1` is the first quartile,
-  /// and `q3` is the third quartile.
-  ///
-  /// Note: The default value of `factor` is 1.5.
+  /// Removes values smaller than
+  /// [quartile1] - [iqr] * [factor] and
+  /// larger than [quartile3] + [iqr] * [factor] 
+  /// and returns the removed entries.
   List<T> removeOutliers([num factor = 1.5]) {
     final stats = Stats(this);
     final outliers = <T>[];
