@@ -11,7 +11,6 @@ calculating *statistics* of numerical samples and generating/exporting
 distribution* functions, an approximation of the *error function*,
 and random sample *generators*.
 
-
 Throughout the library the acronym *Pdf* stands for *Probability Distribution
 Function*, while *Cdf* stands for *Cummulative Distribution Function*.
 
@@ -33,21 +32,22 @@ use the method `updateCache()` to recalculate the sample statistics.
 
  void main() {
 
-   final sample = <num>[-10, 0, 1, 2, 3, 4, 5, 6, 20]
-   final stats = Stats(sample)
+   final sample = <num>[-10, 0, 1, 2, 3, 4, 5, 6, 20];
+   final stats = Stats(sample);
 
    print('\nRunning statistic_example.dart ...')
-   print('Sample: $sample')
-   print('min: ${stats.min}')
-   print('max:  ${stats.max}')
-   print('mean: ${stats.mean}')
-   print('median: ${stats.median}')
-   print('first quartile:  ${stats.quartile1}')
-   print('third quartile:  ${stats.quartile3}')
-   print('standard deviation:  ${stats.stdDev}')
+   print('Sample: $sample');
+   print('min: ${stats.min}');
+   print('max:  ${stats.max}');
+   print('mean: ${stats.mean}');
+   print('median: ${stats.median}');
+   print('first quartile:  ${stats.quartile1}');
+   print('third quartile:  ${stats.quartile3}');
+   print('interquartile range:  ${stats.iqr}');
+   print('standard deviation:  ${stats.stdDev}');
 
    final outliers = sample.removeOutliers();
-   print('outliers: $outliers')
+   print('outliers: $outliers');
    print('sample with outliers removed:  $sample');
 
    // Update statistics after sample has changed:
@@ -68,6 +68,7 @@ use the method `updateCache()` to recalculate the sample statistics.
   median: 3
   first quartile: 1
   third quartile: 5
+  interquartile range:4
   standard deviation: 7.779960011322538
   outliers:[-10, 20]
   sample with outliers removed: [0, 1, 2, 3, 4, 5, 6]

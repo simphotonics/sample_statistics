@@ -69,6 +69,9 @@ class Stats<T extends num> {
         : _sortedSample()[q3];
   });
 
+  /// Returns the inter quartile range.
+  num get iqr => quartile3 - quartile1;
+
   /// Returns the sample mean.
   ///
   /// Throws an exception of type `ExceptionOf<SampleStats>` if the

@@ -1,3 +1,6 @@
+## 0.2.2
+- Added `Stats` getter `iqr` returning the interquartile range of the sample. 
+
 ## 0.2.1
 - Updated deps.
 - Removed function `truncatedNormalToNormal` (the package no longer depends

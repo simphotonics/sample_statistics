@@ -59,12 +59,14 @@ void main() {
 
   print(colorize('third quartile: ', blue) + stats.quartile3.toString());
 
-  print(colorize('standard deviation: ', magenta) + stats.stdDev.toString());
+  print(colorize('inter-quartile-range:', magenta) + stats.iqr.toString());
+
+  print(colorize('standard deviation: ', blue) + stats.stdDev.toString());
 
   sample.removeOutliers();
-  print(colorize('outliers:', blue) + sample.toString());
+  print(colorize('outliers:', magenta) + sample.toString());
 
   print(
-    colorize('sample with outliers removed: ', magenta) + sample.toString(),
+    colorize('sample with outliers removed: ', blue) + sample.toString(),
   );
 }

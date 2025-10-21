@@ -3,7 +3,7 @@ name: sample_statistics
 description: Sample statistics, histograms, probability distributions, and
   random sample generators for Dart.
 
-version: 0.2.1
+version: 0.2.2
 
 homepage: https://github.com/simphotonics/sample_statistics
 
