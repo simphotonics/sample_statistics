@@ -1,27 +1,56 @@
+import 'dart:collection';
 import 'dart:math' as math show max;
 
 import 'package:lazy_memo/lazy_memo.dart';
 import 'package:list_operators/list_operators.dart';
 
-import '../extensions/root.dart';
-import 'probability_density.dart';
+import '../../sample_statistics.dart';
+
+enum InputOption { add, overwrite }
 
 /// Provides access to basic statistical entities of a
 /// numerical random sample.
 class Stats<T extends num> {
-  Stats(this.sample);
+  Stats(List<T> sample) : _sample = List.of(sample);
 
-  /// Numerical data sample. Must not be empty.
-  final List<T> sample;
+  /// Adds the entries in [data] to [sample] and calls [updateCache] to
+  /// recalculate cached statistics.
+  void addDataPoints(List<T> data) {
+    _sample.addAll(data);
+    updateCache();
+  }
+
+  /// Removes values smaller than
+  /// [quartile1] - [iqr] * [factor] and
+  /// larger than [quartile3] + [iqr] * [factor] from [sample]
+  /// and returns the removed entries. Calls [updateCache].
+  List<T> removeOutliers([num factor = 1.5]) {
+    final tmp = List.of(_sample);
+    final outliers = tmp.removeOutliers();
+    _sample
+      ..clear()
+      ..addAll(tmp);
+    updateCache();
+    return outliers;
+  }
+
+  /// Returns an [UnmodifiableListView] of the sample.
+  List<T> get sample => UnmodifiableListView(_sample);
+
+  /// Original numerical data sample. Must not be empty.
+  final List<T> _sample;
 
   /// Sorted sample stored as lazy variable.
-  late final _sortedSample = Lazy<List<T>>(() => sample..sort());
+  late final _sortedSample = Lazy<List<T>>(() => List.of(_sample)..sort());
+
+  /// The sorted sample of data points.
+  List<T> get sortedSample => _sortedSample();
 
   /// Sample mean.
-  late final _mean = Lazy<double>(() => sample.mean());
+  late final _mean = Lazy<double>(() => _sample.mean());
 
   /// Corrected sample standard deviation.
-  late final Lazy<double> _stdDev = Lazy<double>(() => sample.stdDev());
+  late final Lazy<double> _stdDev = Lazy<double>(() => _sample.stdDev());
 
   /// Returns the smallest sample value.
   late final _min = Lazy<T>(() => _sortedSample().first);
@@ -86,8 +115,7 @@ class Stats<T extends num> {
 
   /// Returns the optimal interval according to the Freedman-Diaconis rule
   /// taking into account the inter-quartile range and the sample size.
-  double get intervalSize =>
-      2 * (quartile3 - quartile1) / (_sortedSample().length.root(3));
+  double get intervalSize => 2 * (iqr) / (_sortedSample().length.root(3));
 
   /// Returns the optimal number of intervals. The interval size
   /// is estimated using the Freedman-Diaconis rule.
@@ -166,7 +194,7 @@ class Stats<T extends num> {
   /// * `max`,
   /// * `quartile1`,
   /// * `quartile2`,
-  void update() {
+  void updateCache() {
     _sortedSample.updateCache();
     _mean.updateCache();
     _median.updateCache();
