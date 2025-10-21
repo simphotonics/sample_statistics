@@ -24,8 +24,11 @@ as a dependency in your `pubspec.yaml` file.
 To access sample statistics use the class [`Stats`][Stats].
 It calculates sample statistics in a lazy fashion and caches results
 to avoid expensive calculations if the
-same quantity is accessed repeatedly. If the random sample changes
-use the method `updateCache()` to recalculate the sample statistics.
+same quantity is accessed repeatedly. Data points can be added using the
+method `addDataPoints()`. A call to `addDataPoint` triggers a call to
+`updateCache()` to recalculate the sample statistics.
+
+To remove outliers use the method `removeOutliers`.
 
 ```Dart
  import 'package:sample_statistics/sample_statistics.dart'
@@ -49,9 +52,9 @@ use the method `updateCache()` to recalculate the sample statistics.
    final outliers = sample.removeOutliers();
    print('outliers: $outliers');
    print('sample with outliers removed:  $sample');
-
-   // Update statistics after sample has changed:
-   stats.updateCache();
+   stats.addDataPoints([-2, 7]);
+   print('Sample with additional data points: ${stats.sample}');
+   print('Sorted sample: ${stats.sortedSample}');
  }
 ```
 
@@ -59,8 +62,7 @@ use the method `updateCache()` to recalculate the sample statistics.
 
  ```Console
   $ dart  sample_statistics_example.dart
-
-  Running sample_statistic_example.dart ...
+  Running sample_statistics_example.dart ...
   Sample: [-10, 0, 1, 2, 3, 4, 5, 6, 20]
   min: -10
   max: 20
@@ -68,10 +70,12 @@ use the method `updateCache()` to recalculate the sample statistics.
   median: 3
   first quartile: 1
   third quartile: 5
-  interquartile range:4
+  inter-quartile-range:4
   standard deviation: 7.779960011322538
   outliers:[-10, 20]
-  sample with outliers removed: [0, 1, 2, 3, 4, 5, 6]
+  Sample without outliers: [0, 1, 2, 3, 4, 5, 6]
+  Sample with additional data points: [0, 1, 2, 3, 4, 5, 6, -2, 7]
+  Sorted sample: [-2, 0, 1, 2, 3, 4, 5, 6, 7]
 
  ```
 </details>
