@@ -75,8 +75,5 @@ void main() {
         stats.sample.toString(),
   );
 
-  print(
-    colorize('Sorted sample: ', blue) +
-        stats.sortedSample.toString(),
-  );
+  print(colorize('Sorted sample: ', blue) + stats.sortedSample.toString());
 }

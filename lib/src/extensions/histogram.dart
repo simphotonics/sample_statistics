@@ -28,7 +28,7 @@ extension Factorial on int {
 extension StatisticsUtils<T extends num> on List<T> {
   /// Removes values smaller than
   /// [quartile1] - [iqr] * [factor] and
-  /// larger than [quartile3] + [iqr] * [factor] 
+  /// larger than [quartile3] + [iqr] * [factor]
   /// and returns the removed entries.
   List<T> removeOutliers([num factor = 1.5]) {
     final stats = Stats(this);
