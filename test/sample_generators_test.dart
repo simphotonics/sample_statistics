@@ -76,7 +76,7 @@ void main() {
     final stdDev = 1.0;
     final min = 1.5;
     final max = 6;
-    final n = 2000;
+    final n = 10000;
     double pdf(num x) => truncatedNormalPdf(x, min, max, mean, stdDev);
     final sample = randomSample(n, min, max, pdf(mean), pdf);
     final stats = Stats(sample);

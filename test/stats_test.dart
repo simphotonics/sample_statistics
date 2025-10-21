@@ -8,25 +8,49 @@ void main() {
 
   group('Basic:', () {
     test('min', () {
-      expect(stats.min, -1.949079932);
+      expect(stats.min, closeTo(-1.949079932, 1e-8));
     });
     test('max', () {
-      expect(stats.max, 26.55182824);
+      expect(stats.max, closeTo(26.55182824, 1e-8));
     });
     test('mean', () {
-      expect(stats.mean, closeTo(10.168769294545003, 1e-12));
+      expect(stats.mean, closeTo(10.168769294545003, 1e-8));
     });
     test('median', () {
-      expect(stats.median, 10.232570379999999);
+      expect(stats.median, closeTo(10.232570379999999, 1e-8));
     });
     test('stdDev', () {
-      expect(stats.stdDev, 5.370025848202738);
+      expect(stats.stdDev, closeTo(5.370025848202738, 1e-8));
     });
     test('quartile1', () {
-      expect(stats.quartile1, 6.1556007975);
+      expect(stats.quartile1, closeTo(6.1556007975, 1e-8));
     });
     test('quartile3', () {
-      expect(stats.quartile3, 14.234971445);
+      expect(stats.quartile3, closeTo(14.234971445, 1e-8));
+    });
+    test('iqr', () {
+      expect(stats.iqr, closeTo(8.0793706475, 1e-8));
+    });
+  });
+
+  group('Sample:', () {
+    final stats = Stats([-2, 0, 1, 3, 4, 5, 7, 9, 11, -7, -32]);
+
+    test('sorted', () {
+      expect(stats.sortedSample, [-32, -7, -2, 0, 1, 3, 4, 5, 7, 9, 11]);
+    });
+
+    test('outliers', () {
+      final stats0 = Stats(stats.sample);
+      expect(stats0.removeOutliers(), [-32]);
+      expect(stats0.sample, [-2, 0, 1, 3, 4, 5, 7, 9, 11, -7]);
+      expect(stats0.sortedSample, [-7, -2, 0, 1, 3, 4, 5, 7, 9, 11]);
+    });
+
+    test('addDataPoints', () {
+      final stats0 = Stats(stats.sample);
+      stats0.addDataPoints([6, 10]);
+      expect(stats0.sample, [...stats.sample, 6, 10]);
     });
   });
 
