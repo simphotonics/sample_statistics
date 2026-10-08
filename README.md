@@ -134,7 +134,8 @@ import 'dart:io';
 
 ### 3. Histograms
 
-To class `Stats` provides methods for generating and exporting histograms:
+To package includes extension methods on [`Stats`][Stats]
+provides methods for generating and exporting histograms:
 
 ```Dart
 import 'package:sample_statistics/sample_statistics.dart';
@@ -177,7 +178,8 @@ $ dart example/bin/histogram_example.dart
 
 ▁▂▃▉█▁▁▁
 ```
-
+The image below show the histogram data plotted using [gnuplot][gnuplot].
+![Histogram](https://github.com/simphotonics/benchmark_runner/raw/main/images/histogram.svg?sanitize=true)
 
 ## Examples
 
