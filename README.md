@@ -75,7 +75,56 @@ to avoid lengthy calculations when the same quantity is accessed repeatedly.
  ```
 </details>
 
-### 2. Random Sample Generators
+### 2. Histograms
+
+To package includes extension methods on [`Stats`][Stats]
+provides methods for generating and exporting histograms:
+
+```Dart
+import 'package:sample_statistics/sample_statistics.dart';
+
+void main(List<String> args) {
+  final sample = [
+    -10, -8, -5,-4, -3, -3,-1, -1, -1, 0, 0, 0,
+    0, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 7, 10, 14,
+  ];
+
+  final stats = Stats(sample);
+  print(stats.exportHistogram(verbose: true, normalize: false));
+  print(stats.blockHistogram());
+}
+```
+The console output is show below:
+```
+$ dart example/bin/histogram_example.dart
+# Intervals: 8
+# Min: -10.00000000
+# Max: 14.00000000
+# Interval size: 3.428571429
+# Mean:   0.8461538462
+# StdDev: 5.065114472
+# Median: 0.5000000000
+# First Quartile: -1.000000000
+# Third Quartile: 3.000000000
+# Histogram integral: 89.14285714285715
+#
+# -------------------------------------------------------------
+#     Interval Mid-Point                  Count
+        -10.00000000                 1.000000000
+        -6.571428571                 2.000000000
+        -3.142857143                 3.000000000
+        0.2857142857                 9.000000000
+        3.714285714                  8.000000000
+        7.142857143                  1.000000000
+        10.57142857                  1.000000000
+        14.00000000                  1.000000000
+
+▁▂▃▉█▁▁▁
+```
+The image below shows the histogram data plotted using [gnuplot][gnuplot].
+![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
+
+### 3. Random Sample Generators
 
 The library `sample_generators` includes functions for generating random samples
 that follow the probability distribution functions listed below:
@@ -131,55 +180,6 @@ import 'dart:io';
 
  }
 ```
-
-### 3. Histograms
-
-To package includes extension methods on [`Stats`][Stats]
-provides methods for generating and exporting histograms:
-
-```Dart
-import 'package:sample_statistics/sample_statistics.dart';
-
-void main(List<String> args) {
-  final sample = [
-    -10, -8, -5,-4, -3, -3,-1, -1, -1, 0, 0, 0,
-    0, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 7, 10, 14,
-  ];
-
-  final stats = Stats(sample);
-  print(stats.exportHistogram(verbose: true, normalize: false));
-  print(stats.blockHistogram());
-}
-```
-The console output is show below:
-```
-$ dart example/bin/histogram_example.dart
-# Intervals: 8
-# Min: -10.00000000
-# Max: 14.00000000
-# Interval size: 3.428571429
-# Mean:   0.8461538462
-# StdDev: 5.065114472
-# Median: 0.5000000000
-# First Quartile: -1.000000000
-# Third Quartile: 3.000000000
-# Histogram integral: 89.14285714285715
-#
-# -------------------------------------------------------------
-#     Interval Mid-Point                  Count
-        -10.00000000                 1.000000000
-        -6.571428571                 2.000000000
-        -3.142857143                 3.000000000
-        0.2857142857                 9.000000000
-        3.714285714                  8.000000000
-        7.142857143                  1.000000000
-        10.57142857                  1.000000000
-        14.00000000                  1.000000000
-
-▁▂▃▉█▁▁▁
-```
-The image below shows the histogram data plotted using [gnuplot][gnuplot].
-![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
 
 ## Examples
 
