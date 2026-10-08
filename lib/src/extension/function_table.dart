@@ -2,7 +2,6 @@ import 'package:list_operators/list_operators.dart' show ExportListOfList;
 
 import '../typedef/numerical_function.dart';
 
-
 /// Extension providing the methods [export] and [table].
 extension FunctionTable on NumericalFunction {
   /// Returns a [String] containing a function table.

@@ -144,10 +144,7 @@ void main() {
     test('Normalization', () {
       final numberOfIntervals = 10;
       final hist = stats.histogram(intervals: numberOfIntervals);
-      expect(
-        hist[1].sum() * (hist[0][1] - hist[0][0]),
-        closeTo(1.0, 1e-12),
-      );
+      expect(hist[1].sum() * (hist[0][1] - hist[0][0]), closeTo(1.0, 1e-12));
     });
     test('Total count (non-normalized histograms)', () {
       final hist = stats.histogram(normalize: false);
