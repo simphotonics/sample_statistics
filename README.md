@@ -131,7 +131,8 @@ If it contains the ${\color{#0088ff}median}$
 of the sample it is colored blue. In this case, the block containing
 the ${\color{cyan}mean}$ and ${\color{cyan}median}$ is printed in a cyan hue.
 
-The image below shows the histogram data plotted using [gnuplot][gnuplot].
+The image below shows the histogram data shown above
+plotted using [gnuplot][gnuplot].
 ![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
 
 ### 3. Random Sample Generators
