@@ -118,8 +118,8 @@ $ dart example/bin/histogram_example.dart
         7.142857143                  1.000000000
         10.57142857                  1.000000000
         14.00000000                  1.000000000
-
-▁▂▃▉█▁▁▁
+$${\color{red}Welcome \space \color{#8cf720}to \space \color{orange}Stackoverflow}$$
+▁▂▃$${\color{cyan}▉}$$█▁▁▁
 ```
 The image below shows the histogram data plotted using [gnuplot][gnuplot].
 ![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
