@@ -8,31 +8,31 @@ import '../statistics/stats.dart';
 import 'color_profile.dart';
 
 extension ExportHistogram on Stats {
-  static final blocks = switch (Ansi.status) {
-    AnsiOutput.enabled => [
-      '\u2581'.style(ColorProfile.dim),
-      '\u2581',
-      '\u2582',
-      '\u2583',
-      '\u2584',
-      '\u2585',
-      '\u2586',
-      '\u2587',
-      '\u2588',
-      '\u2589',
-    ],
-    AnsiOutput.disabled => [
-      '\u2581',
-      '\u2582',
-      '\u2583',
-      '\u2584',
-      '\u2585',
-      '\u2586',
-      '\u2587',
-      '\u2588',
-      '\u2589',
-    ],
-  };
+  /// Block characters used to build block histograms.
+  static const monochromeBlocks = [
+    '\u2581',
+    '\u2582',
+    '\u2583',
+    '\u2584',
+    '\u2585',
+    '\u2586',
+    '\u2587',
+    '\u2588',
+    '\u2589',
+  ];
+
+  static final colorBlocks = List.unmodifiableOf([
+    '\u2581'.style(ColorProfile.dim),
+    '\u2581',
+    '\u2582',
+    '\u2583',
+    '\u2584',
+    '\u2585',
+    '\u2586',
+    '\u2587',
+    '\u2588',
+    '\u2589',
+  ]);
 
   /// Returns a block histogram in the form of a [String].
   /// * If the same block contains the [mean] and [median] it is styled using
@@ -42,9 +42,9 @@ extension ExportHistogram on Stats {
   /// AnsiModifier.colorOutput = ColoOutput.off;
   /// ```
   String _singleBlockHistogram() =>
-      '${blocks.first}'
-      '${blocks.last.style(ColorProfile.meanMedianHistogramBlock)}'
-      '${blocks.first}';
+      colorBlocks.first +
+      colorBlocks.last.style(ColorProfile.meanMedianHistogramBlock) +
+      colorBlocks.first;
 
   /// Returns a block histogram in the form of a [String].
   /// * The block containing the [mean] value is styled using
@@ -71,6 +71,7 @@ extension ExportHistogram on Stats {
   String blockHistogram({int intervals = 0}) {
     final hist = histogram(intervals: intervals);
 
+    /// Return early if the range of values is zero.
     if (hist[0].first == hist[0].last) {
       return _singleBlockHistogram();
     }
@@ -79,10 +80,13 @@ extension ExportHistogram on Stats {
     final leftBorder = hist[0].first - intervalSize / 2;
     final counts = hist[1];
     final actualIntervals = counts.length;
-
     final countsMax = counts.max();
 
     // The number of available histogram blocks depends on Ansi.status.
+    final blocks = switch (Ansi.status) {
+      AnsiOutput.enabled => colorBlocks,
+      AnsiOutput.disabled => monochromeBlocks,
+    };
     final blockCount = blocks.length;
     final deltaCounts = countsMax / (blockCount - 1);
 
