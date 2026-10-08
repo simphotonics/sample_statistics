@@ -179,7 +179,7 @@ $ dart example/bin/histogram_example.dart
 ▁▂▃▉█▁▁▁
 ```
 The image below show the histogram data plotted using [gnuplot][gnuplot].
-![Histogram](https://github.com/simphotonics/benchmark_runner/raw/main/images/histogram.svg?sanitize=true)
+![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
 
 ## Examples
 
