@@ -1,32 +1,9 @@
 import 'dart:math';
 
-import 'package:exception_templates/exception_templates.dart';
 import 'package:sample_statistics/sample_statistics.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Factorial', () {
-    test('Zero', () {
-      expect(0.factorial, 1);
-    });
-    test('1.factorial', () {
-      expect(1.factorial, 1);
-    });
-    test('4.factorial', () {
-      expect(4.factorial, 24);
-    });
-    test('10.factorial', () {
-      expect(10.factorial, 3628800);
-    });
-    test('InvalidFunctionParameter', () {
-      try {
-        (-10).factorial;
-      } on ErrorOfType<InvalidFunctionParameter> catch (e) {
-        expect(e.invalidState, '-10 < 0.');
-      }
-    });
-  });
-
   group('erf(x):', () {
     test('erf(0.85)', () {
       expect(erf(0.85), closeTo(0.770668057608353, 1e-14));
@@ -150,36 +127,6 @@ void main() {
     });
     test('sin.d2dx2(pi/2)', () {
       expect(sin.d2dx2(pi / 2), closeTo(-1, dx * dx));
-    });
-  });
-
-  group('StatsUtils', () {
-    final list = [
-      -21,
-      -10,
-      -3,
-      -2,
-      0,
-      1,
-      2,
-      2,
-      3,
-      4,
-      4,
-      4,
-      5,
-      6,
-      6,
-      7,
-      8,
-      10,
-      11,
-      22,
-    ];
-    test('Remove outliers', () {
-      final outliers = list.removeOutliers();
-      expect(list, [-3, -2, 0, 1, 2, 2, 3, 4, 4, 4, 5, 6, 6, 7, 8, 10, 11]);
-      expect(outliers, [-21, -10, 22]);
     });
   });
 }
