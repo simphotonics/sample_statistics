@@ -11,8 +11,8 @@ calculating *statistics* of numerical samples and generating/exporting
 distribution* functions, an approximation of the *error function*,
 and random sample *generators*.
 
-Throughout the library the acronym *Pdf* stands for *Probability Distribution
-Function*, while *Cdf* stands for *Cummulative Distribution Function*.
+Throughout the library the acronym *pdf* stands for *Probability Distribution
+Function*, while *cdf* stands for *Cummulative Distribution Function*.
 
 ## Usage
 
@@ -23,12 +23,7 @@ as a dependency in your `pubspec.yaml` file.
 
 To access sample statistics use the class [`Stats`][Stats].
 It calculates sample statistics in a lazy fashion and caches results
-to avoid expensive calculations if the
-same quantity is accessed repeatedly. Data points can be added using the
-method `addDataPoints()`. A call to `addDataPoint` triggers a call to
-`updateCache()` to recalculate the sample statistics.
-
-To remove outliers use the method `removeOutliers`.
+to avoid lengthy calculations when the same quantity is accessed repeatedly.
 
 ```Dart
  import 'package:sample_statistics/sample_statistics.dart'
@@ -137,37 +132,51 @@ import 'dart:io';
  }
 ```
 
-### 3. Generating Histograms
+### 3. Histograms
 
-To generate a histogram, the first step consists in dividing the random
-sample range into a suitable number of intervals.
-The second step consists in counting how many sample entries fall into each
-interval.
+To class `Stats` provides methods for generating and exporting histograms:
 
-The figures below show the histograms obtained from two random samples that
-follow a truncated normal distribution with
-`xMin = 2.0`, `xMax = 6.0` and normal parent distribution
-with `meanOfParent = 3.0`, and `stdDevOfParent = 1.0`.
-The random samples were generated using the function
-[`truncatedNormalSample`][truncatedNormalSample].
-The histograms were generated using the extension method
-[`exportHistogram`][exportHistogram], see source code above.
+```Dart
+import 'package:sample_statistics/sample_statistics.dart';
 
-![Histogram](https://raw.githubusercontent.com/simphotonics/sample_statistics/main/images/histogram_truncated_normal.png)
+void main(List<String> args) {
+  final sample = [
+    -10, -8, -5,-4, -3, -3,-1, -1, -1, 0, 0, 0,
+    0, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 7, 10, 14,
+  ];
 
+  final stats = Stats(sample);
+  print(stats.exportHistogram(verbose: true, normalize: false));
+  print(stats.blockHistogram());
+}
+```
+The console output is show below:
+```
+$ dart example/bin/histogram_example.dart
+# Intervals: 8
+# Min: -10.00000000
+# Max: 14.00000000
+# Interval size: 3.428571429
+# Mean:   0.8461538462
+# StdDev: 5.065114472
+# Median: 0.5000000000
+# First Quartile: -1.000000000
+# Third Quartile: 3.000000000
+# Histogram integral: 89.14285714285715
+#
+# -------------------------------------------------------------
+#     Interval Mid-Point                  Count
+        -10.00000000                 1.000000000
+        -6.571428571                 2.000000000
+        -3.142857143                 3.000000000
+        0.2857142857                 9.000000000
+        3.714285714                  8.000000000
+        7.142857143                  1.000000000
+        10.57142857                  1.000000000
+        14.00000000                  1.000000000
 
-The figure on the left shows the histogram of a sample with size 150.
-The figure on the right shows the histogram of a sample with size 600.
-Increasing the random sample size leads to an increasingly
-closer match between the shape of the histogram and
-the underlying probability distribution.
-
-Using the distribution parameters mentioned above with the function
-[`meanTruncatedNormal`][meanTruncatedNormal],  one can determine
-a theoretical mean of 3.2828. It can be seen that in the limit of a
-large sample size the *sample mean* approaches
-the *mean* of the underlying probability distribution.
-
+▁▂▃▉█▁▁▁
+```
 
 
 ## Examples
