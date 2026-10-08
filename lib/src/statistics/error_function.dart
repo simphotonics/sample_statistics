@@ -242,13 +242,13 @@ double _erfcx(num x) {
 /// Returns an approximation of the scaled error function defined as:
 ///
 /// `erfx(x) = exp(x * x) * erf(x)`
-final erfx = MemoizedFunction(_erfx);
+final erfx = MemoizedSingleArgumentFunction(_erfx);
 
 /// Returns an approximation of the complementary scaled error function
 /// defined as:
 ///
 /// `erfcx(x) = exp(x * x) * erfc(x)`
-final erfcx = MemoizedFunction(_erfcx);
+final erfcx = MemoizedSingleArgumentFunction(_erfcx);
 
 /// Returns an approximation of the error function defined as:
 ///
@@ -256,7 +256,7 @@ final erfcx = MemoizedFunction(_erfcx);
 ///
 /// Compared to the approximation provided by gnuplot the maximum
 /// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in [-1, 1]`.
-final erf = MemoizedFunction(_erf);
+final erf = MemoizedSingleArgumentFunction(_erf);
 
 /// Returns an approximation of the complementary error function defined as:
 ///
@@ -264,7 +264,7 @@ final erf = MemoizedFunction(_erf);
 ///
 /// Compared to the approximation provided by gnuplot the maximum absolute
 /// error is `1.5e-15` for `x > 1.0` and  `4.0e-16` for `x in [1, 1]`.
-final erfc = MemoizedFunction(_erfc);
+final erfc = MemoizedSingleArgumentFunction(_erfc);
 
 /// Returns the first derivative of the error function.
 double dxErf(num x) => 2.0 * invSqrtPi * math.exp(-x * x);
