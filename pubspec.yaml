@@ -1,26 +1,27 @@
 name: sample_statistics
 
 description: Sample statistics, histograms, probability distributions, and
-  random sample generators for Dart.
+  random sample generators.
 
-version: 0.2.2
+version: 1.0.0
 
 homepage: https://github.com/simphotonics/sample_statistics
 
 environment:
-  sdk: '^3.9.0'
+  sdk: '^3.13.0'
 
 topics:
-  - statistic
+  - statistics
   - histogram
   - probability-distribution
   - random-sample-generator
 
 dependencies:
-  exception_templates: ^0.3.2
-  lazy_memo: ^0.2.5
-  list_operators: ^0.5.1
+  ansi_modifier: ^1.1.1
+  exception_templates: ^1.1.0
+  lazy_memo: ^2.0.0
+  list_operators: ^1.0.0
 
 dev_dependencies:
-  lints: ^6.0.0
-  test: ^1.26.3
+  lints: ^6.1.0
+  test: ^1.32.0
