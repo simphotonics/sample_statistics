@@ -1,19 +1,37 @@
-import 'dart:io';
-
 import 'package:sample_statistics/sample_statistics.dart';
 
-import '../../test/samples/normal_random_sample.dart';
+void main(List<String> args) {
+  final sample = [
+    -10,
+    -8,
+    -5,
+    -4,
+    -3,
+    -3,
+    -1,
+    -1,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    7,
+    10,
+    14,
+  ];
 
-/// To run this program navigate to the folder: examples/bin and use the
-/// command:
-/// ```Console
-/// $ dart --enable-experiment==non-nullable histogram_example.dart
-/// ```
-void main(List<String> args) async {
-  // The variable  'sample' is defined in the file normal_random_sample.dart.
+  final stats = Stats(sample);
 
-  // Generates a histogram and exports it to a file.
-  await File(
-    '../data/normal_random_sample.hist',
-  ).writeAsString(normalRandomSample.exportHistogram());
+  print(stats.exportHistogram(verbose: true, normalize: false));
+  print(stats.blockHistogram());
 }

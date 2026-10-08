@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:sample_statistics/sample_statistics.dart' show Integration;
 
 void main(List<String> args) {
-  final dx = 0.01;
+  final dx = 0.001;
   final watch = Stopwatch();
   watch.start();
   final result = sin.integrate(0, pi / 2, dx: dx);

@@ -1,79 +1,37 @@
 import 'package:sample_statistics/sample_statistics.dart';
 
-/// Used to enable/disable color output.
-enum ColorOutput { on, off }
-
-/// Ansi color modifier: Reset to default.
-const String resetColour = '\u001B[0m';
-
-/// Ansi color modifier: blue foreground.
-const String blue = '\u001B[1;94m';
-
-/// Ansi color modifier: cyan foreground.
-const String cyan = '\u001B[36m';
-
-/// Ansi color modifier: cyan bold text.
-const String cyanBold = '\u001B[1;36m';
-
-/// Ansi color modifier: green foreground.
-const String green = '\u001B[1;32m';
-
-/// Ansi color modifier: red foreground.
-const String red = '\u001B[31m';
-
-/// Ansi color modifier: yellow foreground.
-const String yellow = '\u001B[33m';
-
-/// Ansi color modifier: magenta foreground.
-const String magenta = '\u001B[35m';
-
-/// Applies an ansi compliant color modifier to a `String`.
-String colorize(
-  String message,
-  String color, {
-  ColorOutput colorOutput = ColorOutput.on,
-}) {
-  color = (colorOutput == ColorOutput.on) ? color : '';
-  final reset = (colorOutput == ColorOutput.on) ? resetColour : '';
-
-  return message = message.isEmpty ? '' : '$color$message$reset';
-}
-
 void main() {
   final originalSample = [-10, 0, 1, 2, 3, 4, 5, 6, 20];
   final stats = Stats(originalSample);
 
-  print(colorize('\nRunning sample_statistics_example.dart ...', green));
+  print('\nRunning sample_statistics_example.dart ...');
 
-  print(colorize('Sample: ', blue) + stats.sample.toString());
+  print('Sample: ${stats.sample}');
 
-  print(colorize('min: ', magenta) + stats.min.toString());
+  print('min: ${stats.min}');
 
-  print(colorize('max: ', blue) + stats.max.toString());
+  print('max: ${stats.max}');
 
-  print(colorize('mean: ', magenta) + stats.mean.toString());
+  print('mean: ${stats.mean}');
 
-  print(colorize('median: ', blue) + stats.median.toString());
+  print('median: ${stats.median}');
 
-  print(colorize('first quartile: ', magenta) + stats.quartile1.toString());
+  print('first quartile: ${stats.quartile1}');
 
-  print(colorize('third quartile: ', blue) + stats.quartile3.toString());
+  print('third quartile: ${stats.quartile3}');
 
-  print(colorize('inter-quartile-range:', magenta) + stats.iqr.toString());
+  print('inter-quartile-range:${stats.iqr}');
 
-  print(colorize('standard deviation: ', blue) + stats.stdDev.toString());
+  print('standard deviation: ${stats.stdDev}');
 
   final outliers = stats.removeOutliers();
-  print(colorize('outliers:', magenta) + outliers.toString());
+  print('outliers:$outliers');
 
-  print(colorize('Sample without outliers: ', blue) + stats.sample.toString());
+  print('Sample without outliers: ${stats.sample}');
 
   stats.addDataPoints([-2, 7]);
 
-  print(
-    colorize('Sample with additional data points: ', magenta) +
-        stats.sample.toString(),
-  );
+  print('Sample with additional data points: ${stats.sample}');
 
-  print(colorize('Sorted sample: ', blue) + stats.sortedSample.toString());
+  print('Sorted sample: ${stats.sortedSample}');
 }
