@@ -1,186 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="441.38" version="1.2" viewBox="0 0 600 331.03" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<svg width="700" height="386.21" version="1.2" viewBox="0 0 525 289.66" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
  <title>Qt SVG Document</title>
  <desc>Generated with Qt</desc>
- <g transform="matrix(.55174 0 0 .55174 4.4753e-6 -4.4887e-6)">
-  <rect x=".33391" y=".33389" width="1086.8" height="599.33" fill="#dddddc" fill-opacity=".94118" stroke="#ccc" stroke-width=".6678"/>
-  <g transform="translate(-3,6)" fill-rule="evenodd">
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 536.5 1082.5 536.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 536.5 126.5 536.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 536.5 1073.5 536.5" stroke="#000"/>
+ <rect x=".16121" y=".16119" width="524.68" height="289.34" fill="#dddddc" fill-opacity=".94118" stroke="#ccc" stroke-width=".3224"/>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 536.5 1082.5 536.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 536.5 126.5 536.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 536.5 1073.5 536.5" stroke="#000"/>
+ </g>
+ <text x="26.425625" y="260.58838" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 0</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 479.5 1082.5 479.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 479.5 126.5 479.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 479.5 1073.5 479.5" stroke="#000"/>
+ </g>
+ <text x="28.990086" y="233.01974" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 1</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 422.5 1082.5 422.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 422.5 126.5 422.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 422.5 1073.5 422.5" stroke="#000"/>
+ </g>
+ <text x="26.428236" y="205.46114" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 2</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 365.5 1082.5 365.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 365.5 126.5 365.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 365.5 1073.5 365.5" stroke="#000"/>
+ </g>
+ <text x="26.432589" y="177.88466" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 3</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 308.5 1082.5 308.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 308.5 126.5 308.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 308.5 1073.5 308.5" stroke="#000"/>
+ </g>
+ <text x="25.916739" y="150.80457" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 4</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 251.5 1082.5 251.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 251.5 126.5 251.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 251.5 1073.5 251.5" stroke="#000"/>
+ </g>
+ <text x="26.432589" y="123.2246" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 5</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 194.5 1082.5 194.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 194.5 126.5 194.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 194.5 1073.5 194.5" stroke="#000"/>
+ </g>
+ <text x="26.423883" y="95.666008" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 6</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 137.5 1082.5 137.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 137.5 126.5 137.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 137.5 1073.5 137.5" stroke="#000"/>
+ </g>
+ <text x="26.425625" y="68.098709" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 7</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 80.5 1082.5 80.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 80.5 126.5 80.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 80.5 1073.5 80.5" stroke="#000"/>
+ </g>
+ <text x="26.426495" y="40.530987" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 8</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 24.5 1082.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 24.5 126.5 24.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1082.5 24.5 1073.5 24.5" stroke="#000"/>
+ </g>
+ <text x="26.428236" y="12.963492" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 9</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="177.5 536.5 177.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="177.5 536.5 177.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="177.5 24.5 177.5 33.5" stroke="#000"/>
+ </g>
+ <text x="60.661247" y="272.19568" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve">-10</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="247.5 536.5 247.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="247.5 536.5 247.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="247.5 24.5 247.5 33.5" stroke="#000"/>
+ </g>
+ <text x="99.609062" y="272.19479" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve">-8</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="318.5 536.5 318.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="318.5 536.5 318.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="318.5 24.5 318.5 33.5" stroke="#000"/>
+ </g>
+ <text x="133.46138" y="272.19479" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve">-6</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="388.5 536.5 388.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="388.5 536.5 388.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="388.5 24.5 388.5 33.5" stroke="#000"/>
+ </g>
+ <text x="167.53468" y="272.19827" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve">-4</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="459.5 536.5 459.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="459.5 536.5 459.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="459.5 24.5 459.5 33.5" stroke="#000"/>
+ </g>
+ <text x="201.65935" y="272.20352" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve">-2</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="529.5 536.5 529.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="529.5 536.5 529.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="529.5 24.5 529.5 33.5" stroke="#000"/>
+ </g>
+ <text x="236.80933" y="272.19568" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 0</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="600.5 536.5 600.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="600.5 536.5 600.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="600.5 24.5 600.5 33.5" stroke="#000"/>
+ </g>
+ <text x="270.66684" y="272.20352" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 2</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="670.5 536.5 670.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="670.5 536.5 670.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="670.5 24.5 670.5 33.5" stroke="#000"/>
+ </g>
+ <text x="304.25159" y="272.19827" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 4</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="740.5 536.5 740.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="740.5 536.5 740.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="740.5 24.5 740.5 33.5" stroke="#000"/>
+ </g>
+ <text x="338.85562" y="272.19479" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 6</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="811.5 536.5 811.5 79.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="811.5 33.5 811.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="811.5 536.5 811.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="811.5 24.5 811.5 33.5" stroke="#000"/>
+ </g>
+ <text x="372.71317" y="272.19479" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 8</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="881.5 536.5 881.5 79.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="881.5 33.5 881.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="881.5 536.5 881.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="881.5 24.5 881.5 33.5" stroke="#000"/>
+ </g>
+ <text x="402.44174" y="272.19568" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 10</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="952.5 536.5 952.5 79.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="952.5 33.5 952.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="952.5 536.5 952.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="952.5 24.5 952.5 33.5" stroke="#000"/>
+ </g>
+ <text x="436.29926" y="272.20352" fill="#000000" fill-rule="evenodd" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 12</text>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1022.5 536.5 1022.5 79.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1022.5 33.5 1022.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1022.5 536.5 1022.5 526.5" stroke="#000"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="1022.5 24.5 1022.5 33.5" stroke="#000"/>
+ </g>
+ <g fill-rule="evenodd">
+  <text x="470.36774" y="272.19827" fill="#000000" font-family="Sans" font-size="10.446px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve"> 14</text>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 24.5 117.5 536.5 1082.5 536.5 1082.5 24.5 117.5 24.5" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="393.33661" y="25.667896" fill="#000000" font-family="Sans" font-size="11.607px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve">histogram</text>
+  <rect x="455.13" y="16.695" width="41.593" height="11.124" fill="#08aaff" fill-opacity=".10001" stroke-width=".48277"/>
+  <path d="m455.37 28.06h41.11v-11.124h-41.11v11.124" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="1.6928"/>
+  <rect x="43.551" y="226.59" width="58.522" height="27.568" fill="#08aaff" fill-opacity=".10001" stroke-width=".48277"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 536.5 117.5 479.5 237.5 479.5 237.5 536.5 117.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
+  <rect x="102.07" y="199.03" width="58.522" height="55.137" fill="#08aaff" fill-opacity=".10001" stroke-width=".48277"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="237.5 536.5 237.5 422.5 358.5 422.5 358.5 536.5 237.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
+  <rect x="160.59" y="171.46" width="58.522" height="82.704" fill="#08aaff" fill-opacity=".10001" stroke-width=".48277"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="358.5 536.5 358.5 365.5 479.5 365.5 479.5 536.5 358.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
+  <rect x="218.63" y="6.5383" width="58.522" height="247.62" fill="#08aaff" fill-opacity=".10001" stroke-width=".48277"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="479.5 536.5 479.5 24.5 599.5 24.5 599.5 536.5 479.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
+  <rect x="277.15" y="34.106" width="58.522" height="220.06" fill="#08aaff" fill-opacity=".10001" stroke-width=".48277"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="599.5 536.5 599.5 80.5 720.5 80.5 720.5 536.5 599.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
+  <rect x="335.67" y="226.59" width="58.522" height="27.568" fill="#08aaff" fill-opacity=".10001" stroke-width=".48277"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="720.5 536.5 720.5 479.5 841.5 479.5 841.5 536.5 720.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
+  <rect x="393.71" y="226.59" width="58.522" height="27.568" fill="#08aaff" fill-opacity=".10001" stroke-width=".48277"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="841.5 536.5 841.5 479.5 962.5 479.5 962.5 536.5 841.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
+  <rect x="452.23" y="226.59" width="58.522" height="27.568" fill="#08aaff" fill-opacity=".10001" stroke-width=".48277"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="962.5 536.5 962.5 479.5 1082.5 479.5 1082.5 536.5 962.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="117.5 24.5 117.5 536.5 1082.5 536.5 1082.5 24.5 117.5 24.5" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
+  <g stroke-linecap="square" stroke-linejoin="bevel">
+   <text transform="rotate(-90)" x="-156.10187" y="21.016539" fill="#000000" font-family="Sans" font-size="11.607px" font-weight="400" stroke-width=".58037" xml:space="preserve">Count</text>
+   <text x="216.2242" y="284.84991" fill="#000000" font-family="Sans" font-size="11.607px" font-weight="400" stroke-width=".58037" xml:space="preserve">Sample values</text>
+   <g transform="matrix(.36231 0 0 .43173 40.667 10.77)" fill="#eef" fill-opacity=".86667" font-family="'Ubuntu Medium'" font-size="13px">
+    <rect x="491" y="259.75" width="211" height="40.5" fill="#eee" fill-opacity=".86667"/>
    </g>
-   <text x="59.149071" y="532.48499" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 0</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 479.5 1082.5 479.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 479.5 126.5 479.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 479.5 1073.5 479.5" stroke="#000"/>
-   </g>
-   <text x="64.158073" y="475.38199" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 1</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 422.5 1082.5 422.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 422.5 126.5 422.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 422.5 1073.5 422.5" stroke="#000"/>
-   </g>
-   <text x="59.149071" y="418.27997" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 2</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 365.5 1082.5 365.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 365.5 126.5 365.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 365.5 1073.5 365.5" stroke="#000"/>
-   </g>
-   <text x="59.149071" y="361.17697" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 3</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 308.5 1082.5 308.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 308.5 126.5 308.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 308.5 1073.5 308.5" stroke="#000"/>
-   </g>
-   <text x="58.14727" y="305.07697" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 4</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 251.5 1082.5 251.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 251.5 126.5 251.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 251.5 1073.5 251.5" stroke="#000"/>
-   </g>
-   <text x="59.149071" y="247.97398" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 5</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 194.5 1082.5 194.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 194.5 126.5 194.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 194.5 1073.5 194.5" stroke="#000"/>
-   </g>
-   <text x="59.149071" y="190.87198" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 6</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 137.5 1082.5 137.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 137.5 126.5 137.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 137.5 1073.5 137.5" stroke="#000"/>
-   </g>
-   <text x="59.149071" y="133.76997" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 7</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 80.5 1082.5 80.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 80.5 126.5 80.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 80.5 1073.5 80.5" stroke="#000"/>
-   </g>
-   <text x="59.149071" y="76.667084" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 8</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 24.5 1082.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 24.5 126.5 24.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1082.5 24.5 1073.5 24.5" stroke="#000"/>
-   </g>
-   <text x="59.149071" y="19.56468" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 9</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="177.5 536.5 177.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="177.5 536.5 177.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="177.5 24.5 177.5 33.5" stroke="#000"/>
-   </g>
-   <text x="131.27898" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve">-10</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="247.5 536.5 247.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="247.5 536.5 247.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="247.5 24.5 247.5 33.5" stroke="#000"/>
-   </g>
-   <text x="210.92097" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve">-8</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="318.5 536.5 318.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="318.5 536.5 318.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="318.5 24.5 318.5 33.5" stroke="#000"/>
-   </g>
-   <text x="281.04697" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve">-6</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="388.5 536.5 388.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="388.5 536.5 388.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="388.5 24.5 388.5 33.5" stroke="#000"/>
-   </g>
-   <text x="351.67398" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve">-4</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="459.5 536.5 459.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="459.5 536.5 459.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="459.5 24.5 459.5 33.5" stroke="#000"/>
-   </g>
-   <text x="422.30096" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve">-2</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="529.5 536.5 529.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="529.5 536.5 529.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="529.5 24.5 529.5 33.5" stroke="#000"/>
-   </g>
-   <text x="494.93097" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 0</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="600.5 536.5 600.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="600.5 536.5 600.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="600.5 24.5 600.5 33.5" stroke="#000"/>
-   </g>
-   <text x="565.05695" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 2</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="670.5 536.5 670.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="670.5 536.5 670.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="670.5 24.5 670.5 33.5" stroke="#000"/>
-   </g>
-   <text x="634.68097" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 4</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="740.5 536.5 740.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="740.5 536.5 740.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="740.5 24.5 740.5 33.5" stroke="#000"/>
-   </g>
-   <text x="706.31" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 6</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="811.5 536.5 811.5 79.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="811.5 33.5 811.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="811.5 536.5 811.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="811.5 24.5 811.5 33.5" stroke="#000"/>
-   </g>
-   <text x="776.43597" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 8</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="881.5 536.5 881.5 79.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="881.5 33.5 881.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="881.5 536.5 881.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="881.5 24.5 881.5 33.5" stroke="#000"/>
-   </g>
-   <text x="839.04797" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 10</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="952.5 536.5 952.5 79.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="952.5 33.5 952.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="952.5 536.5 952.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="952.5 24.5 952.5 33.5" stroke="#000"/>
-   </g>
-   <text x="909.17395" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 12</text>
-   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1022.5 536.5 1022.5 79.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1022.5 33.5 1022.5 24.5" stroke="#a0a0a4" stroke-dasharray="2, 4" stroke-width="2"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1022.5 536.5 1022.5 526.5" stroke="#000"/>
-    <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="1022.5 24.5 1022.5 33.5" stroke="#000"/>
-   </g>
-   <text x="979.79999" y="556.52795" fill="#000000" font-family="Sans" font-size="18.032px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve"> 14</text>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 24.5 117.5 536.5 1082.5 536.5 1082.5 24.5 117.5 24.5" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
-   <text x="827.41998" y="46.125782" fill="#000000" font-family="Sans" font-size="20.036px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve">histogram</text>
-   <rect x="945.74" y="28.581" width="86.155" height="23.041" fill="#08aaff" fill-opacity=".10001"/>
-   <path d="m946.24 52.123h85.153v-23.041h-85.153v23.041" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5063"/>
-   <rect x="93.211" y="463.36" width="121.22" height="57.103" fill="#08aaff" fill-opacity=".10001"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 536.5 117.5 479.5 237.5 479.5 237.5 536.5 117.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
-   <rect x="214.43" y="406.26" width="121.22" height="114.21" fill="#08aaff" fill-opacity=".10001"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="237.5 536.5 237.5 422.5 358.5 422.5 358.5 536.5 237.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
-   <rect x="335.65" y="349.16" width="121.22" height="171.31" fill="#08aaff" fill-opacity=".10001"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="358.5 536.5 358.5 365.5 479.5 365.5 479.5 536.5 358.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
-   <rect x="455.86" y="7.5432" width="121.22" height="512.92" fill="#08aaff" fill-opacity=".10001"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="479.5 536.5 479.5 24.5 599.5 24.5 599.5 536.5 479.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
-   <rect x="577.08" y="64.646" width="121.22" height="455.82" fill="#08aaff" fill-opacity=".10001"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="599.5 536.5 599.5 80.5 720.5 80.5 720.5 536.5 599.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
-   <rect x="698.3" y="463.36" width="121.22" height="57.103" fill="#08aaff" fill-opacity=".10001"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="720.5 536.5 720.5 479.5 841.5 479.5 841.5 536.5 720.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
-   <rect x="818.51" y="463.36" width="121.22" height="57.103" fill="#08aaff" fill-opacity=".10001"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="841.5 536.5 841.5 479.5 962.5 479.5 962.5 536.5 841.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
-   <rect x="939.73" y="463.36" width="121.22" height="57.103" fill="#08aaff" fill-opacity=".10001"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="962.5 536.5 962.5 479.5 1082.5 479.5 1082.5 536.5 962.5 536.5" fill="none" stroke="#08aaff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".97647" stroke-width="3.5"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="117.5 24.5 117.5 536.5 1082.5 536.5 1082.5 24.5 117.5 24.5" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
-   <g stroke-linecap="square" stroke-linejoin="bevel">
-    <text transform="rotate(-90)" x="-311.58798" y="45.102386" fill="#000000" font-family="Sans" font-size="20.036px" font-weight="400" stroke-width="1.0018" xml:space="preserve">Count</text>
-    <text x="464.37598" y="586.09399" fill="#000000" font-family="Sans" font-size="20.036px" font-weight="400" stroke-width="1.0018" xml:space="preserve">Sample values</text>
-    <g transform="matrix(.6544 0 0 1.0018 143.57 -15)" fill="#eef" fill-opacity=".86667" font-family="'Ubuntu Medium'" font-size="13px">
-     <rect x="491" y="259.75" width="211" height="40.5" fill="#eee" fill-opacity=".86667"/>
-    </g>
-    <text x="470.88797" y="271.52197" fill="#0000ff" font-family="' '" font-size="18.032px" font-weight="400" stroke-width="1.0018" xml:space="preserve">mean = 0.8460</text>
-   </g>
-   <rect x="750.39" y="361.43" width="169.86" height="36.566" fill="#eee" fill-opacity=".86667"/>
-   <text x="756.39398" y="384.72498" fill="#332222" font-family="' '" font-size="16.029px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="1.0018" xml:space="preserve">interval size = 3.4286</text>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="554.5 517.5 559.4 536 564.3 517.5" fill="none" stroke="#00f" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-   <polyline transform="matrix(1.0018,0,0,1.0018,-24,-16.5)" points="559.5 536.5 559.5 308.5" fill="none" stroke="#00f" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+   <text x="221.34734" y="136.09904" fill="#0000ff" font-family="' '" font-size="10.446px" font-weight="400" stroke-width=".58037" xml:space="preserve">mean = 0.8460</text>
   </g>
+  <rect x="352.62" y="176.98" width="98.405" height="17.956" fill="#eee" fill-opacity=".86667" stroke-width=".53336"/>
+  <text x="356.11679" y="189.20871" fill="#332222" font-family="' '" font-size="9.286px" font-weight="400" stroke-linecap="square" stroke-linejoin="bevel" stroke-width=".58037" xml:space="preserve">interval size = 3.4286</text>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="554.5 517.5 559.4 536 564.3 517.5" fill="none" stroke="#00f" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+  <polyline transform="matrix(.48364 0 0 .48364 -13.035 -5.0691)" points="559.5 536.5 559.5 308.5" fill="none" stroke="#00f" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
  </g>
  <metadata>
   <rdf:RDF>
