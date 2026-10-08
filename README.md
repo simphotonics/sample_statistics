@@ -124,7 +124,7 @@ $ dart example/bin/histogram_example.dart
 On a monochrome terminal the block histogram is rendered as shown above.
 On a terminal with Ansi support, the block histogram is rendered as:
 
-▁▂▃${\color{cyan}▉}$█▁▁▁
+▁▂▃ ${\color{cyan}▉}$ █▁▁▁
 
 If a block contains the ${\color{#22ff33}mean}$ it is colored green.
 If it contains the ${\color{#0088ff}median}$
