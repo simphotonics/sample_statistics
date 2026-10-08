@@ -118,9 +118,19 @@ $ dart example/bin/histogram_example.dart
         7.142857143                  1.000000000
         10.57142857                  1.000000000
         14.00000000                  1.000000000
-$${\color{red}Welcome \space \color{#8cf720}to \space \color{orange}Stackoverflow}$$
-▁▂▃$${\color{cyan}▉}$$█▁▁▁
+
+ ▁▂▃▉█▁▁▁
 ```
+On a monochrome terminal the block histogram is rendered as shown above.
+On a terminal with Ansi support, the block histogram is rendered as:
+
+${▁▂▃\color{cyan}▉ \color{default} █▁▁▁ }$
+
+If a block contains the ${\color{#22ff33}mean}$ it is colored green.
+If it contains the ${\color{#0088ff}median}$
+of the sample it is colored blue. In this case, the block containing
+the ${\color{#00ffff}mean \space \color{default} and \space \color{cyan} median}$ is printed in a cyan hue.
+
 The image below shows the histogram data plotted using [gnuplot][gnuplot].
 ![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
 
