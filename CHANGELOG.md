@@ -1,9 +1,13 @@
+## 1.0.0
+- Extended class `Stats`, added extension `ExportHistogram` with methods:
+  * 
+
 ## 0.2.2
 - Added `Stats` getters `iqr`, `sortedSample` returning the interquartile range of the sample.
 - Added `Stats` method `addDataPoints`. This method calls `updatedCache`
   (previously named `update`).
 - The data `sample` held by `Stats` is now a copy of the original sample.
-  Changes to the original sample will not be reflected in sample. 
+  Changes to the original sample will not be reflected in the sample.
 
 ## 0.2.1
 - Updated deps.
