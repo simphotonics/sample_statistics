@@ -1,35 +1,102 @@
+import 'package:list_operators/list_operators.dart' show NumericalMethods;
 import 'package:sample_statistics/sample_statistics.dart';
 import 'package:test/test.dart';
 
-import 'samples/normal_random_sample.dart';
-
 void main() {
-  final stats = Stats(normalRandomSample);
+  final sample = [
+    -10,
+    -8,
+    -5,
+    -4,
+    -3,
+    -3,
+    -1,
+    -1,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    7,
+    10,
+  ];
+  final sampleEvenEven = [-4, -3, -2, -1, 1, 2, 3, 4];
+  final sampleOddEven = [-4, -3, -2, -1, 0, 1, 2, 3, 4];
+  final sampleEvenOdd = [-3, -2, -1, 1, 2, 3];
+  final sampleOddOdd = [-3, -2, -1, 0, 1, 2, 3];
 
   group('Basic:', () {
+    final statsEvenEven = Stats(sampleEvenEven);
+    final statsOddEven = Stats(sampleOddEven);
+    final statsEvenOdd = Stats(sampleEvenOdd);
+    final statsOddOdd = Stats(sampleOddOdd);
+
     test('min', () {
-      expect(stats.min, closeTo(-1.949079932, 1e-8));
+      expect(statsEvenEven.min, -4);
+      expect(statsOddOdd.min, -3);
     });
     test('max', () {
-      expect(stats.max, closeTo(26.55182824, 1e-8));
+      expect(statsEvenOdd.max, 3);
+      expect(statsOddOdd.max, 3);
     });
     test('mean', () {
-      expect(stats.mean, closeTo(10.168769294545003, 1e-8));
+      expect(statsEvenEven.mean, 0);
+      expect(statsOddOdd.mean, 0);
     });
     test('median', () {
-      expect(stats.median, closeTo(10.232570379999999, 1e-8));
+      expect(statsEvenEven.median, 0);
+      expect(statsOddOdd.median, 0);
+      expect(statsEvenOdd.median, 0);
+      expect(statsOddEven.median, 0);
     });
     test('stdDev', () {
-      expect(stats.stdDev, closeTo(5.370025848202738, 1e-8));
+      final stats = Stats(sample);
+      expect(stats.stdDev, closeTo(4.384822307308093, 1e-8));
     });
-    test('quartile1', () {
-      expect(stats.quartile1, closeTo(6.1556007975, 1e-8));
+  });
+
+  group('Quartile: ', () {
+    final statsEvenEven = Stats(sampleEvenEven);
+    final statsOddEven = Stats(sampleOddEven);
+    final statsEvenOdd = Stats(sampleEvenOdd);
+    final statsOddOdd = Stats(sampleOddOdd);
+    test('1 even-even', () {
+      expect(statsEvenEven.quartile1, -2.5);
     });
-    test('quartile3', () {
-      expect(stats.quartile3, closeTo(14.234971445, 1e-8));
+    test('1: even-odd', () {
+      expect(statsEvenOdd.quartile1, -2);
+    });
+    test('1: odd-even', () {
+      expect(statsOddEven.quartile1, -2.5);
+    });
+    test('1: odd-odd', () {
+      expect(statsOddOdd.quartile1, -2);
+    });
+    test('3: even-even', () {
+      expect(statsEvenEven.quartile3, 2.5);
+    });
+    test('3: even-odd', () {
+      expect(statsEvenOdd.quartile3, 2);
+    });
+    test('3: odd-even', () {
+      expect(statsOddEven.quartile3, 2.5);
+    });
+    test('3: odd-odd', () {
+      expect(statsOddOdd.quartile3, 2);
     });
     test('iqr', () {
-      expect(stats.iqr, closeTo(8.0793706475, 1e-8));
+      final stats = Stats(sample);
+      expect(stats.iqr, closeTo(5.0, 1e-8));
     });
   });
 
@@ -55,12 +122,19 @@ void main() {
   });
 
   group('Histogram', () {
+    final stats = Stats(sample);
     test('Columns', () {
-      expect(stats.histogram().length, 3);
-      expect(stats.histogram(normalize: false).length, 3);
+      double pdf(num x) => normalPdf(x, stats.mean, stats.stdDev);
+      expect(stats.histogram().length, 2);
+      expect(stats.histogram(normalize: false).length, 2);
+      expect(stats.histogram(probabilityDensity: pdf).length, 3);
+      expect(
+        stats.histogram(probabilityDensity: pdf, normalize: false).length,
+        3,
+      );
     });
     test('Number of intervals', () {
-      expect(stats.histogram(intervals: 8).first.length, 9);
+      expect(stats.histogram(intervals: 8).first.length, 8);
     });
     test('Range', () {
       final hist = stats.histogram(intervals: 10);
@@ -70,49 +144,41 @@ void main() {
     test('Normalization', () {
       final numberOfIntervals = 10;
       final hist = stats.histogram(intervals: numberOfIntervals);
-      var sum = hist[1].fold<num>(0.0, (sum, current) => sum + current);
       expect(
-        sum * (stats.max - stats.min) / numberOfIntervals,
+        hist[1].sum() * (hist[0][1] - hist[0][0]),
         closeTo(1.0, 1e-12),
       );
     });
     test('Total count (non-normalized histograms)', () {
       final hist = stats.histogram(normalize: false);
-      var sum = hist[1].fold<num>(0.0, (sum, current) => sum + current);
-      expect(sum, normalRandomSample.length);
+      expect(hist[1].sum(), sample.length);
     });
   });
 
   group('Export Histogram', () {
-    final hist = normalRandomSample.exportHistogram(
-      precision: 8,
-      verbose: true,
-    );
+    final stats = Stats(sample);
+    final hist = stats.exportHistogram(precision: 8, verbose: true);
     test('Data', () {
       expect(
         hist,
-        '# Intervals: 8\n'
-        '# Min: -1.9490799\n'
-        '# Max: 26.551828\n'
-        '# Mean: 10.168769\n'
-        '# StdDev: 5.3700258\n'
-        '# Median: 10.232570\n'
-        '# First Quartile: 6.1556008\n'
-        '# Third Quartile: 14.234971\n'
-        '# Interval size: 3.5626135\n'
-        '# Integrated histogram: 1.0000000000000002\n'
+        '# Intervals: 5\n'
+        '# Min: -10.000000\n'
+        '# Max: 10.000000\n'
+        '# Interval size: 5.0000000\n'
+        '# Mean:   0.32000000\n'
+        '# StdDev: 4.3848223\n'
+        '# Median: 0.0000000\n'
+        '# First Quartile: -2.0000000\n'
+        '# Third Quartile: 3.0000000\n'
+        '# Histogram integral: 1.0\n'
         '#\n'
         '# -------------------------------------------------------------\n'
-        '#     Range     Count    Prob. Density Func. \n'
-        '-1.9490799     0.0056138562     0.0058236414\n'
-        '1.6135336     0.022455425     0.020882819\n'
-        '5.1761471     0.056138562     0.048220974\n'
-        '8.7387606     0.058945490     0.071702644\n'
-        '12.301374     0.064559346     0.068657297\n'
-        '15.863988     0.056138562     0.042334124\n'
-        '19.426601     0.011227712     0.016809190\n'
-        '22.989215     0.0028069281     0.0042978905\n'
-        '26.551828     0.0028069281     0.00070764630\n'
+        '#     Interval Mid-Point                  Probability Density\n'
+        '        -10.000000             0.016000000     \n'
+        '        -5.0000000             0.032000000     \n'
+        '        0.0000000              0.096000000     \n'
+        '        5.0000000              0.048000000     \n'
+        '        10.000000              0.0080000000     \n'
         '',
       );
     });
