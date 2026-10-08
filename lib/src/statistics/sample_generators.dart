@@ -2,18 +2,17 @@ import 'dart:math';
 
 import 'package:exception_templates/exception_templates.dart';
 
-import '../exceptions/invalid_function_parameter.dart';
+import '../exception/invalid_function_parameter.dart';
 import 'probability_density.dart';
 
 /// Returns a random sample with probability density
-/// `probabilityDensity`.
+/// [pdf].
 ///
-/// * `sampleSize`: sample size,
-/// * `xMin`: lower limit of the sample values,
-/// * `xMax`: upper limit of the sample values,
-/// * `yMax`: maximum value of `pdf`,
-/// * `pdf`: probability density function,
-/// * `seed`: optional random generator seed.
+/// * [xMin]: lower limit of the sample values,
+/// * [xMax]: upper limit of the sample values,
+/// * [yMax]: maximum value of [pdf],
+/// * [pdf] : probability density function,
+/// * [seed]: optional random generator seed.
 ///
 /// The generator uses a rejection sampling algorithm.
 List<double> randomSample(
@@ -37,14 +36,13 @@ List<double> randomSample(
   return result;
 }
 
-/// Returns a random sample containing `sampleSize` elements following a
+/// Returns a random sample following a
 /// truncated normal distribution with:
-/// * `xMin`: minimum value,
-/// * `xMax`: maximum value,
-/// * `meanOfParent`: mean of parent normal distribution,
-/// * `stdDevOfParent`: standard deviation of parent normal distribution.
-/// ---
-/// * `seed`: random generator seed (optional).
+/// * [xMin]: minimum value,
+/// * [xMax]: maximum value,
+/// * [meanOfParent]: mean of parent normal distribution,
+/// * [stdDevOfParent]: standard deviation of parent normal distribution,
+/// * [seed: random generator seed (optional).
 List<double> truncatedNormalSample(
   int sampleSize,
   num xMin,
@@ -61,15 +59,15 @@ List<double> truncatedNormalSample(
   seed: seed,
 );
 
-/// Returns a random sample with `sampleSize` elements following a
+/// Returns a random sample following a
 /// normal distribution with parameters:
-/// * `mean`: mean value,
-/// * `stdDev`: standard deviation.
+/// * [mean]: mean value,
+/// * [stdDev]: standard deviation.
 /// ---
 /// The following parameters are optional:
-/// * `xMin`: minimum value (defaults to `mean - 10 * stdDev`),
-/// * `xMax`: maximum value (defaults to `mean + 10 * stdDev`),
-/// * `seed`: random generator seed.
+/// * [xMin]: minimum value (defaults to `mean - 10 * stdDev`),
+/// * [xMax]: maximum value (defaults to `mean + 10 * stdDev`),
+/// * [seed]: random generator seed.
 List<double> normalSample(
   int sampleSize,
   num mean,
@@ -90,10 +88,11 @@ List<double> normalSample(
   );
 }
 
-/// Returns a random sample of length `sampleSize` following an
+/// Returns a random sample following an
 /// exponential distribution.
-/// * `mean` must be larger than zero,
-/// * `seed` is optional (seeds the random number generator)
+///
+/// * [mean] must be larger than zero,,
+/// * [seed] is optional (seeds the random number generator).
 /// * The generator uses inversion sampling.
 List<double> exponentialSample(int sampleSize, num mean, {int? seed}) {
   if (mean <= 0) {
@@ -113,10 +112,11 @@ List<double> exponentialSample(int sampleSize, num mean, {int? seed}) {
 }
 
 /// Returns a random sample following a uniform distribution with
-/// non-zero support over the range `xMin ... xMax`.
+/// non-zero support over the range [xMin] ... [xMax].
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `xMin >= xMax`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [xMin] >= [xMax].
 List<double> uniformSample(int sampleSize, num xMin, num xMax, {int? seed}) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
@@ -132,10 +132,11 @@ List<double> uniformSample(int sampleSize, num xMin, num xMax, {int? seed}) {
 }
 
 /// Returns a random sample following a symmetric triangular distribution with
-/// non-zero support over the range `xMin ... xMax`.
+/// non-zero support over the range [xMin] ... [xMax].
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `xMin >= xMax`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [xMin] >= [xMax].
 List<double> triangularSample(int sampleSize, num xMin, num xMax, {int? seed}) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(

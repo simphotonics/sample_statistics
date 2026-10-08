@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:exception_templates/exception_templates.dart';
 //import 'package:simulated_annealing/simulated_annealing.dart';
 
-import '../exceptions/invalid_function_parameter.dart';
+import '../exception/invalid_function_parameter.dart';
 import 'error_function.dart';
 
 /// Small number used to ensure that a
@@ -15,8 +15,8 @@ const num epsilon = 1e-50;
 typedef ProbabilityDensity = double Function(num x);
 
 /// Standard normal probability
-/// density function (with a mean of zero
-/// and a standard deviation equal to one) .
+/// density function with a mean of zero
+/// and a standard deviation equal to one.
 double stdNormalPdf(num x) => invSqrt2Pi * math.exp(-0.5 * x * x);
 
 /// Standard normal cumulative probability distribution.
@@ -27,8 +27,9 @@ double stdNormalCdf(num x) {
 
 /// Normal probability density function.
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `stdDev < 0`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [stdDev] < 0.
 double normalPdf(num x, num mean, num stdDev) {
   if (stdDev <= 0.0) {
     throw throw ErrorOfType<InvalidFunctionParameter>(
@@ -43,8 +44,9 @@ double normalPdf(num x, num mean, num stdDev) {
 
 /// Normal cumulative probability density function.
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `stdDev < 0`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [stdDev] < 0.
 double normalCdf(num x, num mean, num stdDev) {
   if (stdDev <= 0.0) {
     throw throw ErrorOfType<InvalidFunctionParameter>(
@@ -55,15 +57,17 @@ double normalCdf(num x, num mean, num stdDev) {
   return 1 - 0.5 * erfc((x - mean) / (math.sqrt2 * stdDev));
 }
 
-/// Truncated normal probability density function
-/// * `xMin`: left limit.
-/// * `xMax`: right limit satisfying `xMin < xMax`.
-/// * `meanOfParent`: Mean of the *parent* normal distribution.
-/// * `stdDevOfParent`: Standard deviation of the *parent* normal distribution.
-/// * `truncatedNormalPdf(x) > 0` for `x` in `(xMin, xMax)` and zero elsewhere.
+/// Truncated normal probability density function.
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `xMin >= xMax`.
+/// * [xMin]: left limit.
+/// * [xMax]: right limit (must satisfy [xMin] < [xMax]).
+/// * [meanOfParent]: Mean of the *parent* normal distribution.
+/// * [stdDevOfParent]: Standard deviation of the *parent* normal distribution.
+/// * The function is zero outside the interval: ([xMin], [xMax]).
+///
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [xMin] >= [xMax].
 double truncatedNormalPdf(
   num x,
   num xMin,
@@ -95,14 +99,17 @@ double truncatedNormalPdf(
 
 /// Truncated normal cumulative
 /// probability density function
-/// * `min`: left limit.
-/// * `max`: right limit satisfying `min < max`.
-/// * `meanOfParent`: Mean of the *parent* normal distribution.
-/// * `stdDevOfParent`: Standard deviation of the *parent* normal distribution.
-/// * `truncatedNormalPdf(x) > 0` for `x` in `(xMin, xMax)` and zero elsewhere.
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `xMin >= xMax`.
+/// * [xMin]: left limit.
+/// * [xMax]: right limit (must satisfy [xMin] < [xMax]).
+/// * [meanOfParent]: Mean of the *parent* normal distribution.
+/// * [stdDevOfParent]: Standard deviation of the *parent* normal distribution.
+/// * The function is zero for x < [xMin], and 1 for x > [xMax].
+///
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [xMin] >= [xMax].
+
 double truncatedNormalCdf(
   num x,
   num xMin,
@@ -195,10 +202,11 @@ double stdDevTruncatedNormal(
 ) => _stdDevTruncatedNormal(xMin, xMax, meanOfParent, stdDevOfParent);
 
 /// Uniform probability density function
-/// with non-zero support over the interval `(xMin, xMax)`.
+/// with non-zero support over the interval ([xMin], [xMax]).
 ///
-/// Throws an exception of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `xMin >= xMax`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [xMin] >= [xMax].
 double uniformPdf(num x, num xMin, num xMax) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
@@ -213,8 +221,9 @@ double uniformPdf(num x, num xMin, num xMax) {
 /// Uniform cumulative probability density function
 /// with non-zero support over the interval `(xMin, xMax)`.
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `xMin >= xMax`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [xMin] >= [xMax].
 double uniformCdf(num x, num xMin, num xMax) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
@@ -230,8 +239,9 @@ double uniformCdf(num x, num xMin, num xMax) {
 /// Exponential density function
 /// with non-zero support over the interval `(0, inf)`.
 ///
-/// Throws an exception of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `mean <= 0`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [mean] <= 0.
 double expPdf(num x, num mean) {
   if (mean <= 0) {
     throw ErrorOfType<InvalidFunctionParameter>(
@@ -247,8 +257,9 @@ double expPdf(num x, num mean) {
 /// Exponential cumulative probability density function
 /// with non-zero support over the interval `(0, inf)`.
 ///
-/// Throws an exception of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `mean <= 0`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [mean] <= 0`.
 double expCdf(num x, num mean) {
   if (mean <= 0) {
     throw ErrorOfType<InvalidFunctionParameter>(
@@ -261,12 +272,13 @@ double expCdf(num x, num mean) {
 }
 
 /// Triangular probability density function
-/// with non-zero support over the interval `(xMin, xMax)`.
+/// with non-zero support over the interval ([xMin], [xMax]).
 ///
-/// The maximum occurs at `(xMax - xMin) / 2`.
+/// The maximum occurs at ([xMax] - [xMin]) / 2.
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `xMin >= xMax`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [xMin] >= [xMax].
 double triangularPdf(num x, num xMin, num xMax) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
@@ -286,12 +298,13 @@ double triangularPdf(num x, num xMin, num xMax) {
 }
 
 /// Triangular cumulative probability density function
-/// with non-zero support over the interval `(xMin, xMax)`.
+/// with non-zero support over the interval ([xMin], [xMax]).
 ///
-/// The maximum of the probability density occurs at `(xMax - xMin) / 2`.
+/// The maximum of the probability density occurs at ([xMax] - [xMin]) / 2.
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `xMin >= xMax`.
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [xMin] >= [xMax].
 double triangularCdf(num x, num xMin, num xMax) {
   if (xMin >= xMax) {
     throw ErrorOfType<InvalidFunctionParameter>(
@@ -312,18 +325,18 @@ double triangularCdf(num x, num xMin, num xMax) {
 }
 
 /// Triangular inverse cumulative probability density function
-/// with non-zero support over the interval `(xMin, xMax)`.
+/// with non-zero support over the interval ([xMin], [xMax]).
 ///
-/// The mean of the probability density occurs at `(xMax - xMin) / 2`
+/// The mean of the probability density occurs at ([xMax] - [xMin]) / 2
 /// and the probability density function is symmetric w.r.t its mean.
 ///
-/// * `p`: A probability with `0 <= p < 1`.
-/// * `xMin`: The left margin of the domain of the density function.
-/// * `xMax`: The right margin of the domain of the density function.
+/// * [p] A probability with 0 <= [p] < 1.
+/// * [xMin]: The left margin of the domain of the density function.
+/// * [xMax]: The right margin of the domain of the density function.
 ///
-/// Throws an error of type `ErrorOfType<InvalidFunctionParameter>`
-/// if `xMin >= xMax`.
-///
+/// Throws an error of type [ErrorOfType] with type argument
+/// [InvalidFunctionParameter]
+/// if [xMin] >= [xMax].
 double triangularInvCdf(num p, num xMin, num xMax) {
   if (p < 0 || p > 1) {
     throw ErrorOfType<InvalidFunctionParameter>(
