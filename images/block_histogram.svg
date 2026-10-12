@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="184" height="52" viewBox="0 0 184 52" role="img" aria-label="console2svg output">
+<style>
+.c2.c { font-family: "JetBrains Mono","Cascadia Mono","Segoe UI Mono","Noto Sans Mono","SFMono-Regular",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace; font-size: 14px; }
+.c2 text { dominant-baseline: alphabetic; }
+.c2 .q { shape-rendering: crispEdges; }
+.c2 .w { white-space: pre; }
+.c2 .aa{fill:#3b8eea}
+.c2 .ab{fill:#23d18b}
+</style><rect width="184" height="52" fill="#1e1e1e"/>
+<g class="c2 c" transform="translate(8 8)">
+<rect width="168" height="36" fill="#1e1e1e"/>
+<text class="aa" x="25.2" y="14" textLength="8.4">x̃</text>
+<text class="ab" x="33.6" y="14" textLength="8.4">x̄</text>
+<rect class="q" y="33.75" width="8.4" height="2.25" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="8.4" y="33.75" width="8.4" height="2.25" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="16.8" y="27" width="8.4" height="9" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="25.2" y="18" width="8.4" height="18" fill="#3b8eea" stroke="#3b8eea" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="33.6" y="20.25" width="8.4" height="15.75" fill="#23d18b" stroke="#23d18b" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="42" y="29.25" width="8.4" height="6.75" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="50.4" y="33.75" width="8.4" height="2.25" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="58.8" y="33.75" width="8.4" height="2.25" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="67.2" y="33.75" width="8.4" height="2.25" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+</g>
+</svg>
