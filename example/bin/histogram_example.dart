@@ -1,4 +1,3 @@
-import 'package:ansi_modifier/ansi_modifier.dart';
 import 'package:sample_statistics/sample_statistics.dart';
 
 void main(List<String> args) {
@@ -31,14 +30,10 @@ void main(List<String> args) {
     7,
     10,
     14,
-
   ];
 
   final stats = Stats(sample);
 
-  //print(stats.exportHistogram(verbose: true, normalize: false, intervals: 9));
-
-  //Ansi.status = AnsiOutput.disabled;
-
+  print(stats.exportHistogram(verbose: true, normalize: false, intervals: 9));
   print(stats.blockHistogram(intervals: 9));
 }
