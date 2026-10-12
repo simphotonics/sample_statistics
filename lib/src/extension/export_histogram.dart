@@ -9,7 +9,8 @@ import 'color_profile.dart';
 
 extension ExportHistogram on Stats {
   /// Block characters used to build block histograms.
-  static const monochromeBlocks = [
+  static const blocks = [
+    '_',
     '\u2581',
     '\u2582',
     '\u2583',
@@ -18,21 +19,16 @@ extension ExportHistogram on Stats {
     '\u2586',
     '\u2587',
     '\u2588',
-    '\u2589',
   ];
 
-  static final colorBlocks = List.unmodifiableOf([
-    '\u2581'.style(ColorProfile.dim),
-    '\u2581',
-    '\u2582',
-    '\u2583',
-    '\u2584',
-    '\u2585',
-    '\u2586',
-    '\u2587',
-    '\u2588',
-    '\u2589',
-  ]);
+  static const rightArrow = '\u2198';
+  static const leftArrow = '\u2199';
+  static const meanSymbol = '\u0078\u0304';
+  static const medianSymbol = '\u0078\u0303';
+  static const gap = ' ';
+  // static const tilde = '\u223c';
+  // static const dashTilde = '\u2242';
+  // static const dash = '\u2212';
 
   /// Returns a block histogram in the form of a [String].
   /// * If the same block contains the [mean] and [median] it is styled using
@@ -42,9 +38,9 @@ extension ExportHistogram on Stats {
   /// AnsiModifier.colorOutput = ColoOutput.off;
   /// ```
   String _singleBlockHistogram() =>
-      colorBlocks.first +
-      colorBlocks.last.style(ColorProfile.meanMedianHistogramBlock) +
-      colorBlocks.first;
+      blocks.first +
+      blocks.last.style(ColorProfile.meanMedianHistogramBlock) +
+      blocks.first;
 
   /// Returns a block histogram in the form of a [String].
   /// * The block containing the [mean] value is styled using
@@ -82,11 +78,6 @@ extension ExportHistogram on Stats {
     final actualIntervals = counts.length;
     final countsMax = counts.max();
 
-    // The number of available histogram blocks depends on Ansi.status.
-    final blocks = switch (Ansi.status) {
-      AnsiOutput.enabled => colorBlocks,
-      AnsiOutput.disabled => monochromeBlocks,
-    };
     final blockCount = blocks.length;
     final deltaCounts = countsMax / (blockCount - 1);
 
@@ -100,59 +91,102 @@ extension ExportHistogram on Stats {
     }
 
     final length = result.length;
-
     final indexOfMean = (mean - leftBorder) ~/ intervalSize;
     final indexOfMedian = (median - leftBorder) ~/ intervalSize;
 
+    String firstLine = '';
+
     if (indexOfMedian == indexOfMean) {
-      // Replace block if it will not be visible:
-      result[indexOfMedian] = switch (result[indexOfMedian]) {
-        String b when (b == blocks[0] || b == blocks[1]) => blocks[2],
-        String b => b,
-      };
-      // Colorize block containing mean and median
+      // Colorize block containing the median and mean value.
       result[indexOfMedian] = result[indexOfMedian].style(
         ColorProfile.meanMedianHistogramBlock,
       );
+      firstLine =
+          ' ' * (indexOfMedian - 2) +
+          medianSymbol.style(ColorProfile.median) +
+          rightArrow +
+          ' ' +
+          leftArrow +
+          meanSymbol.style(ColorProfile.mean);
     } else {
-      result[indexOfMedian] = switch (result[indexOfMedian]) {
-        String b when (b == blocks[0] || b == blocks[1]) => blocks[2],
-        String b => b,
-      };
       // Colorize block containing the median value.
       result[indexOfMedian] = result[indexOfMedian].style(
         ColorProfile.medianHistogramBlock,
+        editMethod: EditMethod.clearExisting,
       );
-      result[indexOfMean] = switch (result[indexOfMean]) {
-        String b when (b == blocks[0] || b == blocks[1]) => blocks[2],
-        String b => b,
-      };
       // Colorize block containing the mean value.
       result[indexOfMean] = result[indexOfMean].style(
         ColorProfile.meanHistogramBlock,
+        editMethod: EditMethod.clearExisting,
       );
+
+      if (indexOfMean < indexOfMedian) {
+        firstLine =
+            ' ' * (indexOfMean) +
+            meanSymbol.style(ColorProfile.mean) +
+            ' ' * (indexOfMedian - indexOfMean - 1) +
+            medianSymbol.style(ColorProfile.median);
+      } else {
+        firstLine =
+            ' ' * (indexOfMedian) +
+            medianSymbol.style(ColorProfile.median) +
+            ' ' * (indexOfMean - indexOfMedian - 1) +
+            meanSymbol.style(ColorProfile.mean);
+        // Add median first
+      }
     }
 
     /// Avoid situations where iqr = 0
-    final iqrStandIn = iqr == 0.0 ? 20 * intervalSize : iqr;
+    final iqrAsIndex = (iqr == 0.0) ? 10 : iqr ~/ intervalSize;
+    final leftAnchor = (indexOfMean < indexOfMedian)
+        ? indexOfMean
+        : indexOfMedian;
+    final rightAnchor = (indexOfMean < indexOfMedian)
+        ? indexOfMedian
+        : indexOfMean;
 
-    if (length > 40) {
-      var indexLeft = (quartile1 - 3 * iqrStandIn - leftBorder) ~/ intervalSize;
-      indexLeft = indexLeft < 0 ? 0 : indexLeft;
+    // Make sure to keep the mean.
+    var indexLeft = leftAnchor - 4 * iqrAsIndex;
+    indexLeft = indexLeft < 0 ? 0 : indexLeft;
 
-      var indexRight =
-          (quartile3 + 5 * iqrStandIn - leftBorder) ~/ intervalSize;
-      indexRight = indexRight > length - 1 ? length - 1 : indexRight;
-      final rightBlocks = 5;
-      final skippedRight = length - rightBlocks - indexRight;
+    // Make sure to keep the median.
+    var indexRight = rightAnchor + 4 * iqrAsIndex;
 
-      // Make histogram more compact
-      return '${result.skip(indexLeft).take(indexRight - indexLeft).join()}  '
-          '$skippedRight  '
-          '${result.skip(length - rightBlocks).take(rightBlocks).join()}';
+    var skippedLeft = 0;
+
+    // Compose histogram
+    final b = StringBuffer();
+    if (indexLeft > 40) {
+      // Add 5 intervals on the left.
+      b.write(result.take(5).join(gap));
+      // Add the number of skipped intervals.
+      skippedLeft = indexLeft - 5;
+      b.write(skippedLeft);
+      // Add the histogram
+      b.write(result.skip(indexLeft).take(indexRight - indexLeft).join(gap));
     } else {
-      return result.join();
+      // Add the histogram
+      b.write(result.take(indexRight).join());
     }
+
+    if ((length - indexRight) > 40) {
+      // Add the number of skipped intervals.
+      b.write(length - indexRight - 5);
+      // Add 5 intervals on the right.
+      b.write(result.skip(length - 5).take(5).join(gap));
+    } else {
+      // Add remaining characters.
+      b.write(result.skip(indexRight).join('a'));
+    }
+    // Add first line
+    return switch (skippedLeft) {
+      0 => firstLine + '\n' + b.toString(),
+      _ =>
+        // Account for integer representing the skipped intervals.
+        firstLine.substring(skippedLeft - skippedLeft.toString().length) +
+            '\n' +
+            b.toString(),
+    };
   }
 
   /// Builds a histogram from the entries of `this`
