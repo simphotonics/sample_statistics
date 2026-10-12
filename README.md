@@ -91,45 +91,55 @@ void main(List<String> args) {
 
   final stats = Stats(sample);
   print(stats.exportHistogram(verbose: true, normalize: false));
-  print(stats.blockHistogram());
 }
 ```
 The console output is show below:
 ```
 $ dart example/bin/histogram_example.dart
-# Intervals: 8
+# Intervals: 9
 # Min: -10.00000000
 # Max: 14.00000000
-# Interval size: 3.428571429
-# Mean:   0.8461538462
-# StdDev: 5.065114472
-# Median: 0.5000000000
+# Interval size: 3.000000000
+# Mean:   0.7500000000
+# StdDev: 4.888573222
+# Median: 0.000000000
 # First Quartile: -1.000000000
 # Third Quartile: 3.000000000
-# Histogram integral: 89.14285714285715
+# Histogram integral: 84.0
 #
 # -------------------------------------------------------------
 #     Interval Mid-Point                  Count
         -10.00000000                 1.000000000
-        -6.571428571                 2.000000000
-        -3.142857143                 3.000000000
-        0.2857142857                 9.000000000
-        3.714285714                  8.000000000
-        7.142857143                  1.000000000
-        10.57142857                  1.000000000
+        -7.000000000                 1.000000000
+        -4.000000000                 4.000000000
+        -1.000000000                 9.000000000
+        2.000000000                  7.000000000
+        5.000000000                  3.000000000
+        8.000000000                  1.000000000
+        11.00000000                  1.000000000
         14.00000000                  1.000000000
-
- ▁▂▃▉█▁▁▁
 ```
-On a monochrome terminal the block histogram is rendered as shown above.
+A histogram constructed from Unicode block character may be printed using the
+command:
+```Dart
+// Ansi.status = AnsiOutput.disabled; // Uncomment if the terminal is not
+//                                       Ansi compatible.
+print(stats.blockHistogram);
+```
+On a monochrome terminal the block histogram is rendered as shown below:
+```Console
+   x̃x̄
+▁▁▄█▇▃▁▁▁
+
+```
 On a terminal with Ansi support, the block histogram is rendered as:
+![Block Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/block_histogram.svg?sanitize=true)
 
-$\textcolor{white}{\textsf{▁▂▃}}\textcolor{cyan}{\textsf{▉}} \textcolor{white}{\textsf{█▁▁▁}}$
 
-If a block contains the ${\color{#22ff33}mean}$ it is colored green.
-If it contains the ${\color{#0088ff}median}$
-of the sample it is colored blue. In this case, the block containing
-the ${\color{cyan}mean}$ and ${\color{cyan}median}$ is printed in a cyan hue.
+If a block contains the mean , it is colored green.
+If it contains the median of the sample it is colored blue.
+In this case above, the single block containing
+the mean *and* median is printed in a cyan hue.
 
 The image below shows the histogram data shown above
 plotted using [gnuplot][gnuplot].
