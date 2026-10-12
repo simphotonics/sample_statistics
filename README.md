@@ -127,10 +127,9 @@ command:
 print(stats.blockHistogram);
 ```
 On a monochrome terminal the block histogram is rendered as shown below:
-```Console
+```Terminal
    x̃x̄
 ▁▁▄█▇▃▁▁▁
-
 ```
 On a terminal with Ansi support, the block histogram is rendered as:
 ![Block Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/block_histogram.svg?sanitize=true)
