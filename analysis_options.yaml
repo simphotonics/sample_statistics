@@ -2,6 +2,7 @@ include: package:lints/recommended.yaml
 
 analyzer:
   errors:
+    prefer_interpolation_to_compose_strings: ignore
     todo: warning
 
 linter:
