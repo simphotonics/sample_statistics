@@ -25,7 +25,7 @@ extension ExportHistogram on Stats {
   static const leftArrow = '\u2199';
   static const meanSymbol = '\u0078\u0304';
   static const medianSymbol = '\u0078\u0303';
-  static const gap = ' ';
+
   // static const tilde = '\u223c';
   // static const dashTilde = '\u2242';
   // static const dash = '\u2212';
@@ -158,12 +158,12 @@ extension ExportHistogram on Stats {
     final b = StringBuffer();
     if (indexLeft > 40) {
       // Add 5 intervals on the left.
-      b.write(result.take(5).join(gap));
+      b.write(result.take(5).join());
       // Add the number of skipped intervals.
       skippedLeft = indexLeft - 5;
       b.write(skippedLeft);
       // Add the histogram
-      b.write(result.skip(indexLeft).take(indexRight - indexLeft).join(gap));
+      b.write(result.skip(indexLeft).take(indexRight - indexLeft).join());
     } else {
       // Add the histogram
       b.write(result.take(indexRight).join());
@@ -173,7 +173,7 @@ extension ExportHistogram on Stats {
       // Add the number of skipped intervals.
       b.write(length - indexRight - 5);
       // Add 5 intervals on the right.
-      b.write(result.skip(length - 5).take(5).join(gap));
+      b.write(result.skip(length - 5).take(5).join());
     } else {
       // Add remaining characters.
       b.write(result.skip(indexRight).join('a'));
