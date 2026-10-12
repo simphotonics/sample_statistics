@@ -1,6 +1,9 @@
 ## 1.0.0
 - Extended class `Stats`, added extension `ExportHistogram` with methods:
-  * 
+  * `blockHistogram()`
+  * `exportHistogram()`
+- Require Dart SDK ^3.13
+- Updated dependencies. 
 
 ## 0.2.2
 - Added `Stats` getters `iqr`, `sortedSample` returning the interquartile range of the sample.
