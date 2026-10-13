@@ -118,7 +118,7 @@ class Stats<T extends num>(List<T> sample) {
   /// and returns the removed entries.
   ///
   /// Calls [invalidateCache].
-  List<T> removeOutliers([num factor = 3 ]) {
+  List<T> removeOutliers([num factor = 3]) {
     final outliers = <T>[];
     factor = factor.abs();
     final lowerFence = quartile1 - factor * iqr;
