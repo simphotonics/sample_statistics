@@ -1,11 +1,7 @@
 import 'dart:collection';
-import 'dart:math' as math show max;
 
 import 'package:lazy_memo/lazy_memo.dart';
 import 'package:list_operators/list_operators.dart';
-
-import '../extension/root.dart' show Root;
-import 'probability_density.dart' show ProbabilityDensity;
 
 /// Provides access to basic statistical entities of a
 /// numerical sample.
@@ -62,14 +58,6 @@ class Stats<T extends num>(List<T> sample) {
     }
   });
 
-  /// Returns the optimal number of histogram intervals. The interval size
-  /// is estimated using the Freedman-Diaconis rule.
-  int get intervals => math.max((max - min) ~/ intervalSize, 3);
-
-  /// Returns the optimal interval size according to the Freedman-Diaconis rule
-  /// taking into account the inter-quartile range and the sample size.
-  double get intervalSize => 2 * (iqr) / (sortedSample.length.root(3));
-
   /// Returns the inter quartile range.
   num get iqr => quartile3 - quartile1;
 
@@ -108,70 +96,6 @@ class Stats<T extends num>(List<T> sample) {
     invalidateCache();
   }
 
-  /// Returns an object of type `List<List<num>>` containing a sample histogram.
-  ///
-  /// * The first list contains the interval mid points. The first interval
-  ///   has boundaries: `min - h/2 ... min + h/2`, the last has
-  ///   boundaries: `max - h/2 ... max + h/2`, where `h` is the interval width.
-  ///
-  /// * The second list represents a count of how many sample values fall into
-  ///   each interval. If [normalize] is `true`, the histogram count
-  ///   will be normalized such that the total area of the
-  ///   histogram bars is equal to one.
-  ///   This is useful when comparing the histogram to a
-  ///   probability distribution.
-  ///
-  /// * The third list is added if [probabilityDensity] is not `null`.
-  ///   It contains the result of evaluating [probabilityDensity] at each point
-  ///   `(min, min + h, ..., max)`.
-  List<List<double>> histogram({
-    bool normalize = true,
-    int intervals = 0,
-    ProbabilityDensity? probabilityDensity,
-  }) {
-    intervals = intervals < 2 ? this.intervals : intervals;
-
-    /// Make sure we have at least 3 intervals
-    while (intervals < 2) {
-      intervals++;
-    }
-
-    final intervalSize = (max - min) / (intervals - 1);
-
-    final xValues = List<double>.generate(
-      intervals,
-      (i) => min + i * intervalSize,
-      growable: false,
-    );
-
-    final counts = List<double>.filled(intervals, 0.0);
-    final leftBorder = min - intervalSize / 2;
-
-    // Generating histogram
-    for (final current in sortedSample) {
-      // Calculate interval index of current.
-      final index = (current - leftBorder) ~/ intervalSize;
-      ++counts[index];
-    }
-
-    if (normalize) {
-      final factor = counts.sum() * intervalSize;
-      for (var i = 0; i < intervals; ++i) {
-        counts[i] = counts[i] / factor;
-      }
-    }
-
-    if (probabilityDensity == null) {
-      return [xValues, counts];
-    } else {
-      final pdf = List<double>.generate(
-        intervals,
-        (i) => probabilityDensity(min + i * intervalSize),
-      );
-      return [xValues, counts, pdf];
-    }
-  }
-
   /// Requests an update of the cached variables:
   /// * [mean],
   /// * [median],
@@ -194,7 +118,7 @@ class Stats<T extends num>(List<T> sample) {
   /// and returns the removed entries.
   ///
   /// Calls [invalidateCache].
-  List<T> removeOutliers([num factor = 1.5]) {
+  List<T> removeOutliers([num factor = 3 ]) {
     final outliers = <T>[];
     factor = factor.abs();
     final lowerFence = quartile1 - factor * iqr;
