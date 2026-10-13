@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="436" height="70" viewBox="0 0 436 70" role="img" aria-label="console2svg output">
+<style>
+.c2.c { font-family: "JetBrains Mono","Cascadia Mono","Segoe UI Mono","Noto Sans Mono","SFMono-Regular",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace; font-size: 14px; }
+.c2 text { dominant-baseline: alphabetic; }
+.c2 .q { shape-rendering: crispEdges; }
+.c2 .w { white-space: pre; }
+.c2 .aa{fill:#d4d4d4}
+</style><rect width="436" height="70" fill="#1e1e1e"/>
+<g class="c2 c" transform="translate(8 8)">
+<rect width="420" height="54" fill="#1e1e1e"/>
+<rect class="q" x="50.4" width="8.4" height="18" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="58.8" width="8.4" height="18" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="67.2" y="6.75" width="8.4" height="11.25" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="75.6" y="6.75" width="8.4" height="11.25" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="8.4" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="16.8" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="25.2" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="33.6" y="18" width="8.4" height="18" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="42" y="18" width="8.4" height="18" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="50.4" y="18" width="8.4" height="18" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="58.8" y="18" width="8.4" height="18" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="67.2" y="18" width="8.4" height="18" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="75.6" y="18" width="8.4" height="18" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="84" y="22.5" width="8.4" height="13.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="92.4" y="22.5" width="8.4" height="13.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="100.8" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="109.2" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="117.6" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="126" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="134.4" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<rect class="q" x="142.8" y="31.5" width="8.4" height="4.5" fill="#d4d4d4" stroke="#d4d4d4" stroke-width="2" vector-effect="non-scaling-stroke"/>
+<text class="aa w" y="50" textLength="151.2">-10   ←→ 3.000  14</text>
+</g>
+</svg>
