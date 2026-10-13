@@ -85,8 +85,9 @@ import 'package:sample_statistics/sample_statistics.dart';
 
 void main(List<String> args) {
   final sample = [
-    -10, -8, -5,-4, -3, -3,-1, -1, -1, 0, 0, 0,
-    0, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 7, 10, 14,
+    -20,-10,-8, -5, -4, -3, -3, -1, -1, -1, -1, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+    1, 2, 2, 2, 3, 3, 4, 4, 5, 7, 10, 14, 40,
   ];
 
   final stats = Stats(sample);
@@ -94,14 +95,14 @@ void main(List<String> args) {
 }
 ```
 The console output is show below:
-```
+```Console
 $ dart example/bin/histogram_example.dart
 # Intervals: 9
 # Min: -10.00000000
 # Max: 14.00000000
 # Interval size: 3.000000000
-# Mean:   0.7500000000
-# StdDev: 4.888573222
+# Mean:   0.7857142857
+# StdDev: 4.878958168
 # Median: 0.000000000
 # First Quartile: -1.000000000
 # Third Quartile: 3.000000000
@@ -109,36 +110,36 @@ $ dart example/bin/histogram_example.dart
 #
 # -------------------------------------------------------------
 #     Interval Mid-Point                  Count
-        -10.00000000                 1.000000000
-        -7.000000000                 1.000000000
-        -4.000000000                 4.000000000
-        -1.000000000                 9.000000000
-        2.000000000                  7.000000000
-        5.000000000                  3.000000000
-        8.000000000                  1.000000000
-        11.00000000                  1.000000000
-        14.00000000                  1.000000000
+        -10.00000000     1.000000000
+        -7.000000000     1.000000000
+        -4.000000000     4.000000000
+        -1.000000000     9.000000000
+        2.000000000      7.000000000
+        5.000000000      3.000000000
+        8.000000000      1.000000000
+        11.00000000      1.000000000
+        14.00000000      1.000000000
 ```
 A histogram constructed from Unicode block character may be printed using the
 command:
 ```Dart
 // Ansi.status = AnsiOutput.disabled; // Uncomment if the terminal is not
 //                                       Ansi compatible.
-print(stats.blockHistogram);
+print(stats.blockHistogram());
 ```
 On a monochrome terminal the block histogram is rendered as shown below:
-```Terminal
-   x̃x̄
-▁▁▄█▇▃▁▁▁
-```
+![Block Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/block_histogram_monochrome.svg?sanitize=true)
+
 On a terminal with Ansi support, the block histogram is rendered as:
 ![Block Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/block_histogram.svg?sanitize=true)
 
 
-If a block contains the mean , it is colored green.
+If a block contains the mean, it is colored green.
 If it contains the median of the sample it is colored blue.
-In this case above, the single block containing
-the mean *and* median is printed in a cyan hue.
+If the same block contains the mean *and* median is printed in a cyan hue.
+The arrows next the interval size are placed below the block containing the
+sample median.
+
 
 The image below shows the histogram data shown above
 plotted using [gnuplot][gnuplot].
