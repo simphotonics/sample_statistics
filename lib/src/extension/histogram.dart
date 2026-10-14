@@ -432,7 +432,6 @@ extension Histogram on Stats {
         '$commentCharacter Histogram integral: '
         '${hist[1].sum() * intervalSize}',
       );
-      b.writeln(commentCharacter);
       b.writeln(
         '$commentCharacter ------------------------------------'
         '-------------------------',
