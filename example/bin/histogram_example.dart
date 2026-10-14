@@ -32,6 +32,7 @@ void main(List<String> args) {
     14,
   ];
 
+
   final stats = Stats(sample);
 
   final intervals = 9;

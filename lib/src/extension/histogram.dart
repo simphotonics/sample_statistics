@@ -315,34 +315,47 @@ extension Histogram on Stats {
           : max.toStringAsPrecision(4));
       final intervalInfo = intervalSize.toStringAsPrecision(4);
 
-      final info = shorten(graphInfo);
+      final info = shorten(graphInfo, addSkipped: false);
+
       final i = info.indexOf(intervalSymbol);
 
       if (i.isNegative) return '';
-      // Histogram too short to add min, max.
-      if (minInfo.length > i - 1) return '\n' + info;
 
-      // Histogram long enought to add min, interval length, max.
-      if (i + 3 + intervalInfo.length < info.length - maxInfo.length) {
-        return '\n' +
-            minInfo +
-            info.substring(minInfo.length, i + 3) +
-            intervalInfo +
-            info.substring(
-              i + 3 + intervalInfo.length,
-              info.length - maxInfo.length,
-            ) +
-            maxInfo;
-        // Histogram long enough to add min, max
-      } else if (i + 1 + maxInfo.length < info.length) {
-        return '\n' +
-            minInfo +
-            info.substring(minInfo.length, info.length - maxInfo.length) +
-            maxInfo;
+      final canAddMin = minInfo.length < i - 1;
+      final canAddInterval = i + 3 + intervalInfo.length < info.length;
+      final canAddMax = i + 5 + maxInfo.length < info.length;
+      final canAddIntervalAndMax =
+          i + 3 + intervalInfo.length < info.length - maxInfo.length;
+
+      final b = StringBuffer();
+      if (canAddMin) {
+        b.write(minInfo);
+        b.write(info.substring(minInfo.length, i + 2));
       } else {
-        // Histogram long enough to add min but not max, return as is.
-        return '\n' + info;
+        b.write(info.substring(0, i + 2));
       }
+
+      if (canAddIntervalAndMax) {
+        b.write(info.substring(i + 2, i + 3));
+        b.write(intervalInfo);
+        b.write(
+          info.substring(
+            i + 3 + intervalInfo.length,
+            info.length - maxInfo.length,
+          ),
+        );
+        b.write(maxInfo);
+        return '\n' + b.toString();
+      }
+
+      if (canAddInterval) {
+        b.write(info.substring(i + 2, i + 3));
+        b.write(intervalInfo);
+      } else if (canAddMax) {
+        b.write(info.substring(i + 2, info.length - maxInfo.length));
+        b.write(maxInfo);
+      }
+      return '\n' + b.toString();
     }
 
     return shorten(graphUpper, addSkipped: false) +
