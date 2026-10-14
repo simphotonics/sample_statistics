@@ -357,7 +357,7 @@ extension Histogram on Stats {
           ),
         );
         b.write(maxInfo);
-        return '\n' +indent + b.toString();
+        return '\n' + indent + b.toString();
       }
 
       if (canAddInterval) {
@@ -370,9 +370,11 @@ extension Histogram on Stats {
       return '\n' + indent + b.toString();
     }
 
-    return indent + shorten(graphUpper, addSkipped: false) +
+    return indent +
+        shorten(graphUpper, addSkipped: false) +
         '\n' +
-        indent + shorten(graphLower) +
+        indent +
+        shorten(graphLower) +
         info();
   }
 
