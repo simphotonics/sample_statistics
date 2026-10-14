@@ -8,7 +8,7 @@ import '../statistics/stats.dart';
 import 'color_profile.dart';
 import 'root.dart';
 
-extension ExportHistogram on Stats {
+extension Histogram on Stats {
   /// Block characters used to build block histograms.
   static const blocks = [
     '__',
@@ -31,13 +31,6 @@ extension ExportHistogram on Stats {
   ];
 
   static const blank = '  ';
-
-  static const rightArrow = '\u2198';
-  static const leftArrow = '\u2199';
-  static const tilde = '\u223c';
-  static const dash = '\u2212';
-  static const meanSymbol = '\u02C7';
-  static const medianSymbol = '\u00b0';
   static const intervalSymbol = '\u2190\u2192';
 
   /// Returns the optimal number of histogram intervals. The interval size
@@ -48,15 +41,15 @@ extension ExportHistogram on Stats {
   /// taking into account the inter-quartile range and the sample size.
   double get intervalSize => 2.59 * (iqr) / (sortedSample.length.root(3));
 
-  /// Returns an object of type `List<List<num>>` containing a sample histogram.
+  /// Returns data representing a sample histogram.
   ///
-  /// * The first list contains the interval mid points. The first interval
+  /// * The first list represents the interval mid points. The first interval
   ///   has boundaries: `min - h/2 ... min + h/2`, the last has
   ///   boundaries: `max - h/2 ... max + h/2`, where `h` is the interval width.
   ///
   /// * The second list represents a count of how many sample values fall into
   ///   each interval. If [normalize] is `true`, the histogram count
-  ///   will be normalized such that the total area of the
+  ///   will be normalized such that the total area under the
   ///   histogram bars is equal to one.
   ///   This is useful when comparing the histogram to a
   ///   probability distribution.
@@ -126,6 +119,7 @@ extension ExportHistogram on Stats {
       blocks.first;
 
   /// Returns a block histogram in the form of a [String].
+  ///
   /// * The block containing the [mean] value is styled using
   ///   [ColorProfile.meanHistogramBlock].
   /// * The block containing the [median] is styled using
@@ -248,97 +242,113 @@ extension ExportHistogram on Stats {
     /// Avoid situations where iqr = 0
     final iqrAsIndex = (iqr == 0.0) ? 10 : iqr ~/ intervalSize;
 
-    // Make sure to keep the median.
+    // Make sure to include the median.
     var indexLeft = indexOfMedian - 2 * iqrAsIndex;
     indexLeft = indexLeft < 0 ? 0 : indexLeft;
 
-    while (graphLower[indexLeft] != blocks[0] && indexLeft > 0) {
+    final stepsMax = 5 * iqrAsIndex;
+    int steps = 0;
+    while (graphLower[indexLeft] != blocks[0] &&
+        indexLeft > 0 &&
+        steps < stepsMax) {
       indexLeft--;
+      steps++;
     }
 
     final indexMax = length - 1;
     var indexRight = math.min(indexOfMedian + 2 * iqrAsIndex, indexMax);
+    steps = 0;
 
-    while (graphLower[indexRight] != blocks[0] && indexRight < indexMax) {
+    while (graphLower[indexRight] != blocks[0] &&
+        indexRight < indexMax &&
+        steps < stepsMax) {
       indexRight++;
+      steps++;
     }
 
     if (indexRight < indexMax) {
       indexRight++;
     }
 
-    var skippedLeft = 0;
+    String shorten(List<String> input, {bool addSkipped = true}) {
+      final b = StringBuffer();
+      if (indexLeft > 25) {
+        b.write(input.take(5).join());
+        final skipped = indexLeft - 5;
+        if (addSkipped) {
+          // Add the number of skipped intervals
+          b.write(skipped);
+        } else {
+          // Add space characters instead of the number of skipped intervals
+          b.write(' ' * skipped.toString().length);
+        }
+        // Add the relevant part of the histogram
+        b.write(input.skip(indexLeft).take(indexRight - indexLeft).join());
+      } else {
+        b.write(input.take(indexRight).join());
+      }
 
-    final b1 = StringBuffer();
-    final b2 = StringBuffer();
-    final b3 = StringBuffer();
+      if (length - indexRight > 25) {
+        final skipped = length - indexRight - 5;
+        if (addSkipped) {
+          // Add the number of skipped intervals
+          b.write(skipped);
+        } else {
+          // Add space characters instead of number
+          b.write(' ' * skipped.toString().length);
+        }
+        // Add the last 5 intervals
+        b.write(input.skip(length - 5).take(5).join());
+      } else {
+        b.write(input.skip(indexRight).join());
+      }
 
-    final minInfo = ((min is int)
-        ? min.toString()
-        : min.toStringAsPrecision(4));
-    final maxInfo = ((max is int)
-        ? max.toString()
-        : max.toStringAsPrecision(4));
-    final intervalInfo = intervalSize.toStringAsPrecision(4);
-
-    // Compose histogram
-    if (indexLeft > 25) {
-      // Add 5 intervals on the left.
-      b1.write(graphUpper.take(5).join());
-      b2.write(graphLower.take(5).join());
-      b3.write(graphInfo.take(5).join());
-      // Add the number of skipped intervals.
-      skippedLeft = indexLeft - 5;
-      b1.write(' ' * skippedLeft.toString().length);
-      b2.write(skippedLeft);
-      b3.write(' ' * skippedLeft.toString().length);
-      // Add the histogram
-      b1.write(graphUpper.skip(indexLeft).take(indexRight - indexLeft).join());
-      b2.write(graphLower.skip(indexLeft).take(indexRight - indexLeft).join());
-      b3.write(graphInfo.skip(indexLeft).take(indexRight - indexLeft).join());
-    } else {
-      // Add the histogram
-      b1.write(graphUpper.take(indexRight).join());
-      b2.write(graphLower.take(indexRight).join());
-      b3.write(graphInfo.take(indexRight).join());
+      return b.toString();
     }
 
-    if ((length - indexRight) > 25) {
-      // Add the number of skipped intervals.
-      b1.write(' ' * (length - indexRight - 5).toString().length);
-      b2.write(length - indexRight - 5);
-      b3.write(' ' * (length - indexRight - 5).toString().length);
-      // Add 5 intervals on the right.
-      b1.write(graphUpper.skip(length - 5).take(5).join());
-      b2.write(graphLower.skip(length - 5).take(5).join());
-      b3.write(graphInfo.skip(length - 5).take(5).join());
-    } else {
-      // Add remaining characters.
-      b1.write(graphUpper.skip(indexRight).join());
-      b2.write(graphLower.skip(indexRight).join());
-      b3.write(graphInfo.skip(indexRight).join());
-    }
-    final info = b3.toString();
-    final i = info.indexOf(intervalSymbol);
+    String info() {
+      final minInfo = ((min is int)
+          ? min.toString()
+          : min.toStringAsPrecision(4));
+      final maxInfo = ((max is int)
+          ? max.toString()
+          : max.toStringAsPrecision(4));
+      final intervalInfo = intervalSize.toStringAsPrecision(4);
 
-    if (minInfo.length < i &&
-        i + 3 < info.length &&
-        i + 3 + intervalInfo.length < info.length - maxInfo.length) {
-      return b1.toString() +
-          '\n' +
-          b2.toString() +
-          '\n' +
-          minInfo +
-          info.substring(minInfo.length, i + 3) +
-          intervalInfo +
-          info.substring(
-            i + 3 + intervalInfo.length,
-            info.length - maxInfo.length,
-          ) +
-          maxInfo;
-    } else {
-      return b1.toString() + '\n' + b2.toString();
+      final info = shorten(graphInfo);
+      final i = info.indexOf(intervalSymbol);
+
+      if (i.isNegative) return '';
+      // Histogram too short to add min, max.
+      if (minInfo.length > i - 1) return '\n' + info;
+
+      // Histogram long enought to add min, interval length, max.
+      if (i + 3 + intervalInfo.length < info.length - maxInfo.length) {
+        return '\n' +
+            minInfo +
+            info.substring(minInfo.length, i + 3) +
+            intervalInfo +
+            info.substring(
+              i + 3 + intervalInfo.length,
+              info.length - maxInfo.length,
+            ) +
+            maxInfo;
+        // Histogram long enough to add min, max
+      } else if (i + 1 + maxInfo.length < info.length) {
+        return '\n' +
+            minInfo +
+            info.substring(minInfo.length, info.length - maxInfo.length) +
+            maxInfo;
+      } else {
+        // Histogram long enough to add min but not max, return as is.
+        return '\n' + info;
+      }
     }
+
+    return shorten(graphUpper, addSkipped: false) +
+        '\n' +
+        shorten(graphLower) +
+        info();
   }
 
   /// Builds a histogram from the entries of `this`
