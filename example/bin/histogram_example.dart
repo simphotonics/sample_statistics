@@ -44,5 +44,5 @@ void main(List<String> args) {
       intervals: intervals,
     ),
   );
-  print(stats.blockHistogram(intervals: intervals));
+  print(stats.blockHistogram(intervals: intervals, indent: '//   '));
 }

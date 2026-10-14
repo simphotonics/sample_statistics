@@ -1,3 +1,9 @@
+## 1.1.0
+- Extension method `blockHistogram` now accepts the optional parameter
+  `indent`.
+- Fixed bug in method `blockHistogram`
+
+
 ## 1.0.1
 - Updated docs.
 - Changed the format block histograms. The histogram bars now have a width of

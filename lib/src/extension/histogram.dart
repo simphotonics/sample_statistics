@@ -120,6 +120,13 @@ extension Histogram on Stats {
 
   /// Returns a block histogram in the form of a [String].
   ///
+  /// * If [intervals] is 0, it will be calculated using the
+  ///   Freedman-Diaconis rule.
+  /// * To omit the line showing the minimum and maximum sample values
+  ///   set [showInfo] to false.
+  /// * To indent the histogram use an non-empty String as [indent].
+  ///  ---
+  ///
   /// * The block containing the [mean] value is styled using
   ///   [ColorProfile.meanHistogramBlock].
   /// * The block containing the [median] is styled using
@@ -129,19 +136,22 @@ extension Histogram on Stats {
   /// * If the sample range is high resulting in a large number of
   ///   histogram intervals some interval are skipped and
   ///   the number of skipped intervals is shown.
-  /// * To omit the line showing the minimum and maximum sample value
-  ///   set [showInfo] to false.
   /// * To disable color output set:
   ///   [Ansi.status] to [AnsiOutput.disabled].
   /// ```
   /// // Usage
   /// final stats = Stats(sample);
   /// print(stats.blockHistogram);
+  /// // prints:
+  /// //      ██▅▅
+  /// // ▂▂▂▂██████▆▆▂▂▂▂▂▂
+  /// // -10   ←→ 3.000  14
   /// ```
-  /// Sample output (with color output disabled):
-  ///▁▁________________▁▁__▁▁____▁▁▁▁▂▂▄▄██▄▄▃▃▂▂▂▂▁▁__26________▁▁
-  ///-20                                 ←→ 1.091                40
-  String blockHistogram({int intervals = 0, bool showInfo = true}) {
+  String blockHistogram({
+    int intervals = 0,
+    bool showInfo = true,
+    String indent = '',
+  }) {
     final hist = histogram(intervals: intervals);
 
     /// Return early if the range of values is zero.
@@ -306,6 +316,8 @@ extension Histogram on Stats {
       return b.toString();
     }
 
+    /// Adds the sample min/max and the interval length to the
+    /// third line of the histogram.
     String info() {
       final minInfo = ((min is int)
           ? min.toString()
@@ -345,7 +357,7 @@ extension Histogram on Stats {
           ),
         );
         b.write(maxInfo);
-        return '\n' + b.toString();
+        return '\n' +indent + b.toString();
       }
 
       if (canAddInterval) {
@@ -355,12 +367,12 @@ extension Histogram on Stats {
         b.write(info.substring(i + 2, info.length - maxInfo.length));
         b.write(maxInfo);
       }
-      return '\n' + b.toString();
+      return '\n' + indent + b.toString();
     }
 
-    return shorten(graphUpper, addSkipped: false) +
+    return indent + shorten(graphUpper, addSkipped: false) +
         '\n' +
-        shorten(graphLower) +
+        indent + shorten(graphLower) +
         info();
   }
 
