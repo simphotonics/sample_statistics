@@ -144,8 +144,7 @@ Note: If the inter-quartal range is small compared to the range of the data
 sample, then the number of histogram intervals will be large. To shorten the histogram string, some interval are skipped and the number of
 skipped intervals will be printed instead.
 
-The image below shows the histogram data shown above
-plotted using [gnuplot][gnuplot].
+The image below shows the histogram data presented above plotted using gnuplot.
 ![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
 
 ### 3. Random Sample Generators
@@ -221,8 +220,6 @@ Please file feature requests and bugs at the [issue tracker].
 [example]: https://github.com/simphotonics/sample_statistics/tree/main/example
 
 [exportHistogram]:https://pub.dev/documentation/sample_statistics/latest/sample_statistics/StatisticsUtils/exportHistogram.html
-
-[gnuplot]: http://www.gnuplot.info
 
 [histogram]: https://pub.dev/documentation/sample_statistics/latest/sample_statistics/Stats/histogram.html
 
