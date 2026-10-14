@@ -1,7 +1,7 @@
 export 'src/exception/invalid_function_parameter.dart';
 export 'src/extension/color_profile.dart';
 export 'src/extension/differentiation.dart';
-export 'src/extension/export_histogram.dart';
+export 'src/extension/histogram.dart';
 export 'src/extension/function_table.dart';
 export 'src/extension/integration.dart';
 export 'src/extension/root.dart';
