@@ -141,8 +141,8 @@ The arrows indicating the interval size are placed below the block
 containing the sample median.
 
 Note: If the inter-quartal range is small compared to the range of the data
-sample, then the number of histogram interval will be large. To shorted the histogram string, some interval are skippedn and the number of
-skipped intervals is printed instead. 
+sample, then the number of histogram intervals will be large. To shorten the histogram string, some interval are skipped and the number of
+skipped intervals will be printed instead.
 
 The image below shows the histogram data shown above
 plotted using [gnuplot][gnuplot].
