@@ -1,8 +1,10 @@
 ## 1.0.1
 - Updated docs.
+- Changed the format block histograms. The histogram bars now have a width of
+  2 characters and span vertically over two text lines.
 - Added an info line to block histograms showing the sample min/max and
 the interval length. The interval symbol <-> is printed below the
-interval containing the sample median. 
+interval containing the sample median.
 
 ## 1.0.0
 - Extended class `Stats`, added extension `ExportHistogram` with methods:
