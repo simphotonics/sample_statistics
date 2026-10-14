@@ -34,6 +34,14 @@ void main(List<String> args) {
 
   final stats = Stats(sample);
 
-  print(stats.exportHistogram(verbose: true, normalize: false, intervals: 9));
-  print(stats.blockHistogram(intervals: 9));
+  final intervals = 9;
+
+  print(
+    stats.exportHistogram(
+      verbose: true,
+      normalize: false,
+      intervals: intervals,
+    ),
+  );
+  print(stats.blockHistogram(intervals: intervals));
 }
