@@ -137,9 +137,12 @@ On a terminal with Ansi support, the block histogram is rendered as:
 If a block contains the mean, it is colored green.
 If it contains the median of the sample it is colored blue.
 If the same block contains the mean *and* median is printed in a cyan hue.
-The arrows next the interval size are placed below the block containing the
-sample median.
+The arrows indicating the interval size are placed below the block
+containing the sample median.
 
+Note: If the inter-quartal range is small compared to the range of the data
+sample, then the number of histogram interval will be large. To shorted the histogram string, some interval are skippedn and the number of
+skipped intervals is printed instead. 
 
 The image below shows the histogram data shown above
 plotted using [gnuplot][gnuplot].
