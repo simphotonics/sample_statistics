@@ -168,7 +168,6 @@ void main() {
         '# First Quartile: -2.0000000\n'
         '# Third Quartile: 3.0000000\n'
         '# Histogram integral: 1.0\n'
-        '#\n'
         '# -------------------------------------------------------------\n'
         '#     Interval Mid-Point                  Probability Density\n'
         '        -10.000000     0.012000000     \n'
