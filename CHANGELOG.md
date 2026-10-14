@@ -1,3 +1,9 @@
+## 1.0.1
+- Updated docs.
+- Added an info line to block histograms showing the sample min/max and
+the interval length. The interval symbol <-> is printed below the
+interval containing the sample median. 
+
 ## 1.0.0
 - Extended class `Stats`, added extension `ExportHistogram` with methods:
   * `blockHistogram()`
