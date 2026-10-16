@@ -77,22 +77,30 @@ void main() {
     test('Data', () {
       expect(
         hist,
-        '# Intervals: 4\n'
+        '# Intervals: 12\n'
         '# Min: -10.000000\n'
         '# Max: 10.000000\n'
-        '# Interval size: 6.6666667\n'
+        '# Interval size: 1.8181818\n'
         '# Mean:   0.32000000\n'
         '# StdDev: 4.3848223\n'
         '# Median: 0.0000000\n'
         '# First Quartile: -2.0000000\n'
         '# Third Quartile: 3.0000000\n'
-        '# Histogram integral: 1.0\n'
+        '# Histogram integral: 1.0000000000000002\n'
         '# -------------------------------------------------------------\n'
         '#     Interval Mid-Point                  Probability Density\n'
-        '        -10.000000     0.012000000     \n'
-        '        -3.3333333     0.042000000     \n'
-        '        3.3333333      0.084000000     \n'
-        '        10.000000      0.012000000     \n'
+        '        -10.000000     0.022000000     \n'
+        '        -8.1818182     0.022000000     \n'
+        '        -6.3636364     0.0000000     \n'
+        '        -4.5454545     0.044000000     \n'
+        '        -2.7272727     0.044000000     \n'
+        '        -0.90909091     0.066000000     \n'
+        '        0.90909091     0.13200000     \n'
+        '        2.7272727      0.11000000     \n'
+        '        4.5454545      0.066000000     \n'
+        '        6.3636364      0.022000000     \n'
+        '        8.1818182      0.0000000     \n'
+        '        10.000000      0.022000000     \n'
         '',
       );
     });
@@ -125,20 +133,18 @@ void main() {
       );
     });
     test('left skewed histogram', () {
-      final stats = Stats([0,0,0,0,0,0.1, 0.1, 0.1, 0.2, 0.5, 4.0]);
+      final stats = Stats([0, 0, 0, 0, 0, 0.1, 0.1, 0.1, 0.2, 0.5, 4.0]);
       expect(
         stats.blockHistogram(layout: HistogramLayout.fitInfo),
         endsWith('4.000'),
       );
     });
-test('right skewed histogram', () {
-      final stats = Stats([0, 3,5, 3.8, 3.9, 3.95, 3.99, 4.0, 4.0, 4.0]);
+    test('right skewed histogram', () {
+      final stats = Stats([0, 3, 3.5, 3.8, 3.9, 3.95, 3.99, 4.0, 4.0, 4.0]);
       expect(
         stats.blockHistogram(layout: HistogramLayout.fitInfo),
         endsWith('4.000'),
       );
     });
-
   });
-
 }

@@ -23,5 +23,4 @@ enum HistogramLayout {
   /// Returns `true` if this is [omitInfo],
   /// /// and `false` otherwise.
   bool get isOmitInfo => this == omitInfo;
-
-  }
+}
