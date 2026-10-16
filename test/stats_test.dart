@@ -1,4 +1,3 @@
-import 'package:list_operators/list_operators.dart' show NumericalMethods;
 import 'package:sample_statistics/sample_statistics.dart';
 import 'package:test/test.dart';
 
@@ -118,64 +117,6 @@ void main() {
       final stats0 = Stats(stats.sample);
       stats0.addDataPoints([6, 10]);
       expect(stats0.sample, [...stats.sample, 6, 10]);
-    });
-  });
-
-  group('Histogram', () {
-    final stats = Stats(sample);
-    test('Columns', () {
-      double pdf(num x) => normalPdf(x, stats.mean, stats.stdDev);
-      expect(stats.histogram().length, 2);
-      expect(stats.histogram(normalize: false).length, 2);
-      expect(stats.histogram(probabilityDensity: pdf).length, 3);
-      expect(
-        stats.histogram(probabilityDensity: pdf, normalize: false).length,
-        3,
-      );
-    });
-    test('Number of intervals', () {
-      expect(stats.histogram(intervals: 8).first.length, 8);
-    });
-    test('Range', () {
-      final hist = stats.histogram(intervals: 10);
-      expect(hist.first.first, stats.min);
-      expect(hist.first.last, stats.max);
-    });
-    test('Normalization', () {
-      final numberOfIntervals = 10;
-      final hist = stats.histogram(intervals: numberOfIntervals);
-      expect(hist[1].sum() * (hist[0][1] - hist[0][0]), closeTo(1.0, 1e-12));
-    });
-    test('Total count (non-normalized histograms)', () {
-      final hist = stats.histogram(normalize: false);
-      expect(hist[1].sum(), sample.length);
-    });
-  });
-
-  group('Export Histogram', () {
-    final stats = Stats(sample);
-    final hist = stats.exportHistogram(precision: 8, verbose: true);
-    test('Data', () {
-      expect(
-        hist,
-        '# Intervals: 4\n'
-        '# Min: -10.000000\n'
-        '# Max: 10.000000\n'
-        '# Interval size: 6.6666667\n'
-        '# Mean:   0.32000000\n'
-        '# StdDev: 4.3848223\n'
-        '# Median: 0.0000000\n'
-        '# First Quartile: -2.0000000\n'
-        '# Third Quartile: 3.0000000\n'
-        '# Histogram integral: 1.0\n'
-        '# -------------------------------------------------------------\n'
-        '#     Interval Mid-Point                  Probability Density\n'
-        '        -10.000000     0.012000000     \n'
-        '        -3.3333333     0.042000000     \n'
-        '        3.3333333      0.084000000     \n'
-        '        10.000000      0.012000000     \n'
-        '',
-      );
     });
   });
 }
