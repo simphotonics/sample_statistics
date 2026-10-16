@@ -1,8 +1,10 @@
 import 'dart:math' as math;
 
 import 'package:ansi_modifier/ansi_modifier.dart';
+import 'package:lazy_memo/lazy_memo.dart' show Lazy, LazyPool;
 import 'package:list_operators/list_operators.dart' show NumericalMethods;
 
+import '../enum/histogram_layout.dart';
 import '../statistics/probability_density.dart' show ProbabilityDensity;
 import '../statistics/stats.dart';
 import 'color_profile.dart';
@@ -30,16 +32,34 @@ extension Histogram on Stats {
     'b8',
   ];
 
-  static const blank = '  ';
+  static final blockLadder =
+      blankBlock * 9 +
+      blocks.skip(1).take(8).join() +
+      '\n' +
+      blocks.take(9).join() +
+      blocks[8] * 8;
+
+  /// Blank spaces matching the width of a histogram block.
+  static const blankBlock = '  ';
+
+  /// The block size in character widths.
+  static const blockSize = 2;
+
+  /// The symbol used to label the histogram interval size. It is placed
+  /// under the block containing the sample [median].
   static const intervalSymbol = '\u2190\u2192';
 
   /// Returns the optimal number of histogram intervals. The interval size
   /// is estimated using the Freedman-Diaconis rule.
-  int get intervals => math.max((max - min) ~/ intervalSize, 3);
+  ///
+  /// Returns a minimum interval number of 1. A degenerate histogram where the
+  /// sample min and max coincide will have only one interval.
+  int get intervals =>
+      (intervalSize == 0) ? 1 : (max - min) ~/ intervalSize + 1;
 
   /// Returns the optimal interval size according to the Freedman-Diaconis rule
   /// taking into account the inter-quartile range and the sample size.
-  double get intervalSize => 2.59 * (iqr) / (sortedSample.length.root(3));
+  double get intervalSize => (iqr) / (sortedSample.length.root(3));
 
   /// Returns data representing a sample histogram.
   ///
@@ -57,20 +77,27 @@ extension Histogram on Stats {
   /// * The third list is added if [probabilityDensity] is not `null`.
   ///   It contains the result of evaluating [probabilityDensity] at each point
   ///   `(min, min + h, ..., max)`.
+  ///
+  /// * If [intervals] is zero, then the number of histogram intervals will be
+  /// calculated using the Freedman-Diaconis rule.
+  ///
+  /// * Use [minIntervals] to force a minimun number of intervals.
   List<List<double>> histogram({
     bool normalize = true,
     int intervals = 0,
+    int minIntervals = 0,
     ProbabilityDensity? probabilityDensity,
   }) {
     var actualIntervals = intervals <= 0 ? this.intervals : intervals;
 
-    /// Make sure we have at least 3 intervals
-    while (actualIntervals < 2) {
-      intervals++;
+    if (actualIntervals < minIntervals) {
+      actualIntervals = minIntervals;
     }
 
     // The left-most interval has boundaries: [min - intervalSize/2].
-    final intervalSize = (max - min) / (actualIntervals - 1);
+    final intervalSize = (max == min)
+        ? 0.0
+        : (max - min) / (actualIntervals - 1);
 
     final xValues = List<double>.generate(
       actualIntervals,
@@ -84,11 +111,13 @@ extension Histogram on Stats {
     // Generating histogram
     for (final current in sortedSample) {
       // Calculate interval index of current.
-      final index = (current - leftBorder) ~/ intervalSize;
+      final index = (intervalSize > 0)
+          ? (current - leftBorder) ~/ intervalSize
+          : 0;
       ++counts[index];
     }
 
-    if (normalize) {
+    if (normalize && intervalSize > 0) {
       final factor = counts.sum() * intervalSize;
       for (var i = 0; i < actualIntervals; ++i) {
         counts[i] = counts[i] / factor;
@@ -107,26 +136,121 @@ extension Histogram on Stats {
   }
 
   /// Returns a block histogram in the form of a [String].
-  /// * If the same block contains the [mean] and [median] it is styled using
-  ///   [ColorProfile.meanMedianHistogramBlock].
+  /// * The same block contains the [mean] and [median] therefore
+  ///   it is styled using [ColorProfile.meanMedianHistogramBlock].
   /// * To disable color output set:
   /// ```Dart
   /// AnsiModifier.colorOutput = ColoOutput.off;
   /// ```
-  String _singleBlockHistogram() =>
-      blocks.first +
-      blocks.last.style(ColorProfile.meanMedianHistogramBlock) +
-      blocks.first;
+  String _singleBlockHistogram({
+    HistogramLayout layout = HistogramLayout.omitInfo,
+    String indent = '',
+  }) {
+    return indent +
+        blankBlock * 3 +
+        blocks[8].style(ColorProfile.meanMedianHistogramBlock) +
+        '\n' +
+        indent +
+        blocks.first * 3 +
+        blocks[8].style(ColorProfile.meanMedianHistogramBlock) +
+        blocks.first * 3 +
+        (layout.isOmitInfo ? '' : '\n' + indent + 'min, median, max: $min');
+  }
+
+  ({int minIntervals, HistogramLayout layout}) validateLayout({
+    required HistogramLayout layout,
+    int precision = 4,
+  }) {
+    if (layout.isOmitInfo) {
+      // This layout is always achievable.
+      return (minIntervals: 0, layout: HistogramLayout.omitInfo);
+    }
+
+    final int minLength = (min is int)
+        ? min.toString().length
+        : min.toStringAsPrecision(precision).length;
+    final int maxLength = (max is int)
+        ? max.toString().length
+        : max.toStringAsPrecision(precision).length;
+
+    if (min == max) {
+      // Only a single block histogram can be printed.
+      return (minIntervals: 0, layout: layout);
+    }
+
+    switch (layout) {
+      case HistogramLayout.omitInfo:
+        return (minIntervals: 0, layout: layout);
+      case HistogramLayout.fitMinMax:
+        var intervals = 2;
+        while (intervals * blockSize < minLength + 2 + maxLength) {
+          intervals++;
+        }
+        return (minIntervals: intervals, layout: layout);
+      case HistogramLayout.fitInfo:
+        final range = max - min;
+        final intervalSymbolLength = intervalSymbol.length;
+        var intervals = 2;
+        var intervalSize = Lazy(() => range / (intervals - 1));
+        var intervalSizeLength = Lazy(
+          () => intervalSize().toStringAsPrecision(precision).length,
+        );
+        var leftBorder = Lazy<double>(() => min - intervalSize() / 2);
+        var iMedian = Lazy<int>(
+          () => (median - leftBorder()) ~/ intervalSize(),
+        );
+
+        var i = 0;
+        final iMax = 200;
+
+        final pool = LazyPool([
+          intervalSize,
+          intervalSizeLength,
+          leftBorder,
+          iMedian,
+        ]);
+
+        // Trying to fit min value:
+        while (minLength + 1 > blockSize * iMedian() && i < iMax) {
+          intervals++;
+          i++;
+          pool.invalidateCache();
+        }
+
+        if (i == iMax) {
+          // min can't be fitted. Use fallback layout fitMinMax.
+          return validateLayout(layout: HistogramLayout.fitMinMax);
+        }
+
+        i = 0;
+
+        while ((intervals - iMedian()) * blockSize <
+                intervalSymbolLength +
+                    1 +
+                    intervalSizeLength() +
+                    2 +
+                    maxLength &&
+            i < iMax) {
+          intervals++;
+          i++;
+          pool.invalidateCache();
+        }
+
+        if (i == iMax) {
+          // max can't be fitted. Use fallback layout fitMinMax.
+          return validateLayout(layout: HistogramLayout.fitMinMax);
+        }
+        return (minIntervals: intervals, layout: layout);
+    }
+  }
 
   /// Returns a block histogram in the form of a [String].
   ///
   /// * If [intervals] is 0, it will be calculated using the
   ///   Freedman-Diaconis rule.
-  /// * To omit the line showing the minimum and maximum sample values
-  ///   set [showInfo] to false.
-  /// * To indent the histogram use an non-empty String as [indent].
+  /// * The [layout] can be used to customize the bottom line
+  ///   of the histogram.
   ///  ---
-  ///
   /// * The block containing the [mean] value is styled using
   ///   [ColorProfile.meanHistogramBlock].
   /// * The block containing the [median] is styled using
@@ -149,14 +273,20 @@ extension Histogram on Stats {
   /// ```
   String blockHistogram({
     int intervals = 0,
-    bool showInfo = true,
     String indent = '',
+    HistogramLayout layout = HistogramLayout.fitInfo,
+    int precision = 4,
   }) {
-    final hist = histogram(intervals: intervals);
+    final (minIntervals: minIntervals, layout: actualLayout) = validateLayout(
+      layout: layout,
+      precision: precision,
+    );
+
+    final hist = histogram(intervals: intervals, minIntervals: minIntervals);
 
     /// Return early if the range of values is zero.
     if (hist[0].first == hist[0].last) {
-      return _singleBlockHistogram();
+      return _singleBlockHistogram(layout: layout, indent: indent);
     }
 
     final intervalSize = hist[0][1] - hist[0][0];
@@ -165,15 +295,18 @@ extension Histogram on Stats {
     final actualIntervals = counts.length;
     final countsMax = counts.max();
 
-    final blockCount = blocks.length;
-    final deltaCounts = countsMax / (blockCount - 1);
+    final blockIndexMax = blocks.length - 1;
+    final deltaCounts = countsMax / (blockIndexMax);
 
     // The empty histogram.
     final graphLower = List<String>.filled(actualIntervals, '');
 
-    // Assign a block string to each value.
+    // Assign a block string to each sample value.
     for (var i = 0; i < actualIntervals; i++) {
-      final blockIndex = math.min((counts[i] / deltaCounts).ceil(), blockCount);
+      final blockIndex = math.min(
+        (counts[i] / deltaCounts).round(),
+        blockIndexMax,
+      );
       graphLower[i] = blocks[blockIndex];
     }
 
@@ -187,7 +320,6 @@ extension Histogram on Stats {
     // Convert placeholders to block characters
     for (var i = 0; i < length; i++) {
       graphUpper.add(switch (graphLower[i]) {
-        'b0' => blocks[0],
         'b1' => blocks[1],
         'b2' => blocks[2],
         'b3' => blocks[3],
@@ -200,7 +332,6 @@ extension Histogram on Stats {
       });
 
       graphLower[i] = switch (graphLower[i]) {
-        'b0' => blocks[8],
         'b1' => blocks[8],
         'b2' => blocks[8],
         'b3' => blocks[8],
@@ -267,8 +398,8 @@ extension Histogram on Stats {
 
     final indexMax = length - 1;
     var indexRight = math.min(indexOfMedian + 2 * iqrAsIndex, indexMax);
-    steps = 0;
 
+    steps = 0;
     while (graphLower[indexRight] != blocks[0] &&
         indexRight < indexMax &&
         steps < stepsMax) {
@@ -277,6 +408,8 @@ extension Histogram on Stats {
     }
 
     if (indexRight < indexMax) {
+      // If possible shift indexRight to show one interval using blocks[0]
+      // before the number of skipped intervals is printed.
       indexRight++;
     }
 
@@ -319,55 +452,41 @@ extension Histogram on Stats {
     /// Adds the sample min/max and the interval length to the
     /// third line of the histogram.
     String info() {
-      final minInfo = ((min is int)
+      late final minInfo = ((min is int)
           ? min.toString()
-          : min.toStringAsPrecision(4));
-      final maxInfo = ((max is int)
+          : min.toStringAsPrecision(precision));
+      late final maxInfo = ((max is int)
           ? max.toString()
-          : max.toStringAsPrecision(4));
-      final intervalInfo = intervalSize.toStringAsPrecision(4);
+          : max.toStringAsPrecision(precision));
 
-      final info = shorten(graphInfo, addSkipped: false);
+      switch (actualLayout) {
+        case HistogramLayout.omitInfo:
+          return '';
+        case HistogramLayout.fitMinMax:
+          final info = shorten(graphInfo, addSkipped: false);
 
-      final i = info.indexOf(intervalSymbol);
-
-      if (i.isNegative) return '';
-
-      final canAddMin = minInfo.length < i - 1;
-      final canAddInterval = i + 3 + intervalInfo.length < info.length;
-      final canAddMax = i + 5 + maxInfo.length < info.length;
-      final canAddIntervalAndMax =
-          i + 3 + intervalInfo.length < info.length - maxInfo.length;
-
-      final b = StringBuffer();
-      if (canAddMin) {
-        b.write(minInfo);
-        b.write(info.substring(minInfo.length, i + 2));
-      } else {
-        b.write(info.substring(0, i + 2));
+          return '\n' +
+              indent +
+              minInfo +
+              ' ' * (info.length - minInfo.length - maxInfo.length) +
+              maxInfo;
+        case HistogramLayout.fitInfo:
+          final intervalInfo = intervalSize.toStringAsPrecision(precision);
+          final info = shorten(graphInfo, addSkipped: false);
+          final i = info.indexOf(intervalSymbol);
+          return '\n' +
+              indent +
+              minInfo +
+              info.substring(minInfo.length, i) +
+              intervalSymbol.style(ColorProfile.median) +
+              ' ' +
+              intervalInfo.style(ColorProfile.median) +
+              info.substring(
+                i + 3 + intervalInfo.length,
+                info.length - maxInfo.length,
+              ) +
+              maxInfo;
       }
-
-      if (canAddIntervalAndMax) {
-        b.write(info.substring(i + 2, i + 3));
-        b.write(intervalInfo);
-        b.write(
-          info.substring(
-            i + 3 + intervalInfo.length,
-            info.length - maxInfo.length,
-          ),
-        );
-        b.write(maxInfo);
-        return '\n' + indent + b.toString();
-      }
-
-      if (canAddInterval) {
-        b.write(info.substring(i + 2, i + 3));
-        b.write(intervalInfo);
-      } else if (canAddMax) {
-        b.write(info.substring(i + 2, info.length - maxInfo.length));
-        b.write(maxInfo);
-      }
-      return '\n' + indent + b.toString();
     }
 
     return indent +
@@ -375,13 +494,13 @@ extension Histogram on Stats {
         '\n' +
         indent +
         shorten(graphLower) +
-        info();
+        (layout.isOmitInfo ? '' : info());
   }
 
   /// Builds a histogram from the entries of `this`
   /// and writes the data entries to a [String].
   /// * If [normalize] is `true` the histogram count will be normalized such
-  ///   that the total histogram area is equal to 1 .0.
+  ///   that the t +otal histogram area is equal to 1 .0.
   /// * [intervals]: The number of same-size intervals used to construct
   ///    the histogram.
   /// * [pdf]: The probability density function used to calculate the third
@@ -418,8 +537,8 @@ extension Histogram on Stats {
     final bool hasPdf = pdf != null;
 
     // hist[0] = [min, min + intervalSize, ..., max].
-    final intervalSize = hist[0][1] - hist[0][0];
     final actualIntervals = hist[0].length;
+    final intervalSize = actualIntervals < 2 ? 0 : hist[0][1] - hist[0][0];
 
     if (verbose) {
       b.writeln('$commentCharacter Intervals: $actualIntervals');
