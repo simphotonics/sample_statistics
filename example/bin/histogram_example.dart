@@ -32,6 +32,8 @@ void main(List<String> args) {
     14,
   ];
 
+
+
   final stats = Stats(sample);
 
   final intervals = 9;
@@ -43,5 +45,13 @@ void main(List<String> args) {
       intervals: intervals,
     ),
   );
-  print(stats.blockHistogram(intervals: intervals, indent: '//   '));
+  print(
+    stats.blockHistogram(
+      intervals: intervals,
+      indent: '//   ',
+      //layout: HistogramLayout.omitInfo,
+    ),
+  );
+
+
 }
