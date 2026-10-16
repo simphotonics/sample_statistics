@@ -3,7 +3,7 @@ name: sample_statistics
 description: Sample statistics, histograms, probability distributions, and
   random sample generators.
 
-version: 1.1.0
+version: 1.1.1
 
 homepage: https://github.com/simphotonics/sample_statistics
 
@@ -19,9 +19,9 @@ topics:
 dependencies:
   ansi_modifier: ^1.1.1
   exception_templates: ^1.1.0
-  lazy_memo: ^2.0.0
+  lazy_memo: ^2.0.1
   list_operators: ^1.0.0
 
 dev_dependencies:
   lints: ^6.1.0
-  test: ^1.32.0
+  test: ^1.33.0

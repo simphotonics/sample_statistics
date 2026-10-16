@@ -1,3 +1,8 @@
+## 1.2.0
+- Added the enum `HistogramLayout` used with the function `blockHistogram`.
+- Made functions able to deal with degenerate data where min == max and
+ the inter quartal range is zero.
+
 ## 1.1.0
 - Extension method `blockHistogram` now accepts the optional parameter
   `indent`.
