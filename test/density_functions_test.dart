@@ -48,7 +48,7 @@ void main() {
       expect(pdf(math.log(2) * mean), 0.5 / mean);
     });
     test('is normalized', () {
-      expect(pdf.integrate(0, 10 * mean, dx: 0.1), closeTo(1.0, 1.0e-4));
+      expect(pdf.integrate(0, 10 * mean), closeTo(1.0, 1.0e-4));
     });
   });
 
