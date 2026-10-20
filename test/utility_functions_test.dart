@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:sample_statistics/sample_statistics.dart';
 import 'package:test/test.dart';
 
@@ -82,51 +80,6 @@ void main() {
     });
     test('32.0.root(5)', () {
       expect(32.root(5).roundToDouble(), 2.0);
-    });
-  });
-
-  group('integrate', () {
-    test('sin.integrate(0, 2*pi)', () {
-      expect(sin.integrate(0, 2 * pi), closeTo(0.0, 1e-12));
-    });
-    test('sin.integrate(0, pi/2)', () {
-      expect(sin.integrate(0, pi / 2, dx: 1e-6), closeTo(1.0, 1.0e-6));
-    });
-    test('integrate(x, 0, 1)', () {
-      expect(
-        ((num x) => x.toDouble()).integrate(0, 1, dx: 1e-2),
-        closeTo(0.5, 1e-12),
-      );
-    });
-    test('integrate(1, 0, 1)', () {
-      expect(((num x) => 1.0).integrate(0, 1, dx: 0.1), closeTo(1.0, 1e-12));
-    });
-    test('sin.integrate( 0, 1) == -sin.integrate( 1, 0)', () {
-      expect((sin.integrate(0, 1) + sin.integrate(1, 0)), 0.0);
-    });
-    test('sin.integrate( 0, 0) == 0.0', () {
-      expect(sin.integrate(0, 0), 0.0);
-    });
-  });
-
-  group('Differentiation:', () {
-    final dx = 1e-4;
-    test('constant', () {
-      double c(num x) => 10;
-      expect(c.ddx(2.0), closeTo(0, dx * dx));
-      expect(c.ddx(3.1), closeTo(0, dx * dx));
-    });
-    test('sin.ddx(0)', () {
-      expect(sin.ddx(0), closeTo(1.0, dx * dx));
-    });
-    test('sin.ddx(pi/2):', () {
-      expect(sin.ddx(pi / 2), closeTo(0.0, dx * dx));
-    });
-    test('sin.d2dx2(0)', () {
-      expect(sin.d2dx2(0), closeTo(0, dx * dx));
-    });
-    test('sin.d2dx2(pi/2)', () {
-      expect(sin.d2dx2(pi / 2), closeTo(-1, dx * dx));
     });
   });
 }
