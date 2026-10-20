@@ -32,6 +32,7 @@ extension Histogram on Stats {
     'b8',
   ];
 
+  /// The blocks printed in sequential order from shortest to tallest.
   static final blockLadder =
       blankBlock * 9 +
       blocks.skip(1).take(8).join() +
@@ -45,8 +46,8 @@ extension Histogram on Stats {
   /// The block size in character widths.
   static const blockSize = 2;
 
-  /// The symbol used to label the histogram interval size. It is placed
-  /// under the block containing the sample [median].
+  /// The symbol used to label the histogram interval size. If geometrically
+  /// possible, it is placed under the block containing the sample [median].
   static const intervalSymbol = '\u2190\u2192';
 
   /// Returns the optimal number of histogram intervals. The interval size
@@ -59,6 +60,9 @@ extension Histogram on Stats {
 
   /// Returns the optimal interval size according to the Freedman-Diaconis rule
   /// taking into account the inter-quartile range and the sample size.
+  ///
+  /// Note: A sample where [min] and [max] coincide will have [iqr] zero,
+  /// resulting in an interval size of zero.
   double get intervalSize => (iqr) / (sortedSample.length.root(3));
 
   /// Returns data representing a sample histogram.
