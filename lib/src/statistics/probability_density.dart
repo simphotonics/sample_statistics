@@ -12,6 +12,17 @@ import 'error_function.dart';
 const num epsilon = 1e-50;
 
 /// A probability density function.
+///
+/// ```
+/// // Usage
+/// final ProbabiltyDensity pdf = stdNormalPdf;
+/// // pdf(x) > 0 for every possible value x.
+/// // pdf.integrate()
+///
+///
+///
+/// ```
+///
 typedef ProbabilityDensity = double Function(num x);
 
 /// Standard normal probability
@@ -38,8 +49,8 @@ double normalPdf(num x, num mean, num stdDev) {
     );
   }
   final invStdDev = 1.0 / stdDev;
-  x = (x - mean) * invStdDev;
-  return invSqrt2Pi * invStdDev * math.exp(-0.5 * x * x);
+  final dx = (x - mean) * invStdDev;
+  return invSqrt2Pi * invStdDev * math.exp(-0.5 * dx * dx);
 }
 
 /// Normal cumulative probability density function.
