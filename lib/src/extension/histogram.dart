@@ -164,18 +164,19 @@ extension Histogram on Stats {
   ({int minIntervals, HistogramLayout layout}) validateLayout({
     required HistogramLayout layout,
     int precision = 4,
+    double infoScalingFactor = 1.0
   }) {
     if (layout.isOmitInfo) {
       // This layout is always achievable.
       return (minIntervals: 0, layout: HistogramLayout.omitInfo);
     }
 
-    final int minLength = (min is int)
+    final int minLength = (min is int && infoScalingFactor == 1.0)
         ? min.toString().length
-        : min.toStringAsPrecision(precision).length;
-    final int maxLength = (max is int)
+        : (min/infoScalingFactor).toStringAsPrecision(precision).length;
+    final int maxLength = (max is int && infoScalingFactor == 1.0)
         ? max.toString().length
-        : max.toStringAsPrecision(precision).length;
+        : (max/infoScalingFactor).toStringAsPrecision(precision).length;
 
     if (min == max) {
       // Only a single block histogram can be printed.
@@ -280,10 +281,12 @@ extension Histogram on Stats {
     String indent = '',
     HistogramLayout layout = HistogramLayout.fitInfo,
     int precision = 4,
+    double infoScalingFactor = 1.0,
   }) {
     final (minIntervals: minIntervals, layout: actualLayout) = validateLayout(
       layout: layout,
       precision: precision,
+      infoScalingFactor: infoScalingFactor,
     );
 
     final hist = histogram(intervals: intervals, minIntervals: minIntervals);
