@@ -161,7 +161,6 @@ extension Histogram on Stats {
         (layout.isOmitInfo ? '' : '\n' + indent + 'min, median, max: $min');
   }
 
-
   /// Checks if [layout] is feasible and returns the minimum necessary
   /// intervals to accommodate the histogram info.
   ///
@@ -175,7 +174,7 @@ extension Histogram on Stats {
   ({int minIntervals, HistogramLayout layout}) validateLayout({
     required HistogramLayout layout,
     int precision = 4,
-    num scalingFactor = 1
+    num scalingFactor = 1,
   }) {
     if (layout.isOmitInfo) {
       // This layout is always achievable.
@@ -184,10 +183,10 @@ extension Histogram on Stats {
 
     final int minLength = (min is int && scalingFactor == 1)
         ? min.toString().length
-        : (min/scalingFactor).toStringAsPrecision(precision).length;
+        : (min / scalingFactor).toStringAsPrecision(precision).length;
     final int maxLength = (max is int && scalingFactor == 1)
         ? max.toString().length
-        : (max/scalingFactor).toStringAsPrecision(precision).length;
+        : (max / scalingFactor).toStringAsPrecision(precision).length;
 
     if (min == max) {
       // Only a single block histogram can be printed.
@@ -471,12 +470,12 @@ extension Histogram on Stats {
     /// Adds the sample min/max and the interval length to the
     /// third line of the histogram.
     String info() {
-      late final minInfo = ((min is int)
+      late final minInfo = ((min is int && scalingFactor == 1)
           ? min.toString()
-          : min.toStringAsPrecision(precision));
-      late final maxInfo = ((max is int)
+          : (min / scalingFactor).toStringAsPrecision(precision));
+      late final maxInfo = ((max is int && scalingFactor == 1)
           ? max.toString()
-          : max.toStringAsPrecision(precision));
+          : (max / scalingFactor).toStringAsPrecision(precision));
 
       switch (actualLayout) {
         case HistogramLayout.omitInfo:
@@ -490,7 +489,8 @@ extension Histogram on Stats {
               ' ' * (info.length - minInfo.length - maxInfo.length) +
               maxInfo;
         case HistogramLayout.fitInfo:
-          final intervalInfo = intervalSize.toStringAsPrecision(precision);
+          final intervalInfo = (intervalSize / scalingFactor)
+              .toStringAsPrecision(precision);
           final info = shorten(graphInfo, addSkipped: false);
           final i = info.indexOf(intervalSymbol);
           return '\n' +
