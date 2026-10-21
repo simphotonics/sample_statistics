@@ -63,7 +63,10 @@ extension Histogram on Stats {
   ///
   /// Note: A sample where [min] and [max] coincide will have [iqr] zero,
   /// resulting in an interval size of zero.
-  double get intervalSize => (iqr) / (sortedSample.length.root(3));
+  double get intervalSize {
+    final reducedStdDev = (Stats(sample)..removeOutliers()).stdDev;
+    return reducedStdDev / (sortedSample.length.root(3));
+  }
 
   /// Returns data representing a sample histogram.
   ///
