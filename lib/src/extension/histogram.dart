@@ -419,7 +419,7 @@ extension Histogram on Stats {
 
     String shorten(List<String> input, {bool addSkipped = true}) {
       final b = StringBuffer();
-      if (indexLeft > 25) {
+      if (indexLeft > 20) {
         b.write(input.take(5).join());
         final skipped = indexLeft - 5;
         if (addSkipped) {
@@ -435,7 +435,7 @@ extension Histogram on Stats {
         b.write(input.take(indexRight).join());
       }
 
-      if (length - indexRight > 25) {
+      if (length - indexRight > 20) {
         final skipped = length - indexRight - 5;
         if (addSkipped) {
           // Add the number of skipped intervals
