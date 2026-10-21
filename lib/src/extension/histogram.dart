@@ -161,22 +161,33 @@ extension Histogram on Stats {
         (layout.isOmitInfo ? '' : '\n' + indent + 'min, median, max: $min');
   }
 
+
+  /// Checks if [layout] is feasible and returns the minimum necessary
+  /// intervals to accommodate the histogram info.
+  ///
+  /// * [precision]: The precision used when converting the sample [min], [mean],
+  /// and [max] to a [String].
+  /// * [scalingFactor]: [min], [max], and [mean] are divided by this scaling
+  /// factor.
+  ///
+  /// Note: [HistogramLayout.fitInfo] may not be feasible, for example if the
+  /// [median] is located at the left-most or right-most histogram block.
   ({int minIntervals, HistogramLayout layout}) validateLayout({
     required HistogramLayout layout,
     int precision = 4,
-    double infoScalingFactor = 1.0
+    num scalingFactor = 1
   }) {
     if (layout.isOmitInfo) {
       // This layout is always achievable.
       return (minIntervals: 0, layout: HistogramLayout.omitInfo);
     }
 
-    final int minLength = (min is int && infoScalingFactor == 1.0)
+    final int minLength = (min is int && scalingFactor == 1)
         ? min.toString().length
-        : (min/infoScalingFactor).toStringAsPrecision(precision).length;
-    final int maxLength = (max is int && infoScalingFactor == 1.0)
+        : (min/scalingFactor).toStringAsPrecision(precision).length;
+    final int maxLength = (max is int && scalingFactor == 1)
         ? max.toString().length
-        : (max/infoScalingFactor).toStringAsPrecision(precision).length;
+        : (max/scalingFactor).toStringAsPrecision(precision).length;
 
     if (min == max) {
       // Only a single block histogram can be printed.
@@ -255,6 +266,7 @@ extension Histogram on Stats {
   ///   Freedman-Diaconis rule.
   /// * The [layout] can be used to customize the bottom line
   ///   of the histogram.
+  /// * [scalingFactor]: [min], [max], and [mean] are divided by this factor.
   ///  ---
   /// * The block containing the [mean] value is styled using
   ///   [ColorProfile.meanHistogramBlock].
@@ -281,12 +293,12 @@ extension Histogram on Stats {
     String indent = '',
     HistogramLayout layout = HistogramLayout.fitInfo,
     int precision = 4,
-    double infoScalingFactor = 1.0,
+    num scalingFactor = 1,
   }) {
     final (minIntervals: minIntervals, layout: actualLayout) = validateLayout(
       layout: layout,
       precision: precision,
-      infoScalingFactor: infoScalingFactor,
+      scalingFactor: scalingFactor,
     );
 
     final hist = histogram(intervals: intervals, minIntervals: minIntervals);
@@ -422,7 +434,7 @@ extension Histogram on Stats {
 
     String shorten(List<String> input, {bool addSkipped = true}) {
       final b = StringBuffer();
-      if (indexLeft > 20) {
+      if (indexLeft > 15) {
         b.write(input.take(5).join());
         final skipped = indexLeft - 5;
         if (addSkipped) {
@@ -438,7 +450,7 @@ extension Histogram on Stats {
         b.write(input.take(indexRight).join());
       }
 
-      if (length - indexRight > 20) {
+      if (length - indexRight > 15) {
         final skipped = length - indexRight - 5;
         if (addSkipped) {
           // Add the number of skipped intervals
