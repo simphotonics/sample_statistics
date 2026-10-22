@@ -1,3 +1,4 @@
+import 'package:ansi_modifier/ansi_modifier.dart';
 import 'package:list_operators/list_operators.dart' show NumericalMethods;
 import 'package:sample_statistics/sample_statistics.dart';
 import 'package:test/test.dart';
@@ -138,9 +139,17 @@ void main() {
     });
     test('right skewed histogram', () {
       final stats = Stats([0, 3, 3.5, 3.8, 3.9, 3.95, 3.99, 4.0, 4.0, 4.0]);
+
       expect(
         stats.blockHistogram(infoOption: HistogramInfoOption.showAll),
         endsWith('4.000'),
+      );
+      print(stats.blockHistogram(infoOption: HistogramInfoOption.showMedian));
+      expect(
+        stats.blockHistogram(infoOption: HistogramInfoOption.showMedian),
+        endsWith(
+          Histogram.intervalSymbol.style(ColorProfile.medianHistogramBlock),
+        ),
       );
     });
   });

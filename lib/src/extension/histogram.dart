@@ -393,40 +393,39 @@ extension Histogram on Stats {
       );
     }
 
-    /// Avoid situations where iqr = 0
-    final iqrAsIndex = (iqr == 0.0) ? 10 : iqr ~/ intervalSize;
-
-    // Make sure to include the median.
-    var indexLeft = indexOfMedian - 2 * iqrAsIndex;
-    indexLeft = indexLeft < 0 ? 0 : indexLeft;
-
-    final stepsMax = 5 * iqrAsIndex;
-    int steps = 0;
-    while (graphLower[indexLeft] != blocks[0] &&
-        indexLeft > 0 &&
-        steps < stepsMax) {
-      indexLeft--;
-      steps++;
-    }
-
-    final indexMax = length - 1;
-    var indexRight = math.min(indexOfMedian + 2 * iqrAsIndex, indexMax);
-
-    steps = 0;
-    while (graphLower[indexRight] != blocks[0] &&
-        indexRight < indexMax &&
-        steps < stepsMax) {
-      indexRight++;
-      steps++;
-    }
-
-    if (indexRight < indexMax) {
-      // If possible shift indexRight to show one interval using blocks[0]
-      // before the number of skipped intervals is printed.
-      indexRight++;
-    }
-
     String shorten(List<String> input, {bool addSkipped = true}) {
+      /// Avoid situations where iqr = 0
+      final iqrAsIndex = (iqr == 0.0) ? 10 : iqr ~/ intervalSize;
+
+      // Make sure to include the median.
+      var indexLeft = indexOfMedian - 2 * iqrAsIndex;
+      indexLeft = indexLeft < 0 ? 0 : indexLeft;
+
+      final stepsMax = 5 * iqrAsIndex;
+      int steps = 0;
+      while (graphLower[indexLeft] != blocks[0] &&
+          indexLeft > 0 &&
+          steps < stepsMax) {
+        indexLeft--;
+        steps++;
+      }
+
+      final indexMax = length - 1;
+      var indexRight = math.min(indexOfMedian + 2 * iqrAsIndex, indexMax);
+
+      steps = 0;
+      while (graphLower[indexRight] != blocks[0] &&
+          indexRight < indexMax &&
+          steps < stepsMax) {
+        indexRight++;
+        steps++;
+      }
+
+      if (indexRight < indexMax) {
+        // If possible shift indexRight to show one interval using blocks[0]
+        // before the number of skipped intervals is printed.
+        indexRight++;
+      }
       final b = StringBuffer();
       if (indexLeft > layout.maxTailWidth) {
         b.write(input.take(5).join());
@@ -475,6 +474,12 @@ extension Histogram on Stats {
           .toStringAsPrecision(precision);
       late final info = shorten(graphInfo, addSkipped: false);
       late final i = info.indexOf(intervalSymbol);
+      late final styledIntervalSymbol = (indexOfMedian == indexOfMean)
+          ? intervalSymbol.style(ColorProfile.meanMedianHistogramBlock)
+          : intervalSymbol.style(ColorProfile.medianHistogramBlock);
+       late final styledIntervalInfo = (indexOfMedian == indexOfMean)
+          ? intervalInfo.style(ColorProfile.meanMedianHistogramBlock)
+          : intervalInfo.style(ColorProfile.medianHistogramBlock);
 
       switch (infoOption) {
         case HistogramInfoOption.showNone:
@@ -498,13 +503,13 @@ extension Histogram on Stats {
           }
         case HistogramInfoOption.showMedian:
           final part0 = (minInfo.length + 1 <= i)
-              ? minInfo + info.substring(minInfo.length, i + 2)
-              : info.substring(0, i + 2);
+              ? minInfo + info.substring(minInfo.length, i) + styledIntervalSymbol
+              : info.substring(0, i) + styledIntervalSymbol;
           var part1 = '';
           if (info.length >= i + 3 + intervalInfo.length + 2 + maxInfo.length) {
             part1 =
                 ' ' +
-                intervalInfo +
+                styledIntervalInfo +
                 info.substring(
                   i + 3 + intervalInfo.length,
                   info.length - maxInfo.length,
@@ -527,14 +532,14 @@ extension Histogram on Stats {
               ) *
               blockSize;
           if (minInfoLength <= info.length && !minInfoLength.isNegative) {
-            final i = info.indexOf(intervalSymbol);
+
             return '\n' +
                 indent +
                 minInfo +
                 info.substring(minInfo.length, i) +
-                intervalSymbol.style(ColorProfile.median) +
+                styledIntervalSymbol +
                 ' ' +
-                intervalInfo.style(ColorProfile.median) +
+                styledIntervalInfo +
                 info.substring(
                   i + 3 + intervalInfo.length,
                   info.length - maxInfo.length,
