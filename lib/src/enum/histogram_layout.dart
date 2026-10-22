@@ -1,26 +1,15 @@
-/// Specifies the layout of a block histogram.
-enum HistogramLayout {
-  /// The minimum number of intervals is chosen such that the info line
-  /// can accommodate the minimum sample value, the interval size, and
-  /// the maximum sample value.
-  fitInfo,
+enum HistogramLayout(
+  /// If the tail of the probabililty density on either side of the
+  /// sample median exceeds [maxTailWidth], it will be shortened and the
+  /// number of omitted intervals will be displayed.
+  final int maxTailWidth,
+) {
+  /// A histogram with [maxTailWidth] 10.
+  compact(10),
 
-  /// The minimum number of intervals is chose such that the info line
-  /// can accommodate the minimum and maximum sample values.
-  fitMinMax,
+  /// A histogram with [maxTailWidth] 20.
+  standard(20),
 
-  /// The info line is not included.
-  omitInfo;
-
-  /// Returns `true` if this is [fitInfo],
-  /// and `false` otherwise.
-  bool get isFitInfo => this == fitInfo;
-
-  /// Returns `true` if this is [fitMinMax],
-  /// and `false` otherwise.
-  bool get isMinMax => this == fitMinMax;
-
-  /// Returns `true` if this is [omitInfo],
-  /// /// and `false` otherwise.
-  bool get isOmitInfo => this == omitInfo;
+  /// A histogram with [maxTailWidth] 25.
+  wide(25),
 }

@@ -34,7 +34,7 @@ void main(List<String> args) {
 
   final stats = Stats(sample);
 
-  final intervals = 9;
+  final intervals = 8;
 
   print(
     stats.exportHistogram(
@@ -47,7 +47,8 @@ void main(List<String> args) {
     stats.blockHistogram(
       intervals: intervals,
       indent: '//   ',
-      //layout: HistogramLayout.omitInfo,
+      infoOption: HistogramInfoOption.showMinMax
+      ,
     ),
   );
 }

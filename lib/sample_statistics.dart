@@ -1,3 +1,4 @@
+export 'src/enum/histogram_info.dart';
 export 'src/enum/histogram_layout.dart';
 export 'src/exception/invalid_function_parameter.dart';
 export 'src/extension/color_profile.dart';
