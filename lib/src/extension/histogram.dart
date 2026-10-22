@@ -464,10 +464,6 @@ extension Histogram on Stats {
     /// Composes the info line of the histogram (containing
     /// the sample min, max, and the interval size).
     String infoLine() {
-      if (infoOption.isShowNone) {
-        return '';
-      }
-
       late final minInfo = ((min is int && scalingFactor == 1)
           ? min.toString()
           : (min / scalingFactor).toStringAsPrecision(precision));
@@ -479,13 +475,15 @@ extension Histogram on Stats {
         case HistogramInfoOption.showNone:
           return '';
         case HistogramInfoOption.showMinMax:
-          if (minInfoIntervals(
+          final info = shorten(graphInfo, addSkipped: false);
+          final minInfoLength =
+              minInfoIntervals(
                 infoOption,
                 precision: precision,
                 scalingFactor: scalingFactor,
-              ) <=
-              length) {
-            final info = shorten(graphInfo, addSkipped: false);
+              ) *
+              blockSize;
+          if (minInfoLength <= info.length && !minInfoLength.isNegative) {
             return '\n' +
                 indent +
                 minInfo +
@@ -495,15 +493,15 @@ extension Histogram on Stats {
             return '\n' + indent + 'min: $minInfo, max: $maxInfo';
           }
         case HistogramInfoOption.showAll:
+          final info = shorten(graphInfo, addSkipped: false);
           final intervalInfo = (intervalSize / scalingFactor)
               .toStringAsPrecision(precision);
-          if (minInfoIntervals(
-                infoOption,
-                precision: precision,
-                scalingFactor: scalingFactor,
-              ) <=
-              length) {
-            final info = shorten(graphInfo, addSkipped: false);
+          final minInfoLength = minInfoIntervals(
+            infoOption,
+            precision: precision,
+            scalingFactor: scalingFactor,
+          )*blockSize;
+          if (minInfoLength <= info.length && !minInfoLength.isNegative) {
             final i = info.indexOf(intervalSymbol);
             return '\n' +
                 indent +

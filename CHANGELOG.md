@@ -1,10 +1,11 @@
 ## 1.2.0
-- Added the enum `HistogramLayout` used with the function `blockHistogram`.
-- Made functions able to deal with degenerate data where min == max and
- the inter quartal range is zero.
+- Added the enums `HistogramLayout` and `HistogramInfoOption`
+  used with the function `blockHistogram`.
+- Made histogram functions able to deal with degenerate sample data
+  where min == max and the inter quartal range is zero.
 - Added the enum `IntegrationMethod` use to select the integration method
-when using the extension methods `integrate`, `localIntegrationError`, and
-`integrationError`.
+  when using the extension methods `integrate`, `localIntegrationError`, and
+  `integrationError`.
 
 ## 1.1.0
 - Extension method `blockHistogram` now accepts the optional parameter
