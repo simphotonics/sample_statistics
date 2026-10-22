@@ -496,11 +496,13 @@ extension Histogram on Stats {
           final info = shorten(graphInfo, addSkipped: false);
           final intervalInfo = (intervalSize / scalingFactor)
               .toStringAsPrecision(precision);
-          final minInfoLength = minInfoIntervals(
-            infoOption,
-            precision: precision,
-            scalingFactor: scalingFactor,
-          )*blockSize;
+          final minInfoLength =
+              minInfoIntervals(
+                infoOption,
+                precision: precision,
+                scalingFactor: scalingFactor,
+              ) *
+              blockSize;
           if (minInfoLength <= info.length && !minInfoLength.isNegative) {
             final i = info.indexOf(intervalSymbol);
             return '\n' +
