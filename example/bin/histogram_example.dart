@@ -34,7 +34,7 @@ void main(List<String> args) {
 
   final stats = Stats(sample);
 
-  final intervals = 8;
+  final intervals = 9;
 
   print(
     stats.exportHistogram(
