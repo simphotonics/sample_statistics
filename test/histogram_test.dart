@@ -121,29 +121,83 @@ void main() {
     test('omit info line', () {
       final stats = Stats(sample);
       expect(
-        stats.blockHistogram(layout: HistogramLayout.omitInfo, intervals: 20),
+        stats.blockHistogram(
+          infoOption: HistogramInfoOption.showNone,
+          intervals: 20,
+        ),
         endsWith(Histogram.blocks[3]),
       );
     });
     test('include info line', () {
       final stats = Stats(sample);
       expect(
-        stats.blockHistogram(layout: HistogramLayout.fitInfo),
+        stats.blockHistogram(infoOption: HistogramInfoOption.showAll),
         endsWith('10'),
       );
     });
     test('left skewed histogram', () {
       final stats = Stats([0, 0, 0, 0, 0, 0.1, 0.1, 0.1, 0.2, 0.5, 4.0]);
       expect(
-        stats.blockHistogram(layout: HistogramLayout.fitInfo),
+        stats.blockHistogram(infoOption: HistogramInfoOption.showAll),
         endsWith('4.000'),
       );
     });
     test('right skewed histogram', () {
       final stats = Stats([0, 3, 3.5, 3.8, 3.9, 3.95, 3.99, 4.0, 4.0, 4.0]);
       expect(
-        stats.blockHistogram(layout: HistogramLayout.fitInfo),
+        stats.blockHistogram(infoOption: HistogramInfoOption.showAll),
         endsWith('4.000'),
+      );
+    });
+  });
+
+  group('minInfoIntervals:', () {
+    final stats = Stats(sample);
+
+    test('showNone', () {
+      expect(stats.minInfoIntervals(HistogramInfoOption.showNone), isZero);
+    });
+    test('showMinMax', () {
+      final precision = 5;
+      expect(
+        stats.minInfoIntervals(
+          HistogramInfoOption.showMinMax,
+          precision: precision,
+        ),
+        4,
+      );
+    });
+
+    test('showMinMax left-skewed dist.', () {
+      final stats = Stats([0, 0, 0, 0, 0, 0, 1, 5, 10]);
+      final precision = 4;
+      expect(
+        stats.minInfoIntervals(
+          HistogramInfoOption.showMinMax,
+          precision: precision,
+        ),
+        3,
+      );
+    });
+    test('showAll', () {
+      final precision = 5;
+      expect(
+        stats.minInfoIntervals(
+          HistogramInfoOption.showAll,
+          precision: precision,
+        ),
+        13,
+      );
+    });
+    test('showAll left-skewed dist.', () {
+      final stats = Stats([0, 0, 0, 0, 0, 0, 1, 5, 10]);
+      final precision = 4;
+      expect(
+        stats.minInfoIntervals(
+          HistogramInfoOption.showAll,
+          precision: precision,
+        ),
+        -1,
       );
     });
   });
