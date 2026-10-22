@@ -477,7 +477,7 @@ extension Histogram on Stats {
       late final styledIntervalSymbol = (indexOfMedian == indexOfMean)
           ? intervalSymbol.style(ColorProfile.meanMedianHistogramBlock)
           : intervalSymbol.style(ColorProfile.medianHistogramBlock);
-       late final styledIntervalInfo = (indexOfMedian == indexOfMean)
+      late final styledIntervalInfo = (indexOfMedian == indexOfMean)
           ? intervalInfo.style(ColorProfile.meanMedianHistogramBlock)
           : intervalInfo.style(ColorProfile.medianHistogramBlock);
 
@@ -503,7 +503,9 @@ extension Histogram on Stats {
           }
         case HistogramInfoOption.showMedian:
           final part0 = (minInfo.length + 1 <= i)
-              ? minInfo + info.substring(minInfo.length, i) + styledIntervalSymbol
+              ? minInfo +
+                    info.substring(minInfo.length, i) +
+                    styledIntervalSymbol
               : info.substring(0, i) + styledIntervalSymbol;
           var part1 = '';
           if (info.length >= i + 3 + intervalInfo.length + 2 + maxInfo.length) {
@@ -532,7 +534,6 @@ extension Histogram on Stats {
               ) *
               blockSize;
           if (minInfoLength <= info.length && !minInfoLength.isNegative) {
-
             return '\n' +
                 indent +
                 minInfo +
