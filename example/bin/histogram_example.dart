@@ -47,7 +47,7 @@ void main(List<String> args) {
     stats.blockHistogram(
       intervals: intervals,
       indent: '//   ',
-      infoOption: HistogramInfoOption.showMinMax,
+      infoOption: HistogramInfoOption.showMedian,
     ),
   );
 }

@@ -183,12 +183,10 @@ extension Histogram on Stats {
     int precision = 4,
     num scalingFactor = 1,
   }) {
-    if (infoOption.isShowNone) return 0;
-
-    final int minLength = (min is int && scalingFactor == 1)
+    late final int minLength = (min is int && scalingFactor == 1)
         ? min.toString().length
         : (min / scalingFactor).toStringAsPrecision(precision).length;
-    final int maxLength = (max is int && scalingFactor == 1)
+    late final int maxLength = (max is int && scalingFactor == 1)
         ? max.toString().length
         : (max / scalingFactor).toStringAsPrecision(precision).length;
 
@@ -248,9 +246,12 @@ extension Histogram on Stats {
         }
 
         if (i == iMax) {
-          return -1;
+          return -2;
         }
         return intervals;
+
+      case HistogramInfoOption.showMedian:
+        return 1;
       case HistogramInfoOption.showNone:
         return 0;
     }
@@ -470,12 +471,15 @@ extension Histogram on Stats {
       late final maxInfo = ((max is int && scalingFactor == 1)
           ? max.toString()
           : (max / scalingFactor).toStringAsPrecision(precision));
+      late final intervalInfo = (intervalSize / scalingFactor)
+          .toStringAsPrecision(precision);
+      late final info = shorten(graphInfo, addSkipped: false);
+      late final i = info.indexOf(intervalSymbol);
 
       switch (infoOption) {
         case HistogramInfoOption.showNone:
           return '';
         case HistogramInfoOption.showMinMax:
-          final info = shorten(graphInfo, addSkipped: false);
           final minInfoLength =
               minInfoIntervals(
                 infoOption,
@@ -492,10 +496,29 @@ extension Histogram on Stats {
           } else {
             return '\n' + indent + 'min: $minInfo, max: $maxInfo';
           }
+        case HistogramInfoOption.showMedian:
+          final part0 = (minInfo.length + 1 <= i)
+              ? minInfo + info.substring(minInfo.length, i + 2)
+              : info.substring(0, i + 2);
+          var part1 = '';
+          if (info.length >= i + 3 + intervalInfo.length + 2 + maxInfo.length) {
+            part1 =
+                ' ' +
+                intervalInfo +
+                info.substring(
+                  i + 3 + intervalInfo.length,
+                  info.length - maxInfo.length,
+                ) +
+                maxInfo;
+          } else if (info.length >= i + 4 + maxInfo.length) {
+            part1 =
+                '  ' +
+                info.substring(i + 4, info.length - maxInfo.length) +
+                maxInfo;
+          }
+          return '\n' + indent + part0 + part1;
+
         case HistogramInfoOption.showAll:
-          final info = shorten(graphInfo, addSkipped: false);
-          final intervalInfo = (intervalSize / scalingFactor)
-              .toStringAsPrecision(precision);
           final minInfoLength =
               minInfoIntervals(
                 infoOption,
