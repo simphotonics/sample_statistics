@@ -109,7 +109,7 @@ void main() {
         Stats(sample).blockHistogram(indent: '##'),
         '##      \x1B[36m██\x1B[0m\n'
         '##______\x1B[36m██\x1B[0m______\n'
-        '##min, median, max: 5',
+        '##min, max: 5',
       );
     });
 
@@ -134,7 +134,7 @@ void main() {
       final stats = Stats([0, 0, 0, 0, 0, 0.1, 0.1, 0.1, 0.2, 0.5, 4.0]);
       expect(
         stats.blockHistogram(infoOption: HistogramInfoOption.showAll),
-        endsWith('4.000'),
+        endsWith('4.00'),
       );
     });
     test('right skewed histogram', () {
@@ -142,64 +142,13 @@ void main() {
 
       expect(
         stats.blockHistogram(infoOption: HistogramInfoOption.showAll),
-        endsWith('4.000'),
+        endsWith('4.00'),
       );
       expect(
         stats.blockHistogram(infoOption: HistogramInfoOption.showMedian),
         endsWith(
           Histogram.intervalSymbol.style(ColorProfile.medianHistogramBlock),
         ),
-      );
-    });
-  });
-
-  group('minInfoIntervals:', () {
-    final stats = Stats(sample);
-
-    test('showNone', () {
-      expect(stats.minInfoIntervals(HistogramInfoOption.showNone), isZero);
-    });
-    test('showMinMax', () {
-      final precision = 5;
-      expect(
-        stats.minInfoIntervals(
-          HistogramInfoOption.showMinMax,
-          precision: precision,
-        ),
-        4,
-      );
-    });
-
-    test('showMinMax left-skewed dist.', () {
-      final stats = Stats([0, 0, 0, 0, 0, 0, 1, 5, 10]);
-      final precision = 4;
-      expect(
-        stats.minInfoIntervals(
-          HistogramInfoOption.showMinMax,
-          precision: precision,
-        ),
-        3,
-      );
-    });
-    test('showAll', () {
-      final precision = 5;
-      expect(
-        stats.minInfoIntervals(
-          HistogramInfoOption.showAll,
-          precision: precision,
-        ),
-        13,
-      );
-    });
-    test('showAll left-skewed dist.', () {
-      final stats = Stats([0, 0, 0, 0, 0, 0, 1, 5, 10]);
-      final precision = 4;
-      expect(
-        stats.minInfoIntervals(
-          HistogramInfoOption.showAll,
-          precision: precision,
-        ),
-        -1,
       );
     });
   });

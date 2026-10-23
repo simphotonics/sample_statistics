@@ -6,6 +6,7 @@ export 'src/extension/differentiation.dart';
 export 'src/extension/function_table.dart';
 export 'src/extension/histogram.dart';
 export 'src/extension/integration.dart';
+export 'src/extension/precision.dart';
 export 'src/extension/root.dart';
 export 'src/statistics/error_function.dart';
 export 'src/statistics/probability_density.dart';

@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:ansi_modifier/ansi_modifier.dart';
-import 'package:lazy_memo/lazy_memo.dart' show Lazy, LazyPool;
 import 'package:list_operators/list_operators.dart' show NumericalMethods;
 
 import '../enum/histogram_info.dart';
@@ -9,7 +8,18 @@ import '../enum/histogram_layout.dart';
 import '../statistics/probability_density.dart' show ProbabilityDensity;
 import '../statistics/stats.dart';
 import 'color_profile.dart';
+import 'precision.dart';
 import 'root.dart';
+
+/// A custom function converting a [num] to a [String].
+typedef NumToString = String Function(num argument);
+
+/// Returns a [String] representing an approximation of [argument]
+/// with 2 non zero digits.
+///
+/// Calls the extension method [Precision.toStringAsFixedDigits].
+String numToString(num argument) =>
+    (argument is int) ? argument.toString() : argument.toStringAsFixedDigits(2);
 
 extension Histogram on Stats {
   /// Block characters used to build block histograms.
@@ -152,6 +162,7 @@ extension Histogram on Stats {
   String _singleBlockHistogram({
     HistogramInfoOption infoOption = HistogramInfoOption.showNone,
     String indent = '',
+    NumToString numToString = numToString,
   }) {
     return indent +
         blankBlock * 3 +
@@ -161,100 +172,9 @@ extension Histogram on Stats {
         blocks.first * 3 +
         blocks[8].style(ColorProfile.meanMedianHistogramBlock) +
         blocks.first * 3 +
-        (infoOption.isShowNone ? '' : '\n' + indent + 'min, median, max: $min');
-  }
-
-  /// Returns the minimum necessary intervals to accommodate
-  /// spread out histogram labels. Returns -1, if [infoOption] is not
-  /// feasible.
-  ///
-  /// * [precision]: The precision used when converting the sample [min],
-  /// [mean], and [max] to a [String].
-  /// * [scalingFactor]: [min], [max], and [mean] are divided by this scaling
-  /// factor.
-  ///
-  /// Note: The option [HistogramInfoOption.showAll] which includes
-  /// a marker under the
-  /// block containing the sample [median] may not be feasible,
-  /// for example if the
-  /// [median] is located near the left-most or right-most histogram block.
-  int minInfoIntervals(
-    HistogramInfoOption infoOption, {
-    int precision = 4,
-    num scalingFactor = 1,
-  }) {
-    late final int minLength = (min is int && scalingFactor == 1)
-        ? min.toString().length
-        : (min / scalingFactor).toStringAsPrecision(precision).length;
-    late final int maxLength = (max is int && scalingFactor == 1)
-        ? max.toString().length
-        : (max / scalingFactor).toStringAsPrecision(precision).length;
-
-    switch (infoOption) {
-      case HistogramInfoOption.showMinMax:
-        var intervals = 2;
-        while (intervals * blockSize < minLength + 2 + maxLength) {
-          intervals++;
-        }
-        return intervals;
-      case HistogramInfoOption.showAll:
-        var intervals = 2;
-        final range = max - min;
-        final intervalSymbolLength = intervalSymbol.length;
-        var intervalSize = Lazy(() => range / (intervals - 1));
-        var intervalSizeLength = Lazy(
-          () => intervalSize().toStringAsPrecision(precision).length,
-        );
-        var leftBorder = Lazy<double>(() => min - intervalSize() / 2);
-        var iMedian = Lazy<int>(
-          () => (median - leftBorder()) ~/ intervalSize(),
-        );
-
-        final pool = LazyPool([
-          intervalSize,
-          intervalSizeLength,
-          leftBorder,
-          iMedian,
-        ]);
-
-        final iMax = 200;
-
-        // Trying to fit min value:
-        var i = 0;
-        while (minLength + 1 > blockSize * iMedian() && i < iMax) {
-          intervals++;
-          i++;
-          pool.invalidateCache();
-        }
-
-        if (i == iMax) {
-          // Min can't be fitted
-          return -1;
-        }
-
-        i = 0;
-        while ((intervals - iMedian()) * blockSize <
-                intervalSymbolLength +
-                    1 +
-                    intervalSizeLength() +
-                    2 +
-                    maxLength &&
-            i < iMax) {
-          intervals++;
-          i++;
-          pool.invalidateCache();
-        }
-
-        if (i == iMax) {
-          return -2;
-        }
-        return intervals;
-
-      case HistogramInfoOption.showMedian:
-        return 1;
-      case HistogramInfoOption.showNone:
-        return 0;
-    }
+        (infoOption.isShowNone
+            ? ''
+            : '\n' + indent + 'min, max: ${numToString(min)}');
   }
 
   /// Returns a block histogram in the form of a [String].
@@ -292,14 +212,18 @@ extension Histogram on Stats {
     String indent = '',
     HistogramInfoOption infoOption = HistogramInfoOption.showAll,
     HistogramLayout layout = HistogramLayout.standard,
-    int precision = 4,
     num scalingFactor = 1,
+    NumToString numToString = numToString,
   }) {
     final hist = histogram(intervals: intervals, minIntervals: minIntervals);
 
     /// Return early if the range of values is zero.
     if (hist[0].first == hist[0].last) {
-      return _singleBlockHistogram(infoOption: infoOption, indent: indent);
+      return _singleBlockHistogram(
+        infoOption: infoOption,
+        indent: indent,
+        numToString: numToString,
+      );
     }
 
     final intervalSize = hist[0][1] - hist[0][0];
@@ -464,14 +388,13 @@ extension Histogram on Stats {
     /// Composes the info line of the histogram (containing
     /// the sample min, max, and the interval size).
     String infoLine() {
-      late final minInfo = ((min is int && scalingFactor == 1)
+      late final minInfo = (min is int && scalingFactor == 1)
           ? min.toString()
-          : (min / scalingFactor).toStringAsPrecision(precision));
-      late final maxInfo = ((max is int && scalingFactor == 1)
+          : numToString(min / scalingFactor);
+      late final maxInfo = (max is int && scalingFactor == 1)
           ? max.toString()
-          : (max / scalingFactor).toStringAsPrecision(precision));
-      late final intervalInfo = (intervalSize / scalingFactor)
-          .toStringAsPrecision(precision);
+          : numToString(max / scalingFactor);
+      late final intervalInfo = numToString(intervalSize / scalingFactor);
       late final info = shorten(graphInfo, addSkipped: false);
       late final i = info.indexOf(intervalSymbol);
       late final styledIntervalSymbol = (indexOfMedian == indexOfMean)
@@ -485,18 +408,12 @@ extension Histogram on Stats {
         case HistogramInfoOption.showNone:
           return '';
         case HistogramInfoOption.showMinMax:
-          final minInfoLength =
-              minInfoIntervals(
-                infoOption,
-                precision: precision,
-                scalingFactor: scalingFactor,
-              ) *
-              blockSize;
-          if (minInfoLength <= info.length && !minInfoLength.isNegative) {
+          if (minInfo.length + 2 <= i &&
+              info.length - (i + intervalSymbol.length + 2) < maxInfo.length) {
             return '\n' +
                 indent +
                 minInfo +
-                ' ' * (info.length - minInfo.length - maxInfo.length) +
+                info.substring(minInfo.length, info.length - maxInfo.length) +
                 maxInfo;
           } else {
             return '\n' + indent + 'min: $minInfo, max: $maxInfo';
@@ -526,14 +443,13 @@ extension Histogram on Stats {
           return '\n' + indent + part0 + part1;
 
         case HistogramInfoOption.showAll:
-          final minInfoLength =
-              minInfoIntervals(
-                infoOption,
-                precision: precision,
-                scalingFactor: scalingFactor,
-              ) *
-              blockSize;
-          if (minInfoLength <= info.length && !minInfoLength.isNegative) {
+          if (minInfo.length + 2 <= i &&
+              info.length - i >=
+                  intervalSymbol.length +
+                      1 +
+                      intervalInfo.length +
+                      2 +
+                      maxInfo.length) {
             return '\n' +
                 indent +
                 minInfo +
