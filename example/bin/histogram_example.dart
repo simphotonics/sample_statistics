@@ -38,7 +38,7 @@ void main(List<String> args) {
 
   print(
     stats.exportHistogram(
-      verbose: true,
+      includeStats: true,
       normalize: false,
       intervals: intervals,
     ),
@@ -46,8 +46,8 @@ void main(List<String> args) {
   print(
     stats.blockHistogram(
       intervals: intervals,
-      indent: '//   ',
-      infoOption: HistogramInfoOption.showMedian,
+      indent: '',
+      infoOption: HistogramInfoOption.showAll,
     ),
   );
 }

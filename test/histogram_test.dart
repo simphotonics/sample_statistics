@@ -74,7 +74,7 @@ void main() {
 
   group('Export Histogram', () {
     final stats = Stats(sample);
-    final hist = stats.exportHistogram(precision: 8, verbose: true);
+    final hist = stats.exportHistogram(precision: 8, includeStats: true);
     test('Data', () {
       expect(
         hist,
