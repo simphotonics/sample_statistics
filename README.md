@@ -77,8 +77,8 @@ to avoid lengthy calculations when the same quantity is accessed repeatedly.
 
 ### 2. Histograms
 
-To package includes extension methods on [`Stats`][Stats]
-provides methods for generating and exporting histograms:
+Extension methods on [`Stats`][Stats]
+can be used to generate and export histograms:
 
 ```Dart
 import 'package:sample_statistics/sample_statistics.dart';
@@ -134,11 +134,11 @@ On a terminal with Ansi support, the block histogram is rendered as:
 ![Block Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/block_histogram.svg?sanitize=true)
 
 
-If a block contains the mean, it is colored green.
-If it contains the median of the sample it is colored blue.
-If the same block contains the mean *and* median is printed in a cyan hue.
+If a block contains the sample *mean*, it is rendered in a green hue.
+If it contains the *median* of the sample it is colored blue.
+If the same block contains the *mean* and *median* is printed in a cyan hue.
 The arrows indicating the interval size are placed below the block
-containing the sample median.
+containing the sample *median*.
 
 Note: If the inter-quartal range is small compared to the range of the data
 sample, then the number of histogram intervals will be large.
@@ -150,13 +150,13 @@ The image below shows the histogram data presented above plotted using gnuplot.
 
 ### 3. Random Sample Generators
 
-The library `sample_generators` includes functions for generating random samples
-that follow the probability distribution functions listed below:
- * normal distribution,
- * truncated normal distribution,
- * exponential distribution,
- * uniform distribution,
- * triangular distribution.
+The library also includes functions for generating random samples
+that follow a:
+ * normal prob. dist.,
+ * truncated normal prob. dist.,
+ * exponential prob. dist.,
+ * uniform prob. dist.,
+ * triangular prob. dist.
 
 Additionally, the library includes the function [`randomSample`][randomSample]
 which is based on the [rejection sampling][rejection-sampling] method.
@@ -165,44 +165,34 @@ and can be used to generate random samples that follow
 an *arbitrary* probability distribution function.
 
 The program listed below demonstrates how to generated a random sample
-and write a histogram to a file.
+and write histogram data to a file.
 
 ```Dart
 import 'dart:io';
 
- import 'package:sample_statistics/sample_statistics.dart';
+import 'package:sample_statistics/sample_statistics.dart';
 
- void main(List<String> args) async{
-   final xMmin = 1.0;
-   final xMmax = 9.0;
-   final meanOfParent = 5.0;
-   final stdDevOfParent = 2.0;
-   final sampleSize = 1000;
+void main(List<String> args) async {
+  final mean = 5.0;
+  final stdDev = 2.0;
+  final sampleSize = 1000;
 
-   // Generating the random sample with 1000 entries.
-   final sample = truncatedNormalSample(
-     sampleSize,
-     xMmin,
-     xMmax,
-     meanOfParent,
-     stdDevOfParent,
-   );
+  // Generating the random sample with 1000 entries.
+  final sample = normalSample(sampleSize, mean, stdDev);
+  final stats = Stats(sample);
 
-   final stats = Stats(sample);
-   print(stats.mean);
-   print(stats.stdDev);
-   print(stats.min);
+  print(stats.mean);
+  print(stats.stdDev);
+  print(stats.min);
 
-   // Exporting a histogram.
-   // Export histogram
-   await File('example/data/truncated_normal$sampleSize.hist').writeAsString(
-     sample.exportHistogram(
-       pdf: (x) =>
-           truncatedNormalPdf(x, xMin, xMax, meanOfParent, stdDevOfParent),
-     ),
-   );
-
- }
+  // Exporting a histogram.
+  await File('normal$sampleSize.hist').writeAsString(
+    stats.exportHistogram(
+      pdf: (x) => normalPdf(x, mean, stdDev),
+      includeStats: true,
+    ),
+  );
+}
 ```
 
 ## Examples
