@@ -144,7 +144,6 @@ void main() {
         stats.blockHistogram(infoOption: HistogramInfoOption.showAll),
         endsWith('4.000'),
       );
-      print(stats.blockHistogram(infoOption: HistogramInfoOption.showMedian));
       expect(
         stats.blockHistogram(infoOption: HistogramInfoOption.showMedian),
         endsWith(
