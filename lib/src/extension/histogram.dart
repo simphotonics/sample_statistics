@@ -570,8 +570,8 @@ extension Histogram on Stats {
   ///    the histogram.
   /// * [pdf]: The probability density function used to calculate the third
   ///    column.
-  /// * [verbose]: Logical flag indicating if sample stats should be printed
-  ///    as comments above the histogram data.
+  /// * [includeStats]: Logical flag indicating if sample stats should be
+  ///    printed as header above the histogram data.
   /// * [commentCharacter]: The String character used to prefix comments.
   ///    It defaults to `#`, the comment character used by Gnuplot.
   /// * [precision]: The precision used when converting numbers to a [String].
@@ -579,7 +579,7 @@ extension Histogram on Stats {
     bool normalize = true,
     int intervals = 0,
     ProbabilityDensity? pdf,
-    bool verbose = false,
+    bool includeStats = false,
     String commentCharacter = '#',
     int precision = 10,
   }) {
@@ -605,7 +605,7 @@ extension Histogram on Stats {
     final actualIntervals = hist[0].length;
     final intervalSize = actualIntervals < 2 ? 0 : hist[0][1] - hist[0][0];
 
-    if (verbose) {
+    if (includeStats) {
       b.writeln('$commentCharacter Intervals: $actualIntervals');
       b.writeln(
         '$commentCharacter Min: '
