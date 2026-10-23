@@ -166,8 +166,8 @@ sample, then the number of histogram intervals will be large. Instead of
 omitting outliers, the whole value range is shown but some intervals
 are skipped and the number of skipped intervals will be printed instead.
 
-Tip: The format of the numbers printed below the block histogram can be
-customized by providing a callback `numToString`.
+Tip: The format and the precision of the numbers printed below the
+block histogram can be customized by providing a callback `numToString`.
 
 
 ### 3. Random Sample Generators
