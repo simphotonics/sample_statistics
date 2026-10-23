@@ -77,8 +77,9 @@ to avoid lengthy calculations when the same quantity is accessed repeatedly.
 
 ### 2. Histograms
 
-Histograms are used to count and visualize the occurance frequency of each
-value in the sample. If the count is normalized such that the area under the
+Histograms are used to count and visualize the occurance frequency of
+value ranges in the sample.
+If the count is normalized such that the area under the
 histogram graph is equal to one, it can be compared to a probability density
 function.
 

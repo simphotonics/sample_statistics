@@ -1,3 +1,10 @@
+## 1.3.0
+- Added the extension `Precision` on `num` providing the method
+`toStringAsFixedDigits`.
+- Removed the function `Histogram.minInfoIntervals`.
+- Removed the parameter `precision` from the extension method `blockHistogram`.
+- Added the parameter `numToString` to method `blockHistogram`.
+
 ## 1.2.0
 - Added the enums `HistogramLayout` and `HistogramInfoOption`
   used with the function `blockHistogram`.
