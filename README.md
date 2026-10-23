@@ -77,6 +77,13 @@ to avoid lengthy calculations when the same quantity is accessed repeatedly.
 
 ### 2. Histograms
 
+Histograms are used to count and visualize the occurance frequency of each
+value in the sample. If the count is normalized such that the area under the
+histogram graph is equal to one, it can be compared to a probability density
+function.
+
+#### 2.1 Generating Histogram Data
+
 Extension methods on [`Stats`][Stats]
 can be used to generate and export histograms:
 
@@ -91,7 +98,7 @@ void main(List<String> args) {
   ];
 
   final stats = Stats(sample);
-  print(stats.exportHistogram(verbose: true, normalize: false));
+  print(stats.exportHistogram(includeStats: true, normalize: false));
 }
 ```
 The console output is show below:
@@ -120,33 +127,38 @@ $ dart example/bin/histogram_example.dart
         11.00000000      1.000000000
         14.00000000      1.000000000
 ```
-A histogram constructed from Unicode block characters may be printed using the
-command:
+
+#### 2.2 Block Histograms
+They say a picture is a thousand words. At times, even a crude plot of a
+histogram can reveal details of the distribution of sample values.
+To print a histogram constructed from Unicode block characters  to a console
+use the command:
 ```Dart
 // Ansi.status = AnsiOutput.disabled; // Uncomment if the terminal is not
 //                                       Ansi compatible.
 print(stats.blockHistogram());
 ```
-On a monochrome terminal the block histogram is rendered as shown below:
+On a monochrome terminal the block histogram (representing the data shown in the
+previous section) is rendered as shown below:
 ![Block Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/block_histogram_monochrome.svg?sanitize=true)
 
 On a terminal with Ansi support, the block histogram is rendered as:
 ![Block Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/block_histogram.svg?sanitize=true)
 
-
-If a block contains the sample *mean*, it is rendered in a green hue.
-If it contains the *median* of the sample it is colored blue.
-If the same block contains the *mean* and *median* is printed in a cyan hue.
-The arrows indicating the interval size are placed below the block
+The following convention is used:
+* The block containing the sample *mean* is rendered using a green hue.
+* The block containing the  *median* of the sample it is colored blue.
+* If the same block contains the *mean* and *median* is printed in a cyan hue.
+* The arrow symbol indicating the interval size is placed below the block
 containing the sample *median*.
 
 Note: If the inter-quartal range is small compared to the range of the data
-sample, then the number of histogram intervals will be large.
-To shorten the histogram string, some intervals are skipped and the number of
-skipped intervals will be printed instead.
+sample, then the number of histogram intervals will be large. Instead of
+omitting outliers, the whole value range is shown but some intervals
+are skipped and the number of skipped intervals will be printed instead.
 
 Tip: The format of the numbers printed below the block histogram can be
-customized by providing a callback for the paramater `numToString`.
+customized by providing a callback `numToString`.
 
 The image below shows the histogram data presented above plotted using gnuplot.
 ![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
