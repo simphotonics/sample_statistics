@@ -120,7 +120,7 @@ $ dart example/bin/histogram_example.dart
         11.00000000      1.000000000
         14.00000000      1.000000000
 ```
-A histogram constructed from Unicode block character may be printed using the
+A histogram constructed from Unicode block characters may be printed using the
 command:
 ```Dart
 // Ansi.status = AnsiOutput.disabled; // Uncomment if the terminal is not
@@ -144,6 +144,9 @@ Note: If the inter-quartal range is small compared to the range of the data
 sample, then the number of histogram intervals will be large.
 To shorten the histogram string, some intervals are skipped and the number of
 skipped intervals will be printed instead.
+
+Tip: The format of the numbers printed below the block histogram can be
+customized by providing a callback for the paramater `numToString`.
 
 The image below shows the histogram data presented above plotted using gnuplot.
 ![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
