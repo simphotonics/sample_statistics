@@ -127,22 +127,31 @@ $ dart example/bin/histogram_example.dart
         11.00000000      1.000000000
         14.00000000      1.000000000
 ```
+The image below shows the histogram data presented above plotted using gnuplot.
+![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
+
 
 #### 2.2 Block Histograms
 They say a picture is a thousand words. At times, even a crude plot of a
-histogram can reveal details of the distribution of sample values.
-To print a histogram constructed from Unicode block characters  to a console
-use the command:
+histogram can reveal details of the occurrance frequency of sample values.
+To print a histogram constructed from Unicode block characters to a
+console that is *not* ANSI compliant use the command:
 ```Dart
-// Ansi.status = AnsiOutput.disabled; // Uncomment if the terminal is not
-//                                       Ansi compatible.
+Ansi.status = AnsiOutput.disabled;
 print(stats.blockHistogram());
 ```
-On a monochrome terminal the block histogram (representing the data shown in the
+The block histogram (representing the data shown in the
 previous section) is rendered as shown below:
+
 ![Block Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/block_histogram_monochrome.svg?sanitize=true)
 
+To print a colorized block histogram, on an ANSI compliant console, use the command:
+```Dart
+print(stats.blockHistogram());
+```
+
 On a terminal with Ansi support, the block histogram is rendered as:
+
 ![Block Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/block_histogram.svg?sanitize=true)
 
 The following convention is used:
@@ -160,8 +169,6 @@ are skipped and the number of skipped intervals will be printed instead.
 Tip: The format of the numbers printed below the block histogram can be
 customized by providing a callback `numToString`.
 
-The image below shows the histogram data presented above plotted using gnuplot.
-![Histogram](https://github.com/simphotonics/sample_statistics/raw/main/images/histogram.svg?sanitize=true)
 
 ### 3. Random Sample Generators
 
